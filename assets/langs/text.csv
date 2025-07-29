@@ -1,0 +1,18 @@
+keys,en,de
+HEADER,The Final Quiz,Das große Abschlussquiz
+OPTIONS,Options,Optionen
+LANGUAGE,Language,Sprache
+KEEP_SCREEN_ON,Keep screen on,Bildschirm wach halten
+KEEP_SCREEN_ON_TOOLTIP,The app will prevent the screen from going to sleep.,"Die App wird verhindern, das der Bildschirm sich von selbst ausschaltet."
+VERSION_X,Version: {version},Version: {version}
+CLOSE,Close,Schließen
+FAVORITES,Favorites,Favoriten
+ALL,All,Alle
+CREATE_QUIZ,Create Quiz,Quiz erstellen
+PLAY,Play,Spielen
+MAKE_FAVORITE,Make favorite,Favorit
+EDIT,Edit,Bearbeiten
+DELETE,Delete,Löschen
+DOTS,...,...
+X_QUESTIONS,{num} Questions,{num} Fragen
+X_CATEGORIES,{num} Categories,{num} Kategorien
