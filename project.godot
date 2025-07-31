@@ -42,6 +42,10 @@ window/size/initial_position_type=4
 window/handheld/orientation=4
 window/vsync/vsync_mode=0
 
+[gui]
+
+theme/custom="uid://cr3fth58p14i3"
+
 [input]
 
 click={

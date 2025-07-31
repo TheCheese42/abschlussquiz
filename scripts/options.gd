@@ -30,3 +30,7 @@ func _on_language_button_item_selected(index: int) -> void:
 func _on_keep_screen_on_check_toggled(toggled_on: bool) -> void:
 	GlobalVars.options_save.keep_screen_on = toggled_on
 	GlobalFunctions.apply_options()
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit(0)

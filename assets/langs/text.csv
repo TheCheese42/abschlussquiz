@@ -1,4 +1,5 @@
 keys,en,de
+### MAIN MENU ###,,
 HEADER,The Final Quiz,Das große Abschlussquiz
 OPTIONS,Options,Optionen
 LANGUAGE,Language,Sprache
@@ -16,3 +17,16 @@ DELETE,Delete,Löschen
 DOTS,...,...
 X_QUESTIONS,{num} Questions,{num} Fragen
 X_CATEGORIES,{num} Categories,{num} Kategorien
+### CREATE QUIZ ###,,
+CREATE_QUIZ,Create Quiz,Quiz erstellen
+EDIT_QUIZ,Edit Quiz,Quiz bearbeiten
+GENERAL,General,Allgemein
+CATEGORIES,Categories,Kategorien
+QUESTIONS,Questions,Fragen
+QUIZ_NAME,Quiz name:,Quiz Name:
+ADD_CATEGORY,Add Category,Neue Kategorie
+ADD_POINTS_STAGE,Add points stage,Neue Punkteetage
+CATEGORY_X,Category {0},Kategorie {0}
+CATEGORY_X_COLON,Category {0}:,Kategorie {0}:
+### PLAY QUIZ ###,,
+TEAM_NAMES,Holy Cungadero:The Fun Gang:Moss Finders:Trash Machine:Uncreative:Unmotivated:Not good but better,Heiliges Cungadero:Die Spaß Gang:Moos Finder:Müllmaschine:Unkreativ:Unmotiviert:Nicht gut aber besser
