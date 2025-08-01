@@ -273,6 +273,7 @@ color = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
+mouse_default_cursor_shape = 2
 text = "CREATE_QUIZ"
 
 [connection signal="item_selected" from="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/LanguageButton" to="MarginContainer/Options" method="_on_language_button_item_selected"]

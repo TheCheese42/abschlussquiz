@@ -1,4 +1,7 @@
 keys,en,de
+### GENERAL ###,,
+OK,OK,OK
+CANCEL,Cancel,Abbrechen
 ### MAIN MENU ###,,
 HEADER,The Final Quiz,Das große Abschlussquiz
 OPTIONS,Options,Optionen
@@ -28,5 +31,10 @@ ADD_CATEGORY,Add Category,Neue Kategorie
 ADD_POINTS_STAGE,Add points stage,Neue Punkteetage
 CATEGORY_X,Category {0},Kategorie {0}
 CATEGORY_X_COLON,Category {0}:,Kategorie {0}:
+POINT_STAGE_X_COLON,Point Stage {0}:,Punktestufe {0}:
+DELETE_CATEGORY_CONFIRM_TITLE,Delete Category?,Kategorie Löschen?
+DELETE_CATEGORY_CONFIRM_CONTENT,Are you sure you want to delete this category?\nAll questions associated with it will be removed.\nYou can also rename the category.\n\nTip: Press 'shift' to skip this message.,Möchten Sie diese Kategorie wirklich löschen?\nAlle zugehörigen Fragen werden ebenfalls entfernt.\nSie können die Kategorie auch umbenennen.\n\nTipp: Drücken Sie 'Shift' um diese Nachricht zu überspringen.
+DELETE_POINT_STAGE_CONFIRM_TITLE,Delete Point Stage?,Punktestufe löschen?
+DELETE_POINT_STAGE_CONFIRM_CONTENT,Are you sure you want to delete this point stage?\nAll questions associated with it will be removed.\n\nTip: Press 'shift' to skip this message.,Möchten Sie diese Punktestufe wirklich löschen?\nAlle zugehörigen Fragen werden ebenfalls entfernt.\n\nTipp: Drücken Sie 'Shift' um diese Nachricht zu überspringen.
 ### PLAY QUIZ ###,,
 TEAM_NAMES,Holy Cungadero:The Fun Gang:Moss Finders:Trash Machine:Uncreative:Unmotivated:Not good but better,Heiliges Cungadero:Die Spaß Gang:Moos Finder:Müllmaschine:Unkreativ:Unmotiviert:Nicht gut aber besser

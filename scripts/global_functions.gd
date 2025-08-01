@@ -8,9 +8,21 @@ func load_options() -> OptionsSave:
 	return options
 
 
+func load_quiz_saves() -> QuizSaves:
+	var quiz_saves: QuizSaves = load("user://saves/quiz_saves.tres")
+	if quiz_saves == null:
+		quiz_saves = QuizSaves.new()
+	return quiz_saves
+
+
 func save_options() -> void:
 	DirAccess.make_dir_absolute("user://saves")
 	ResourceSaver.save(GlobalVars.options_save, "user://saves/options.tres")
+
+
+func save_quiz_saves() -> void:
+	DirAccess.make_dir_absolute("user://saves")
+	ResourceSaver.save(GlobalVars.quiz_saves, "user://saves/quiz_saves.tres")
 
 
 func reset_options() -> void:

@@ -11,6 +11,5 @@ func _process(_delta: float) -> void:
 		GlobalVars.options_save.window_mode = DisplayServer.window_get_mode()
 		GlobalFunctions.save_options()
 	if DisplayServer.window_get_size() != GlobalVars.options_save.window_size:
-		print("is now", DisplayServer.window_get_size())
 		GlobalVars.options_save.window_size = DisplayServer.window_get_size()
 		GlobalFunctions.save_options()

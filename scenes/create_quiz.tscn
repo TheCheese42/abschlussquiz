@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://4hljjmc6pt2g"]
+[gd_scene load_steps=12 format=3 uid="uid://4hljjmc6pt2g"]
 
 [ext_resource type="Script" uid="uid://b48ff1ce8ovme" path="res://scripts/create_quiz.gd" id="1_mj7ud"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="2_3epqd"]
@@ -6,6 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="4_3epqd"]
 [ext_resource type="Texture2D" uid="uid://b4cq06hcb7fat" path="res://assets/textures/icons/plus-line-icon.png" id="5_3b5p7"]
 [ext_resource type="Texture2D" uid="uid://jc0oxlhfgu61" path="res://assets/textures/icons/close-square-line-icon.png" id="5_6ct6t"]
+[ext_resource type="Texture2D" uid="uid://1aiahjte8cs" path="res://assets/textures/icons/round-line-left-arrow-icon.png" id="6_0vcbe"]
 [ext_resource type="Texture2D" uid="uid://1o2aoyke1po6" path="res://assets/textures/icons/select-box-arrow-top-icon.png" id="7_5bj04"]
 [ext_resource type="Texture2D" uid="uid://ck7kt0wkm6s1d" path="res://assets/textures/icons/select-box-arrow-bottom-icon.png" id="8_0vcbe"]
 
@@ -30,6 +31,72 @@ corner_radius_bottom_left = 4
 [node name="CreateQuiz" type="CanvasLayer"]
 script = ExtResource("1_mj7ud")
 
+[node name="CategoryHBox" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = -1
+offset_left = 110.0
+offset_top = 182.0
+offset_right = 714.0
+offset_bottom = 230.0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CategoryHBox"]
+layout_mode = 2
+text = "Category 1:"
+label_settings = ExtResource("4_3epqd")
+
+[node name="CategoryEdit" type="LineEdit" parent="CategoryHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CategoryHBox"]
+layout_mode = 2
+
+[node name="DeleteButton" type="TextureButton" parent="CategoryHBox/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_6ct6t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CategoryHBox/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MoveUpButton" type="TextureButton" parent="CategoryHBox/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_5bj04")
+
+[node name="MoveDownButton" type="TextureButton" parent="CategoryHBox/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_0vcbe")
+
+[node name="PointsHBox" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = -1
+offset_left = 774.0
+offset_top = 182.0
+offset_right = 1090.0
+offset_bottom = 230.0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="PointsHBox"]
+layout_mode = 2
+text = "Stage 1:"
+label_settings = ExtResource("4_3epqd")
+
+[node name="PointsSpin" type="SpinBox" parent="PointsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+allow_greater = true
+
+[node name="DeleteButton" type="TextureButton" parent="PointsHBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_6ct6t")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +108,28 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="Title" type="Label" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="BackButton" type="TextureButton" parent="MarginContainer/HBoxContainer/MarginContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_0vcbe")
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -51,26 +139,32 @@ label_settings = ExtResource("2_3epqd")
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/side_margin = 340
+mouse_filter = 2
+theme_override_constants/side_margin = 400
 theme_override_constants/tab_separation = 20
 current_tab = 1
 
-[node name="GENERAL" type="MarginContainer" parent="MarginContainer/TabContainer"]
+[node name="GENERAL" type="ScrollContainer" parent="MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/GENERAL"]
+[node name="GENERAL" type="MarginContainer" parent="MarginContainer/TabContainer/GENERAL"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/GENERAL/GENERAL"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/GENERAL/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GENERAL/GENERAL/HBoxContainer"]
 layout_mode = 2
 text = "QUIZ_NAME"
 label_settings = ExtResource("4_3epqd")
 
-[node name="QuizName" type="LineEdit" parent="MarginContainer/TabContainer/GENERAL/HBoxContainer"]
+[node name="QuizName" type="LineEdit" parent="MarginContainer/TabContainer/GENERAL/GENERAL/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -80,96 +174,61 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_3epqd")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3b5p7")
 caret_blink = true
 
-[node name="CATEGORIES" type="MarginContainer" parent="MarginContainer/TabContainer"]
+[node name="CATEGORIES" type="ScrollContainer" parent="MarginContainer/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES"]
+[node name="CATEGORIES" type="MarginContainer" parent="MarginContainer/TabContainer/CATEGORIES"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/CATEGORIES"]
 layout_mode = 2
 theme_override_constants/separation = 60
 
-[node name="CategoryContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer"]
+[node name="CategoryContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="CategoriesVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer"]
+[node name="CategoriesVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/CategoryContainer"]
 layout_mode = 2
 
-[node name="CategoryHBox" type="HBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox/CategoryHBox"]
-layout_mode = 2
-text = "Category 1:"
-label_settings = ExtResource("4_3epqd")
-
-[node name="CategoryEdit" type="LineEdit" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox/CategoryHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-caret_blink = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox/CategoryHBox"]
-layout_mode = 2
-
-[node name="DeleteButton" type="TextureButton" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox/CategoryHBox/HBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("5_6ct6t")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox/CategoryHBox/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="MoveUpButton" type="TextureButton" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox/CategoryHBox/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("7_5bj04")
-
-[node name="MoveDownButton" type="TextureButton" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox/CategoryHBox/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("8_0vcbe")
-
-[node name="AddCategory" type="Button" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/CategoryContainer"]
+[node name="AddCategory" type="Button" parent="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/CategoryContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 text = "ADD_CATEGORY"
 icon = ExtResource("5_3b5p7")
 
-[node name="PointsContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer"]
+[node name="PointsContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 20
 
-[node name="PointsVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/PointsContainer"]
+[node name="PointsVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/PointsContainer"]
 layout_mode = 2
 
-[node name="PointsHBox" type="HBoxContainer" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/PointsContainer/PointsVBox"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/PointsContainer/PointsVBox/PointsHBox"]
-layout_mode = 2
-text = "Stage 1:"
-label_settings = ExtResource("4_3epqd")
-
-[node name="PointsSpin" type="SpinBox" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/PointsContainer/PointsVBox/PointsHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-allow_greater = true
-
-[node name="DeleteButton" type="TextureButton" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/PointsContainer/PointsVBox/PointsHBox"]
-layout_mode = 2
-texture_normal = ExtResource("5_6ct6t")
-
-[node name="AddPointsStage" type="Button" parent="MarginContainer/TabContainer/CATEGORIES/HBoxContainer/PointsContainer"]
+[node name="AddPointsStage" type="Button" parent="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/PointsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 text = "ADD_POINTS_STAGE"
 icon = ExtResource("5_3b5p7")
 
-[node name="QUESTIONS" type="MarginContainer" parent="MarginContainer/TabContainer"]
+[node name="QUESTIONS" type="ScrollContainer" parent="MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="QUESTIONS" type="MarginContainer" parent="MarginContainer/TabContainer/QUESTIONS"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/CategoryContainer/AddCategory" to="." method="_on_add_category_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/PointsContainer/AddPointsStage" to="." method="_on_add_points_stage_pressed"]

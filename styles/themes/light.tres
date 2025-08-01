@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=37 format=3 uid="uid://cr3fth58p14i3"]
+[gd_resource type="Theme" load_steps=38 format=3 uid="uid://cr3fth58p14i3"]
 
 [ext_resource type="FontFile" uid="uid://bitequibce137" path="res://assets/fonts/Simply the Best/KGSimplytheBest.otf" id="1_q075r"]
 [ext_resource type="StyleBox" uid="uid://b3u38018sjwyy" path="res://styles/stylebox/bordered_thin.tres" id="2_q075r"]
@@ -64,6 +64,22 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lyoj4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5bj04"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ymu0"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.11858133, 0.11858142, 0.11858133, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q075r"]
 bg_color = Color(0.58909565, 0.58909553, 0.5890959, 1)
@@ -171,6 +187,7 @@ OptionButton/styles/hover_pressed = SubResource("StyleBoxEmpty_my5e6")
 OptionButton/styles/normal = SubResource("StyleBoxEmpty_viyxa")
 OptionButton/styles/pressed = SubResource("StyleBoxEmpty_lyoj4")
 Panel/styles/panel = SubResource("StyleBoxEmpty_5bj04")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_8ymu0")
 SpinBox/styles/down_background_hovered = SubResource("StyleBoxFlat_q075r")
 SpinBox/styles/down_background_pressed = SubResource("StyleBoxFlat_ma8co")
 SpinBox/styles/up_background_hovered = SubResource("StyleBoxFlat_q075r")

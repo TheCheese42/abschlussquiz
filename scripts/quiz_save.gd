@@ -3,9 +3,10 @@ extends Resource
 class_name QuizSave
 
 @export var name: String = ""
-@export var categories: PackedStringArray = [tr("CATEGORY_X").format("1")]
+@export var categories: Array[String] = [tr("CATEGORY_X").format(["1"])]
 @export var point_stages: PackedInt64Array = [10]
 @export var questions: Dictionary[String, Array] = {}  # Dictionary[String, Array[Question]]
+@export var is_favorite: bool = false
 
 
 func rename_category(category: String, new: String) -> void:
@@ -28,8 +29,12 @@ func move_category(category: String, up: bool = true) -> void:
 	var index: int = categories.find(category)
 	if up:
 		index -= 1
+		if index < 0:
+			index = 0
 	else:
 		index += 1
+		if index > len(categories) - 1:
+			index = len(categories) - 1
 	categories.erase(category)
 	categories.insert(index, category)
 
@@ -37,7 +42,7 @@ func move_category(category: String, up: bool = true) -> void:
 func add_category(category: String = "") -> void:
 	"""Add a category."""
 	if category == "":
-		category = tr("CATEGORY_X").format(len(categories) + 1)
+		category = tr("CATEGORY_X").format([len(categories) + 1])
 	while category in categories:
 		category += "_"
 	categories.append(category)
@@ -87,7 +92,7 @@ class Question extends Resource:
 	var type: QuestionType = QuestionType.MultipleChoice
 	var text: String = ""
 	var image: ImageTexture = null
-	var time: int = 0  # 0 is no limit
+	var time: int = 0  # 0 means no limit
 	var answers: Array[Answer] = []
 
 
