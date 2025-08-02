@@ -1,2 +1,2 @@
-Add export quiz option
 More themes
+Allow undo and redo, make backups.

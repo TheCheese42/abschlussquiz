@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://usek6rs3tfly"]
+[gd_scene load_steps=4 format=3 uid="uid://usek6rs3tfly"]
 
 [ext_resource type="Script" uid="uid://cfpc132wdw3s6" path="res://scripts/better_confirmation_dialog.gd" id="1_f6eh6"]
-[ext_resource type="Theme" uid="uid://cr3fth58p14i3" path="res://styles/themes/light.tres" id="1_hrqx1"]
 [ext_resource type="LabelSettings" uid="uid://7r267pcwb314" path="res://styles/labels/label_content_24.tres" id="2_f6eh6"]
 [ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="3_f6eh6"]
 
@@ -30,7 +29,6 @@ offset_right = 86.0
 offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_hrqx1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer"]
 layout_mode = 2

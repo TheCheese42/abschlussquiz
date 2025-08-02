@@ -2,7 +2,7 @@
 extends Resource
 class_name QuizSave
 
-@export var name: String = ""
+@export var name: String = tr("NEW_QUIZ")
 @export var categories: Array[String] = [tr("CATEGORY_X").format(["1"])]
 @export var point_stages: PackedInt64Array = [10]
 @export var questions: Dictionary[String, Array] = {}  # Dictionary[String, Array[Question]]
@@ -11,12 +11,12 @@ class_name QuizSave
 
 func rename_category(category: String, new: String) -> void:
 	"""Rename a category. Changes both the 'questions' key and the 'categories' value."""
-	var category_questions: Array[Question] = questions[category]
+	var category_questions: Array = questions[category]
 	questions.erase(category)
 	questions[new] = category_questions
 	var cat_index: int = categories.find(category)
 	categories.erase(category)
-	categories[cat_index] = new
+	categories.insert(cat_index, new)
 
 
 func change_point_stage_value(index: int, new_value: int) -> void:
@@ -80,23 +80,3 @@ func update_questions() -> void:
 				que = Question.new()
 			_new_questions[cat].append(que)
 	questions = _new_questions
-
-
-enum QuestionType {
-	MultipleChoice,
-	Tournament,
-}
-
-
-class Question extends Resource:
-	var type: QuestionType = QuestionType.MultipleChoice
-	var text: String = ""
-	var image: ImageTexture = null
-	var time: int = 0  # 0 means no limit
-	var answers: Array[Answer] = []
-
-
-class Answer extends Resource:
-	var text: String = ""
-	var image: ImageTexture = null
-	var is_correct: bool = false

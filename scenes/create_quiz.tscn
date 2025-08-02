@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://4hljjmc6pt2g"]
+[gd_scene load_steps=19 format=3 uid="uid://4hljjmc6pt2g"]
 
 [ext_resource type="Script" uid="uid://b48ff1ce8ovme" path="res://scripts/create_quiz.gd" id="1_mj7ud"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="2_3epqd"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://1aiahjte8cs" path="res://assets/textures/icons/round-line-left-arrow-icon.png" id="6_0vcbe"]
 [ext_resource type="Texture2D" uid="uid://1o2aoyke1po6" path="res://assets/textures/icons/select-box-arrow-top-icon.png" id="7_5bj04"]
 [ext_resource type="Texture2D" uid="uid://ck7kt0wkm6s1d" path="res://assets/textures/icons/select-box-arrow-bottom-icon.png" id="8_0vcbe"]
+[ext_resource type="Texture2D" uid="uid://dig251ftf4bmb" path="res://assets/textures/icons/undo-circle-outline-icon.png" id="10_hd6rt"]
+[ext_resource type="Texture2D" uid="uid://d32xko5olfjbh" path="res://assets/textures/icons/redo-circle-outline-icon.png" id="11_obxwr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3epqd"]
 content_margin_left = 5.0
@@ -27,6 +29,31 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3b5p7"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_hd6rt"]
+device = -1
+ctrl_pressed = true
+keycode = 90
+unicode = 122
+
+[sub_resource type="Shortcut" id="Shortcut_obxwr"]
+events = [SubResource("InputEventKey_hd6rt")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_o7jte"]
+device = -1
+shift_pressed = true
+ctrl_pressed = true
+keycode = 90
+unicode = 90
+
+[sub_resource type="InputEventKey" id="InputEventKey_8lc2j"]
+device = -1
+ctrl_pressed = true
+keycode = 89
+unicode = 121
+
+[sub_resource type="Shortcut" id="Shortcut_wu2at"]
+events = [SubResource("InputEventKey_o7jte"), SubResource("InputEventKey_8lc2j")]
 
 [node name="CreateQuiz" type="CanvasLayer"]
 script = ExtResource("1_mj7ud")
@@ -142,10 +169,9 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/side_margin = 400
 theme_override_constants/tab_separation = 20
-current_tab = 1
+current_tab = 0
 
 [node name="GENERAL" type="ScrollContainer" parent="MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -175,6 +201,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_3b5p7")
 caret_blink = true
 
 [node name="CATEGORIES" type="ScrollContainer" parent="MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -229,6 +256,38 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="UndoButton" type="TextureButton" parent="MarginContainer/MarginContainer/HBoxContainer2"]
+z_index = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_obxwr")
+texture_normal = ExtResource("10_hd6rt")
+
+[node name="RedoButton" type="TextureButton" parent="MarginContainer/MarginContainer/HBoxContainer2"]
+z_index = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_wu2at")
+texture_normal = ExtResource("11_obxwr")
+
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="text_changed" from="MarginContainer/TabContainer/GENERAL/GENERAL/HBoxContainer/QuizName" to="." method="_on_quiz_name_text_changed"]
 [connection signal="pressed" from="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/CategoryContainer/AddCategory" to="." method="_on_add_category_pressed"]
 [connection signal="pressed" from="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/PointsContainer/AddPointsStage" to="." method="_on_add_points_stage_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer2/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer2/RedoButton" to="." method="_on_redo_button_pressed"]

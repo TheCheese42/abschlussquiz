@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://8k5wl0gpksu"]
+
+[ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="1_d46aa"]
+[ext_resource type="Script" uid="uid://dqs4qivbix7dm" path="res://scripts/better_accept_dialog.gd" id="1_x2rgp"]
+[ext_resource type="LabelSettings" uid="uid://7r267pcwb314" path="res://styles/labels/label_content_24.tres" id="2_x2rgp"]
+
+[node name="BetterAcceptDialog" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_x2rgp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6862745)
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -75.0
+offset_right = 86.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="ColorRect/PanelContainer/VBoxContainer"]
+layout_mode = 2
+label_settings = ExtResource("1_d46aa")
+horizontal_alignment = 1
+
+[node name="Content" type="Label" parent="ColorRect/PanelContainer/VBoxContainer"]
+layout_mode = 2
+label_settings = ExtResource("2_x2rgp")
+
+[node name="OKButton" type="Button" parent="ColorRect/PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "OK"
+
+[connection signal="pressed" from="ColorRect/PanelContainer/VBoxContainer/OKButton" to="." method="_on_ok_button_pressed"]

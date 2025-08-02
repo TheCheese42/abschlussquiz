@@ -2,4 +2,4 @@
 extends Resource
 class_name QuizSaves
 
-var quiz_saves: Array[QuizSave] = []
+@export var quiz_saves: Array[QuizSave] = []

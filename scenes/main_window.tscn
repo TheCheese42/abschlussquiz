@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ppxc5dtytj0o"]
+[gd_scene load_steps=17 format=3 uid="uid://ppxc5dtytj0o"]
 
 [ext_resource type="LabelSettings" uid="uid://bhh1m84qdtbee" path="res://styles/labels/label_title_64.tres" id="1_52e18"]
 [ext_resource type="Script" uid="uid://dq1kqb2k23xl5" path="res://scripts/main_window.gd" id="1_lp381"]
@@ -6,12 +6,16 @@
 [ext_resource type="LabelSettings" uid="uid://csa3bq3yscrgk" path="res://styles/labels/label_title_56.tres" id="2_ax7xg"]
 [ext_resource type="Script" uid="uid://rtwmaxbnulfp" path="res://scripts/options.gd" id="2_k1aoa"]
 [ext_resource type="Texture2D" uid="uid://c3lo5yukfegs5" path="res://assets/textures/icons/more-options-ellipsis-icon.png" id="3_c4u0h"]
-[ext_resource type="FontFile" uid="uid://bitequibce137" path="res://assets/fonts/Simply the Best/KGSimplytheBest.otf" id="3_k1aoa"]
+[ext_resource type="LabelSettings" uid="uid://7r267pcwb314" path="res://styles/labels/label_content_24.tres" id="6_qvr6y"]
 [ext_resource type="Texture2D" uid="uid://dls4raqr5p8hm" path="res://assets/textures/icons/quit.png" id="7_71cax"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="7_j4oxs"]
 [ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="8_c4u0h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvr6y"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 bg_color = Color(0, 0, 0, 0)
 border_width_left = 3
 border_width_top = 3
@@ -23,18 +27,15 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ax7xg"]
-bg_color = Color(0.10196078, 0.10196078, 0.10196078, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c4u0h"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_exmdq"]
-font = ExtResource("3_k1aoa")
-font_size = 48
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvr6y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m7h58"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yy8od"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71cax"]
 
 [node name="MainWindow" type="CanvasLayer"]
 script = ExtResource("1_lp381")
@@ -42,10 +43,10 @@ script = ExtResource("1_lp381")
 [node name="QuizPanel" type="PanelContainer" parent="."]
 visible = false
 anchors_preset = -1
-offset_left = 50.0
-offset_top = 219.0
-offset_right = 356.0
-offset_bottom = 425.0
+offset_right = 306.0
+offset_bottom = 206.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_qvr6y")
 
 [node name="MarginContainer" type="MarginContainer" parent="QuizPanel"]
@@ -54,12 +55,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="QuizPanel/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="QuizPanel/MarginContainer/VBoxContainer"]
@@ -86,7 +88,109 @@ label_settings = ExtResource("8_c4u0h")
 [node name="Button" type="TextureButton" parent="QuizPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("3_c4u0h")
+
+[node name="QuizOptionsLayer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="QuizOptionsPanel" type="PanelContainer" parent="QuizOptionsLayer"]
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -632.5
+offset_top = -400.0
+offset_right = -429.5
+offset_bottom = -214.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuizOptionsLayer/QuizOptionsPanel"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c4u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvr6y")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m7h58")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yy8od")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_71cax")
+text = "PLAY"
+
+[node name="FavoriteButton" type="Button" parent="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c4u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvr6y")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m7h58")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yy8od")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_71cax")
+text = "MAKE_FAVORITE"
+
+[node name="EditButton" type="Button" parent="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c4u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvr6y")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m7h58")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yy8od")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_71cax")
+text = "EDIT"
+
+[node name="DuplicateButton" type="Button" parent="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c4u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvr6y")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m7h58")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yy8od")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_71cax")
+text = "DUPLICATE"
+
+[node name="ExportButton" type="Button" parent="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c4u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvr6y")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m7h58")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yy8od")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_71cax")
+text = "EXPORT"
+
+[node name="DeleteButton" type="Button" parent="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c4u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvr6y")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m7h58")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yy8od")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_71cax")
+text = "DELETE"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -99,95 +203,128 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="Options" type="CenterContainer" parent="MarginContainer"]
+[node name="OptionsCanvas" type="CanvasLayer" parent="MarginContainer"]
+layer = 3
 visible = false
-layout_mode = 2
 script = ExtResource("2_k1aoa")
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Options"]
-clip_children = 1
-z_index = 1
-custom_minimum_size = Vector2(700, 400)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ax7xg")
-
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/Options/PanelContainer"]
-custom_minimum_size = Vector2(700, 400)
-layout_mode = 2
-color = Color(0.6313726, 0.6313726, 0.6313726, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Options/PanelContainer/ColorRect"]
-layout_mode = 0
-offset_right = 700.0
-offset_bottom = 400.0
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/OptionsCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 20
+color = Color(0, 0, 0, 0.6862745)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/OptionsCanvas/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.3225
+offset_top = -203.0
+offset_right = 294.3225
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer"]
 z_index = 1
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "OPTIONS"
 label_settings = ExtResource("2_ax7xg")
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 26)
+layout_mode = 2
+text = "OPTIONS_TIP"
+label_settings = ExtResource("6_qvr6y")
+autowrap_mode = 3
+
+[node name="Control" type="Control" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="Label" type="Label" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "LANGUAGE"
-label_settings = SubResource("LabelSettings_exmdq")
+label_settings = ExtResource("8_c4u0h")
 horizontal_alignment = 1
 
-[node name="LanguageButton" type="OptionButton" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="LanguageButton" type="OptionButton" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_k1aoa")
-theme_override_font_sizes/font_size = 48
+mouse_default_cursor_shape = 2
 flat = true
 alignment = 1
 
-[node name="KeepScreenOnCheck" type="CheckBox" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="KeepScreenOnCheck" type="CheckBox" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 tooltip_text = "KEEP_SCREEN_ON_TOOLTIP"
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_k1aoa")
-theme_override_font_sizes/font_size = 48
+mouse_default_cursor_shape = 2
 text = "KEEP_SCREEN_ON"
 expand_icon = true
 
-[node name="Control2" type="Control" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "BACKUP_COUNT_TOOLTIP"
+mouse_filter = 0
+text = "BACKUP_COUNT"
+label_settings = ExtResource("8_c4u0h")
+horizontal_alignment = 1
+
+[node name="BackupSpin" type="SpinBox" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+min_value = -1.0
+allow_greater = true
+
+[node name="Control2" type="Control" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Close" type="Button" parent="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_k1aoa")
-theme_override_font_sizes/font_size = 48
+theme_override_constants/separation = 20
+
+[node name="Credits" type="Button" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "CREDITS"
+
+[node name="Close" type="Button" parent="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 text = "CLOSE"
-flat = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -222,63 +359,112 @@ texture_normal = ExtResource("2_52e18")
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="FavoritesContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="ContentVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="FavoritesContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ColorRect1" type="ColorRect" parent="MarginContainer/VBoxContainer/FavoritesContainer"]
+[node name="ColorRect1" type="ColorRect" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/FavoritesContainer"]
 custom_minimum_size = Vector2(40, 5)
 layout_mode = 2
 size_flags_vertical = 4
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FavoritesContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/FavoritesContainer"]
 layout_mode = 2
 text = "FAVORITES"
 label_settings = ExtResource("7_j4oxs")
 
-[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer/FavoritesContainer"]
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/FavoritesContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 color = Color(0, 0, 0, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="FavoritesScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox"]
+custom_minimum_size = Vector2(0, 206)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FavoritesHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/FavoritesScroll"]
 layout_mode = 2
 
-[node name="AllContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="AllContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ColorRect1" type="ColorRect" parent="MarginContainer/VBoxContainer/AllContainer"]
+[node name="ColorRect1" type="ColorRect" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/AllContainer"]
 custom_minimum_size = Vector2(40, 5)
 layout_mode = 2
 size_flags_vertical = 4
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AllContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/AllContainer"]
 layout_mode = 2
 text = "ALL"
 label_settings = ExtResource("7_j4oxs")
 
-[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer/AllContainer"]
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/AllContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 color = Color(0, 0, 0, 1)
 
-[node name="CreateButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="AllScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox"]
+custom_minimum_size = Vector2(0, 206)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AllHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ContentVBox/AllScroll"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 20
+
+[node name="RestoreButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "RESTORE_BACKUP"
+
+[node name="ImportButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "IMPORT_QUIZ"
+
+[node name="CreateButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
 mouse_default_cursor_shape = 2
 text = "CREATE_QUIZ"
 
-[connection signal="item_selected" from="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/LanguageButton" to="MarginContainer/Options" method="_on_language_button_item_selected"]
-[connection signal="toggled" from="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer/KeepScreenOnCheck" to="MarginContainer/Options" method="_on_keep_screen_on_check_toggled"]
-[connection signal="pressed" from="MarginContainer/Options/PanelContainer/ColorRect/MarginContainer/VBoxContainer/Close" to="MarginContainer/Options" method="_on_close_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/TitleContainer/Quit" to="MarginContainer/Options" method="_on_quit_pressed"]
+[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/FavoriteButton" to="." method="_on_favorite_button_pressed"]
+[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]
+[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/DuplicateButton" to="." method="_on_duplicate_button_pressed"]
+[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LanguageButton" to="MarginContainer/OptionsCanvas" method="_on_language_button_item_selected"]
+[connection signal="toggled" from="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/KeepScreenOnCheck" to="MarginContainer/OptionsCanvas" method="_on_keep_screen_on_check_toggled"]
+[connection signal="value_changed" from="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/BackupSpin" to="MarginContainer/OptionsCanvas" method="_on_backup_spin_value_changed"]
+[connection signal="pressed" from="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/Credits" to="MarginContainer/OptionsCanvas" method="_on_credits_pressed"]
+[connection signal="pressed" from="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/Close" to="MarginContainer/OptionsCanvas" method="_on_close_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TitleContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TitleContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RestoreButton" to="." method="_on_restore_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ImportButton" to="." method="_on_import_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]
