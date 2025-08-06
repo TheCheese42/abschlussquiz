@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://4hljjmc6pt2g"]
+[gd_scene load_steps=20 format=3 uid="uid://4hljjmc6pt2g"]
 
 [ext_resource type="Script" uid="uid://b48ff1ce8ovme" path="res://scripts/create_quiz.gd" id="1_mj7ud"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="2_3epqd"]
@@ -11,6 +11,18 @@
 [ext_resource type="Texture2D" uid="uid://ck7kt0wkm6s1d" path="res://assets/textures/icons/select-box-arrow-bottom-icon.png" id="8_0vcbe"]
 [ext_resource type="Texture2D" uid="uid://dig251ftf4bmb" path="res://assets/textures/icons/undo-circle-outline-icon.png" id="10_hd6rt"]
 [ext_resource type="Texture2D" uid="uid://d32xko5olfjbh" path="res://assets/textures/icons/redo-circle-outline-icon.png" id="11_obxwr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hd6rt"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3epqd"]
 content_margin_left = 5.0
@@ -55,8 +67,25 @@ unicode = 121
 [sub_resource type="Shortcut" id="Shortcut_wu2at"]
 events = [SubResource("InputEventKey_o7jte"), SubResource("InputEventKey_8lc2j")]
 
-[node name="CreateQuiz" type="CanvasLayer"]
+[node name="CreateQuiz" type="CanvasLayer" groups=["events"]]
 script = ExtResource("1_mj7ud")
+
+[node name="GridPanel" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_hd6rt")
 
 [node name="CategoryHBox" type="HBoxContainer" parent="."]
 visible = false
@@ -133,7 +162,6 @@ grow_vertical = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 z_index = 1
@@ -169,9 +197,10 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/side_margin = 400
 theme_override_constants/tab_separation = 20
-current_tab = 0
+current_tab = 2
 
 [node name="GENERAL" type="ScrollContainer" parent="MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -247,7 +276,6 @@ text = "ADD_POINTS_STAGE"
 icon = ExtResource("5_3b5p7")
 
 [node name="QUESTIONS" type="ScrollContainer" parent="MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -255,6 +283,120 @@ metadata/_tab_index = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="QuestionsGrid" type="GridContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer"]
+custom_minimum_size = Vector2(340, 164)
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="QuestionsEditorBox" type="HBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="GeneralBox" type="VBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="ModeBox" type="HBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/ModeBox"]
+layout_mode = 2
+text = "MODE"
+label_settings = ExtResource("4_3epqd")
+
+[node name="ModeOption" type="OptionButton" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/ModeBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "MULTIPLE_CHOICE"
+popup/item_0/id = 0
+popup/item_1/text = "TOURNAMENT"
+popup/item_1/id = 1
+
+[node name="TimeBox" type="HBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/TimeBox"]
+layout_mode = 2
+text = "TIME"
+label_settings = ExtResource("4_3epqd")
+
+[node name="TimeSpin" type="SpinBox" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/TimeBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "TIME_TOOLTIP"
+mouse_default_cursor_shape = 2
+rounded = true
+allow_greater = true
+
+[node name="Control" type="Control" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="PictureBox" type="HBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox"]
+layout_mode = 2
+text = "PICTURE"
+label_settings = ExtResource("4_3epqd")
+
+[node name="PictureEdit" type="LineEdit" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PictureButton" type="Button" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "CHOOSE"
+
+[node name="TextBox" type="VBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/TextBox"]
+layout_mode = 2
+text = "QUESTION_TEXT"
+label_settings = ExtResource("4_3epqd")
+
+[node name="QuestionTextEdit" type="TextEdit" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/TextBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+empty_selection_clipboard_enabled = false
+wrap_mode = 1
+scroll_smooth = true
+caret_blink = true
+
+[node name="EditAnswers" type="Button" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "EDIT_ANSWERS"
+autowrap_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2

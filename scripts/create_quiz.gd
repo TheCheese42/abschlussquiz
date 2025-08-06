@@ -9,6 +9,17 @@ var confirmation_dialog_scene: PackedScene = preload("res://scenes/better_confir
 @onready var points_h_box: HBoxContainer = $PointsHBox
 @onready var categories_v_box: VBoxContainer = $MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/CategoryContainer/CategoriesVBox
 @onready var points_v_box: VBoxContainer = $MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/PointsContainer/PointsVBox
+@onready var questions_grid: GridContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/QuestionsGrid
+@onready var grid_panel: PanelContainer = $GridPanel
+@onready var questions_editor_box: BoxContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox
+@onready var questions_tab_box: BoxContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer
+@onready var tab_container: TabContainer = $MarginContainer/TabContainer
+@onready var question_editor_scroll: ScrollContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer
+@onready var mode_menu: MenuButton = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/ModeBox/ModeMenu
+@onready var time_spin: SpinBox = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/TimeBox/TimeSpin
+@onready var picture_edit: LineEdit = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/PictureEdit
+@onready var picture_button: Button = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/PictureButton
+@onready var question_text_edit: TextEdit = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/TextBox/QuestionTextEdit
 
 var edit: bool = false
 var save: QuizSave = null
@@ -17,6 +28,8 @@ var last_state: QuizSave = null
 var redo_queue: Array[QuizSave] = []
 var queue_len_on_last_undo: int = 0
 var just_redone: bool = false
+var selected_question_category: String = ""
+var selected_question_stage: int = 0
 
 
 func _ready() -> void:
@@ -27,6 +40,10 @@ func _ready() -> void:
 	if not edit:
 		save = QuizSave.new()
 		GlobalVars.quiz_saves.quiz_saves.append(save)
+	selected_question_category = save.categories.get(0) if save.categories.get(0) else ""
+	save.update_questions()
+	rebuild_ui()
+	await get_tree().create_timer(0.0).timeout
 	rebuild_ui()
 
 
@@ -39,6 +56,119 @@ func rebuild_ui(append_to_undos: bool = true) -> void:
 			undo_queue.append(last_state)
 			last_state = save.duplicate(true)
 		redo_queue.clear()
+	rebuild_categories_points()
+	rebuild_questions()
+
+
+func rebuild_questions() -> void:
+	for child: Control in questions_grid.get_children():
+		questions_grid.remove_child(child)
+		child.queue_free()
+	questions_grid.columns = len(save.categories) + 1
+	var empty_panel: PanelContainer = grid_panel.duplicate()
+	empty_panel.visible = true
+	var empty_stylebox: StyleBoxFlat = empty_panel.get_theme_stylebox("panel")
+	empty_stylebox = empty_stylebox.duplicate(true)
+	empty_panel.add_theme_stylebox_override("panel", empty_stylebox)
+	empty_stylebox.border_width_top = 2
+	empty_stylebox.border_width_left = 2
+	empty_panel.add_child(Control.new())
+	questions_grid.add_child(empty_panel)  # Upper left corner is emtpy
+	for category: String in save.categories:
+		var label: Label = Label.new()
+		label.label_settings = load("res://styles/labels/label_content_24.tres")
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.text = category
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		var panel: PanelContainer = grid_panel.duplicate()
+		panel.visible = true
+		var stylebox: StyleBoxFlat = panel.get_theme_stylebox("panel")
+		stylebox = stylebox.duplicate(true)
+		panel.add_theme_stylebox_override("panel", stylebox)
+		stylebox.border_width_top = 2
+		if category == save.categories[len(save.categories) - 1]:
+			stylebox.border_width_right = 2
+		panel.add_child(label)
+		questions_grid.add_child(panel)
+	for stage: int in len(save.point_stages):
+		var is_last_stage: bool = stage == len(save.point_stages) - 1
+		var points: int = save.point_stages[stage]
+		var label: Label = Label.new()
+		label.label_settings = load("res://styles/labels/label_content_24.tres")
+		label.text = str(points)
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		var panel: PanelContainer = grid_panel.duplicate()
+		panel.visible = true
+		var stylebox: StyleBoxFlat = panel.get_theme_stylebox("panel")
+		stylebox = stylebox.duplicate(true)
+		panel.add_theme_stylebox_override("panel", stylebox)
+		stylebox.border_width_left = 2
+		if is_last_stage:
+			stylebox.border_width_bottom = 2
+		panel.add_child(label)
+		questions_grid.add_child(panel)
+		for category: String in save.categories:
+			var question: Question = save.questions[category][stage]
+			var question_label: Label = Label.new()
+			question_label.label_settings = load("res://styles/labels/label_content_16.tres")
+			question_label.text = question.text
+			question_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			question_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+			question_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			question_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			var questions_panel: PanelContainer = grid_panel.duplicate()
+			questions_panel.visible = true
+			var questions_stylebox: StyleBoxFlat = questions_panel.get_theme_stylebox("panel")
+			questions_stylebox = questions_stylebox.duplicate(true)
+			questions_panel.add_theme_stylebox_override("panel", questions_stylebox)
+			if is_last_stage:
+				questions_stylebox.border_width_bottom = 2
+			if category == save.categories[len(save.categories) - 1]:
+				questions_stylebox.border_width_right = 2
+			questions_panel.add_child(question_label)
+			questions_grid.add_child(questions_panel)
+	if tab_container.size.x / questions_grid.columns < 400:
+		var new_box: BoxContainer = VBoxContainer.new()
+		new_box.add_theme_constant_override("separation", 25)
+		questions_tab_box.replace_by(new_box)
+		questions_tab_box.queue_free()
+		questions_tab_box = new_box
+		var new_editor_box: BoxContainer = HBoxContainer.new()
+		new_editor_box.add_theme_constant_override("separation", 25)
+		question_editor_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		question_editor_scroll.size_flags_vertical = Control.SIZE_SHRINK_END
+		new_editor_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		questions_editor_box.replace_by(new_editor_box)
+		questions_editor_box.queue_free()
+		questions_editor_box = new_editor_box
+	else:
+		var new_box: BoxContainer = HBoxContainer.new()
+		new_box.add_theme_constant_override("separation", 25)
+		questions_tab_box.replace_by(new_box)
+		questions_tab_box.queue_free()
+		questions_tab_box = new_box
+		var new_editor_box: BoxContainer = VBoxContainer.new()
+		new_editor_box.add_theme_constant_override("separation", 25)
+		question_editor_scroll.size_flags_horizontal = Control.SIZE_SHRINK_END
+		question_editor_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		questions_editor_box.replace_by(new_editor_box)
+		questions_editor_box.queue_free()
+		questions_editor_box = new_editor_box
+		question_text_edit.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		# Make text edit fill the blank space
+		var qte_parent: Control = question_text_edit.get_parent()
+		qte_parent.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		var qte_parent_parent: Control = question_text_edit.get_parent().get_parent()
+		qte_parent_parent.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+
+func on_resize(_size: Vector2) -> void:
+	rebuild_questions()
+
+
+func rebuild_categories_points() -> void:
 	for child: Control in categories_v_box.get_children():
 		categories_v_box.remove_child(child)
 		child.queue_free()
