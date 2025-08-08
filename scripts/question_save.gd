@@ -1,11 +1,12 @@
+@tool
 extends Resource
 class_name Question
-	
-var type: QuestionType = QuestionType.MultipleChoice
-var text: String = ""
-var image: ImageTexture = null
-var time: int = 0  # 0 means no limit
-var answers: Array[Answer] = []
+
+@export var type: QuestionType = QuestionType.MultipleChoice
+@export var text: String = ""
+@export var image: ImageTexture = null
+@export var time: int = 0  # 0 means no limit
+@export var answers: Array[Answer] = []
 
 
 enum QuestionType {

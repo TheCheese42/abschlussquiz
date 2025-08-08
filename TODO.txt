@@ -1,2 +1,1 @@
 More themes
-Allow undo and redo, make backups.

@@ -10,6 +10,7 @@ extends CanvasLayer
 var create_quiz_scene: PackedScene = preload("res://scenes/create_quiz.tscn")
 var confirmation_dialog_scene: PackedScene = preload("res://scenes/better_confirmation_dialog.tscn")
 var accept_dialog_scene: PackedScene = preload("res://scenes/better_accept_dialog.tscn")
+var play_menu_scene: PackedScene = preload("res://scenes/play_menu.tscn")
 
 var options_panel_active_for: QuizSave = null
 
@@ -109,10 +110,29 @@ func _on_quit_pressed() -> void:
 func _on_play_button_pressed() -> void:
 	if options_panel_active_for == null:
 		return
-	var _quiz: QuizSave = options_panel_active_for
+	var quiz: QuizSave = options_panel_active_for
 	options_panel_active_for = null
 	quiz_options_layer.visible = false
-	pass  # TODO (use quiz var instead of options_panel_active_for
+	var play_menu: PlayMenu = play_menu_scene.instantiate()
+	play_menu.init(len(quiz.categories) * len(quiz.point_stages))
+	play_menu.start_pressed.connect(start_quiz.bind(quiz))
+	add_child(play_menu)
+
+
+func start_quiz(
+	teams: PackedStringArray,
+	show_questions: bool,
+	show_answers: bool,
+	pass_questions: bool,
+	pass_points_multiplier: float,
+	quiz: QuizSave,
+) -> void:
+	print(teams)
+	print(show_questions)
+	print(show_answers)
+	print(pass_questions)
+	print(pass_points_multiplier)
+	print(quiz)
 
 
 func _on_favorite_button_pressed() -> void:
@@ -143,17 +163,17 @@ func _on_export_button_pressed() -> void:
 	var dialog: FileDialog = FileDialog.new()
 	dialog.visible = false
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
-	dialog.add_filter("*.quizf", "Quiz File")
-	dialog.add_filter("*.tres", "Godot Text Resource")
+	dialog.add_filter("*.quizf", tr("QUIZ_FILE"))
+	dialog.add_filter("*.tres", tr("GODOT_TEXT_RESOURCE"))
 	dialog.title = tr("EXPORT_QUIZ_FILE")
 	dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 	dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	dialog.current_file = quiz.name.validate_filename() + ".quizf"
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(func(path: String) -> void: export_quiz(quiz, path))
-	dialog.popup_centered_ratio()
 	dialog.visible = true
 	add_child(dialog)
+	dialog.popup_centered_ratio()
 	dialog.show()
 
 
@@ -176,12 +196,15 @@ func _on_delete_button_pressed() -> void:
 	var quiz: QuizSave = options_panel_active_for
 	options_panel_active_for = null
 	quiz_options_layer.visible = false
-	var dialog: BetterConfirmationDialog = confirmation_dialog_scene.instantiate()
-	dialog.title_text = tr("DELETE_QUIZ_CONFIRM_TITLE")
-	dialog.content_text = tr("DELETE_QUIZ_CONFIRM_CONTENT")
-	dialog.confirmed.connect(func() -> void: delete_quiz(quiz))
-	add_child(dialog)
-	dialog.show()
+	if not Input.is_action_pressed("confirm"):
+		var dialog: BetterConfirmationDialog = confirmation_dialog_scene.instantiate()
+		dialog.title_text = tr("DELETE_QUIZ_CONFIRM_TITLE")
+		dialog.content_text = tr("DELETE_QUIZ_CONFIRM_CONTENT")
+		dialog.confirmed.connect(func() -> void: delete_quiz(quiz))
+		add_child(dialog)
+		dialog.show()
+	else:
+		delete_quiz(quiz)
 
 
 func delete_quiz(quiz: QuizSave) -> void:
@@ -197,7 +220,7 @@ func _input(event: InputEvent) -> void:
 			options_panel_active_for = null
 	if is_instance_of(event, InputEventMouseButton):
 		var mouse_event: InputEventMouseButton = event
-		if mouse_event.is_pressed():
+		if mouse_event.is_action_pressed("click"):
 			if not quiz_options_panel.get_rect().has_point(mouse_event.global_position):
 				if quiz_options_layer.visible:
 					quiz_options_layer.visible = false
@@ -208,16 +231,16 @@ func _on_import_button_pressed() -> void:
 	var dialog: FileDialog = FileDialog.new()
 	dialog.visible = false
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
-	dialog.add_filter("*.quizf", "Quiz File")
-	dialog.add_filter("*.tres", "Godot Text Resource")
+	dialog.add_filter("*.quizf", tr("QUIZ_FILE"))
+	dialog.add_filter("*.tres", tr("GODOT_TEXT_RESOURCE"))
 	dialog.title = tr("IMPORT_QUIZ_FILE")
 	dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(import_quiz)
-	dialog.popup_centered_ratio()
 	dialog.visible = true
 	add_child(dialog)
+	dialog.popup_centered_ratio()
 	dialog.show()
 
 
@@ -253,14 +276,14 @@ func _on_restore_button_pressed() -> void:
 	var dialog: FileDialog = FileDialog.new()
 	dialog.visible = false
 	dialog.access = FileDialog.ACCESS_USERDATA
-	dialog.add_filter("*.quizf", "Quiz File")
-	dialog.add_filter("*.tres", "Godot Text Resource")
+	dialog.add_filter("*.quizf", tr("QUIZ_FILE"))
+	dialog.add_filter("*.tres", tr("GODOT_TEXT_RESOURCE"))
 	dialog.title = tr("RESTORE_QUIZ_FILE")
 	dialog.current_dir = "user://backup"
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(import_quiz)
-	dialog.popup_centered_ratio()
 	dialog.visible = true
 	add_child(dialog)
+	dialog.popup_centered_ratio()
 	dialog.show()

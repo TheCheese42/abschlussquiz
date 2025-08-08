@@ -1,6 +1,7 @@
 keys,en,de
 ### GENERAL ###,,
 OK,OK,OK
+YES,Yes,Ja
 NO,No,Nein
 CANCEL,Cancel,Abbrechen
 ### MAIN MENU ###,,
@@ -39,6 +40,8 @@ EXPORT_QUIZ_ERROR_TITLE,Error Exporting Quiz,Fehler beim Exportieren
 EXPORT_QUIZ_ERROR_CONTENT,The following error occurred while exporting the quiz:\n\n{0}\n\nMake sure the path is writable and the file name is valid.,"Der folgende Fehler ist beim Exportieren aufgetreten:\n\n{0}\n\nStellen Sie sicher, dass der Pfad beschreibbar und der Dateiname gültig ist."
 IMPORT_QUIZ_ERROR_TITLE,Error Importing Quiz,Fehler beim Importieren
 IMPORT_QUIZ_ERROR_CONTENT,Failed to import the quiz. Are you sure this is a quiz file?,"Das Quiz konnte nicht importiert werden.\nSind Sie sich sicher, dass es sich um eine Quizdatei handelt?"
+QUIZ_FILE,Quiz File,Quizdatei
+GODOT_TEXT_RESOURCE,Godot Text Resource,Godot Textressource
 ### CREATE QUIZ ###,,
 NEW_QUIZ,New Quiz,Neues Quiz
 CREATE_QUIZ,Create Quiz,Quiz erstellen
@@ -67,5 +70,33 @@ CHOOSE,Choose,Auswählen
 ANSWERS,Answers:,Antworten:
 ANSWER_PLACEHOLDER,Answer text...,Antworttext...
 EDIT_ANSWERS,Edit answers...,Antworten bearbeiten...
+SUPPORTED_IMAGE_FILES,Supported Image Files,Unterstützte Bilddateien
+SELECT_IMAGE,Select an Image,Wählen Sie ein Bild aus
+LOAD_IMAGE_ERROR_TITLE,Error loading Image,Fehler beim Laden des Bildes
+LOAD_IMAGE_ERROR_CONTENT,"The Image couldn't be loaded.\nEnsure that that it contains a supported Image format and the\nprogram has permissions to access it.\nIf that doesn't help, convert it to a different format.","Das Bild konnte nicht geladen werden.\nÜberprüfen Sie ob es sich um ein unterstütztes Format handelt\nund ob das Programm auf die Datei zugreifen darf.\nSollte das nicht helfen, konvertieren Sie es in ein anderes Format."
+ANSWER_X,Answer {0}:,Antwort {0}:
+CORRECT_ANSWER,Correct Answer,Richtige Antwort
+SAVE,Save,Speichern
+ADD_ANSWER,Add Answer,Neue Antwort
 ### PLAY QUIZ ###,,
-TEAM_NAMES,Holy Cungadero:The Fun Gang:Moss Finders:Trash Machine:Uncreative:Unmotivated:Not good but better,Heiliges Cungadero:Die Spaß Gang:Moos Finder:Müllmaschine:Unkreativ:Unmotiviert:Nicht gut aber besser
+TEAM_NAMES,Holy Cungadero:The Fun Gang:Moss Finders:Trash Machine:Uncreative:Unmotivated:Not good but better,Heiliges Cungadero:Die Spaß Gang:Moos Finder:Müllmaschine:Unkreativ:Unmotiviert:Nicht gut sondern besser
+NO_TEAM_NAME_FOUND,But none was found.,Es wurde keiner gefunden.
+PLAY_QUIZ,Play Quiz,Quiz Spielen
+START,Start,Starten
+TEAMS,Teams:,Teams:
+SHOW_QUESTIONS,Show questions,Fragen anzeigen
+SHOW_QUESTIONS_TOOLTIP,"Show the question texts on the screen.\nOtherwise, they need to be read aloud by a presenter.","Zeige die Fragen auf dem Bildschirm an.\nAnsonsten müssen sie von einem Moderator vorgelesen werden."
+SHOW_ANSWERS,Show answers,Antworten anzeigen
+SHOW_ANSWERS_TOOLTIP,"Show the possible answers on the screen.\nOtherwise, they need to be read aloud by a presenter.\nAfter that, you can select whether it was answered correctly.","Zeige die Antwortmöglichkeiten auf dem Bildschirm an.\nAnsonsten müssen sie von einem Moderator vorgelesen werden.\nDanach können Sie auswählen, ob richtig geantwortet wurde."
+PASS_QUESTIONS,Pass questions,Fragen weitergeben
+POINTS_MULTIPLIER,Points multiplier:,Punktemultiplikator:.
+PASS_QUESTIONS_TOOLTIP,"If a question was answered incorrectly, the next\nteam can try it for a portion of the points.","Wenn eine Frage falsch beantwortet wird, kann das nächste\nTeam sie für einen Teil der Punkte ebenfalls versuchen."
+TEAM_X_COLON,Team {0}:,Team {0}:
+TEAM_X,Team {0},Team {0}
+GENERATE,Generate,Generieren
+IMPOSSIBLE_QUESTION_DISTRIBUTION_TITLE,Impossible distribution of Questions,Unmögliche Fragenverteilung
+IMPOSSIBLE_QUESTION_DISTRIBUTION_CONTENT,"Unfortunately, it is not possible to play {questions} questions with {teams} teams,\nso {remainder} questions are omitted at the end.\n\nDo you still want to continue?","Leider können bei {teams} Teams keine {questions} Fragen gespielt\nwerden, sodass am Ende {remainder} Fragen wegfallen.\n\nTrotzdem fortfahren?"
+EMPTY_TEAM_NAMES_TITLE,Missing Team Names,Fehlende Teamnamen
+EMPTY_TEAM_NAMES_CONTENT,"Not all teams have names, please add them.","Nicht alle Teams haben Namen,\nbitte fügen Sie diese hinzu."
+DUPLICATE_TEAM_NAMES_TITLE,Duplicate Team Names,Doppelte Teamnamen
+DUPLICATE_TEAM_NAMES_CONTENT,Some teams have the same name.\nPlease give every team a different name.,Manche Teams haben den gleichen Namen.\nBitte geben Sie jedem Team einen anderen Namen.

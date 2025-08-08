@@ -75,8 +75,10 @@ func update_questions() -> void:
 		for i: int in len(point_stages):
 			if not questions.has(cat):  # If the category was just added to categories
 				questions[cat] = []
-			var que: Question = questions[cat].get(i)
-			if que == null:
+			var que: Question
+			if len(questions[cat]) - 1 < i:
 				que = Question.new()
+			else:
+				que = questions[cat].get(i)
 			_new_questions[cat].append(que)
 	questions = _new_questions

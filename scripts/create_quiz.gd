@@ -2,6 +2,9 @@ extends CanvasLayer
 class_name CreateQuiz
 
 var confirmation_dialog_scene: PackedScene = preload("res://scenes/better_confirmation_dialog.tscn")
+var accept_dialog_scene: PackedScene = preload("res://scenes/better_accept_dialog.tscn")
+var picture_preview_scene: PackedScene = preload("res://scenes/picture_preview.tscn")
+var answer_editor_scene: PackedScene = preload("res://scenes/answers_editor.tscn")
 
 @onready var title: Label = $MarginContainer/HBoxContainer/Title
 @onready var quiz_name: LineEdit = $MarginContainer/TabContainer/GENERAL/GENERAL/HBoxContainer/QuizName
@@ -15,11 +18,13 @@ var confirmation_dialog_scene: PackedScene = preload("res://scenes/better_confir
 @onready var questions_tab_box: BoxContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer
 @onready var tab_container: TabContainer = $MarginContainer/TabContainer
 @onready var question_editor_scroll: ScrollContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer
-@onready var mode_menu: MenuButton = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/ModeBox/ModeMenu
+@onready var mode_menu: OptionButton = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/ModeBox/ModeOption
 @onready var time_spin: SpinBox = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/TimeBox/TimeSpin
-@onready var picture_edit: LineEdit = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/PictureEdit
 @onready var picture_button: Button = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/PictureButton
 @onready var question_text_edit: TextEdit = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/TextBox/QuestionTextEdit
+@onready var picture_preview_container: PanelContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/PicturePreviewContainer
+@onready var clear_picture_container: PanelContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/ClearPictureContainer
+@onready var edit_answers: Button = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/EditAnswers
 
 var edit: bool = false
 var save: QuizSave = null
@@ -30,6 +35,8 @@ var queue_len_on_last_undo: int = 0
 var just_redone: bool = false
 var selected_question_category: String = ""
 var selected_question_stage: int = 0
+# Dictionary[String, Array[PanelContainer]]
+var question_panels: Dictionary[String, Array] = {}
 
 
 func _ready() -> void:
@@ -58,13 +65,33 @@ func rebuild_ui(append_to_undos: bool = true) -> void:
 		redo_queue.clear()
 	rebuild_categories_points()
 	rebuild_questions()
+	rebuild_question_editor()
+
+
+func rebuild_question_editor() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	match question.type:
+		Question.QuestionType.MultipleChoice:
+			mode_menu.selected = 0
+		Question.QuestionType.Tournament:
+			mode_menu.selected = 1
+	time_spin.value = question.time
+	picture_preview_container.visible = question.image != null
+	clear_picture_container.visible = question.image != null
+	question_text_edit.text = question.text
+	edit_answers.visible = question.type == Question.QuestionType.MultipleChoice
 
 
 func rebuild_questions() -> void:
 	for child: Control in questions_grid.get_children():
 		questions_grid.remove_child(child)
 		child.queue_free()
+	question_panels.clear()
 	questions_grid.columns = len(save.categories) + 1
+	if selected_question_category not in save.categories:
+		selected_question_category = save.categories[0]
+	if selected_question_stage >= len(save.point_stages):
+		selected_question_stage = 0
 	var empty_panel: PanelContainer = grid_panel.duplicate()
 	empty_panel.visible = true
 	var empty_stylebox: StyleBoxFlat = empty_panel.get_theme_stylebox("panel")
@@ -75,6 +102,7 @@ func rebuild_questions() -> void:
 	empty_panel.add_child(Control.new())
 	questions_grid.add_child(empty_panel)  # Upper left corner is emtpy
 	for category: String in save.categories:
+		question_panels[category] = []
 		var label: Label = Label.new()
 		label.label_settings = load("res://styles/labels/label_content_24.tres")
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -117,18 +145,26 @@ func rebuild_questions() -> void:
 			question_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			question_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 			question_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			question_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			question_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			question_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			var questions_panel: PanelContainer = grid_panel.duplicate()
-			questions_panel.visible = true
-			var questions_stylebox: StyleBoxFlat = questions_panel.get_theme_stylebox("panel")
-			questions_stylebox = questions_stylebox.duplicate(true)
-			questions_panel.add_theme_stylebox_override("panel", questions_stylebox)
+			var question_panel: PanelContainer = grid_panel.duplicate()
+			question_panel.gui_input.connect(
+				func(event: InputEvent) -> void: select_question(event, category, stage)
+			)
+			question_panels[category].append(question_panel)
+			question_panel.visible = true
+			var question_stylebox: StyleBoxFlat = question_panel.get_theme_stylebox("panel")
+			question_stylebox = question_stylebox.duplicate(true)
+			question_panel.add_theme_stylebox_override("panel", question_stylebox)
 			if is_last_stage:
-				questions_stylebox.border_width_bottom = 2
+				question_stylebox.border_width_bottom = 2
 			if category == save.categories[len(save.categories) - 1]:
-				questions_stylebox.border_width_right = 2
-			questions_panel.add_child(question_label)
-			questions_grid.add_child(questions_panel)
+				question_stylebox.border_width_right = 2
+			if selected_question_category == category and selected_question_stage == stage:
+				question_stylebox.bg_color.a8 = 150
+			question_panel.add_child(question_label)
+			questions_grid.add_child(question_panel)
 	if tab_container.size.x / questions_grid.columns < 400:
 		var new_box: BoxContainer = VBoxContainer.new()
 		new_box.add_theme_constant_override("separation", 25)
@@ -162,6 +198,14 @@ func rebuild_questions() -> void:
 		qte_parent.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		var qte_parent_parent: Control = question_text_edit.get_parent().get_parent()
 		qte_parent_parent.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+
+func select_question(event: InputEvent, category: String, stage: int) -> void:
+	if is_instance_of(event, InputEventMouseButton):
+		if event.is_action_pressed("click"):
+			selected_question_category = category;
+			selected_question_stage = stage;
+			rebuild_ui()
 
 
 func on_resize(_size: Vector2) -> void:
@@ -235,6 +279,8 @@ func rename_category(cat_edit: LineEdit, category: String, new: String) -> void:
 
 
 func remove_category(category: String) -> void:
+	if len(save.categories) <= 1:
+		return
 	if not Input.is_action_pressed("confirm"):
 		var dialog: BetterConfirmationDialog = confirmation_dialog_scene.instantiate()
 		dialog.title_text = tr("DELETE_CATEGORY_CONFIRM_TITLE")
@@ -248,6 +294,8 @@ func remove_category(category: String) -> void:
 
 
 func remove_last_point_stage() -> void:
+	if len(save.point_stages) <= 1:
+		return
 	if not Input.is_action_pressed("confirm"):
 		var dialog: BetterConfirmationDialog = confirmation_dialog_scene.instantiate()
 		dialog.title_text = tr("DELETE_POINT_STAGE_CONFIRM_TITLE")
@@ -276,7 +324,7 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_quiz_name_text_changed(new_text: String) -> void:
-	if new_text:  # Don't save if the name is emmpty
+	if new_text:  # Don't save if the name is empty
 		save.name = new_text
 		GlobalFunctions.save_quiz_saves()
 		undo_queue.append(last_state)
@@ -318,3 +366,92 @@ func _on_undo_button_pressed() -> void:
 
 func _on_redo_button_pressed() -> void:
 	redo()
+
+
+func _on_picture_preview_pressed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	if question.image:
+		var preview: PicturePreview = picture_preview_scene.instantiate()
+		preview.texture = question.image
+		add_child(preview)
+
+
+func _on_clear_picture_pressed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	question.image = null
+	rebuild_ui()
+
+
+func _on_picture_button_pressed() -> void:
+	var dialog: FileDialog = FileDialog.new()
+	dialog.visible = false
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.add_filter(
+		"*.jpg, *.jpeg, *.png, *.tga, *.webp, *.svg, *.bmp, *.dds, *.ktx, *.exr, *.hdr",
+		tr("SUPPORTED_IMAGE_FILES"),
+	)
+	dialog.title = tr("SELECT_IMAGE")
+	dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_PICTURES)
+	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	dialog.use_native_dialog = true
+	dialog.file_selected.connect(open_image)
+	dialog.visible = true
+	add_child(dialog)
+	dialog.popup_centered_ratio()
+	dialog.show()
+
+
+func open_image(path: String) -> void:
+	var image: Image = Image.load_from_file(path)
+	if image == null:
+		var dialog: BetterAcceptDialog = accept_dialog_scene.instantiate()
+		dialog.title_text = tr("LOAD_IMAGE_ERROR_TITLE")
+		dialog.content_text = tr("LOAD_IMAGE_ERROR_CONTENT")
+		add_child(dialog)
+		dialog.show()
+	var texture: ImageTexture = ImageTexture.create_from_image(image)
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	question.image = texture
+	rebuild_ui()
+
+
+func _on_mode_option_item_selected(index: int) -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	match index:
+		0:
+			question.type = Question.QuestionType.MultipleChoice
+		1:
+			question.type = Question.QuestionType.Tournament
+			question.answers.clear()
+	rebuild_ui()
+
+
+func _on_time_spin_value_changed(value: float) -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	question.time = int(value)
+	GlobalFunctions.save_quiz_saves()
+	undo_queue.append(last_state)
+	last_state = save.duplicate(true)
+	redo_queue.clear()
+
+
+func _on_question_text_edit_text_changed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	question.text = question_text_edit.text
+	GlobalFunctions.save_quiz_saves()
+	undo_queue.append(last_state)
+	last_state = save.duplicate(true)
+	redo_queue.clear()
+	var panel: PanelContainer = question_panels[selected_question_category][selected_question_stage]
+	var label: Label = panel.get_child(0)
+	label.text = question.text
+
+
+func _on_edit_answers_pressed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	var answer_editor: AnswersEditor = answer_editor_scene.instantiate()
+	answer_editor.init(question.answers)
+	answer_editor.confirmed.connect(
+		func(answers: Array[Answer]) -> void: question.answers = answers; rebuild_ui()
+	)
+	add_child(answer_editor)

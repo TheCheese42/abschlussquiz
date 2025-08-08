@@ -1,6 +1,7 @@
+@tool
 extends Resource
 class_name Answer
 
-var text: String = ""
-var image: ImageTexture = null
-var is_correct: bool = false
+@export var text: String = ""
+@export var image: ImageTexture = null
+@export var is_correct: bool = false

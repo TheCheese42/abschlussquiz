@@ -1,0 +1,214 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwe2vlosmteih"]
+
+[ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="1_3eh7m"]
+[ext_resource type="Script" uid="uid://by6kytvoeedig" path="res://scripts/play_menu.gd" id="1_a4cai"]
+[ext_resource type="LabelSettings" uid="uid://7r267pcwb314" path="res://styles/labels/label_content_24.tres" id="2_ixut7"]
+[ext_resource type="Texture2D" uid="uid://bn5hsya0nunq2" path="res://assets/textures/icons/dice-game-icon.png" id="4_uxvnm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af7ga"]
+content_margin_left = 4.0
+content_margin_top = 3.0
+content_margin_right = 4.0
+content_margin_bottom = 3.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="PlayMenu" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_a4cai")
+
+[node name="TeamHBox" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = -1
+offset_right = 210.0
+offset_bottom = 30.0
+theme_override_constants/separation = 10
+
+[node name="TeamLabel" type="Label" parent="TeamHBox"]
+layout_mode = 2
+text = "TEAM_X"
+label_settings = ExtResource("2_ixut7")
+
+[node name="TeamNameEdit" type="LineEdit" parent="TeamHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="TeamHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_af7ga")
+
+[node name="RandomButton" type="TextureButton" parent="TeamHBox/PanelContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_uxvnm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -402.375
+offset_top = -191.875
+offset_right = 402.375
+offset_bottom = 191.875
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "PLAY_QUIZ"
+label_settings = ExtResource("1_3eh7m")
+horizontal_alignment = 1
+
+[node name="SetupHBox" type="HBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="OptionsBox" type="VBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="TeamsSpin" type="HBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/TeamsSpin"]
+layout_mode = 2
+text = "TEAMS"
+label_settings = ExtResource("2_ixut7")
+
+[node name="Control" type="Control" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/TeamsSpin"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="TeamsSpin" type="SpinBox" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/TeamsSpin/Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -2.0
+offset_right = 136.0
+offset_bottom = 40.0
+scale = Vector2(0.66, 0.66)
+mouse_default_cursor_shape = 2
+min_value = 1.0
+max_value = 8.0
+value = 1.0
+rounded = true
+update_on_text_changed = true
+
+[node name="ShowQuestionsCheck" type="CheckBox" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+text = "SHOW_QUESTIONS"
+
+[node name="ShowAnswersCheck" type="CheckBox" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+text = "SHOW_ANSWERS"
+
+[node name="PassQuestionsCheck" type="CheckBox" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+text = "PASS_QUESTIONS"
+
+[node name="PassPercentBox" type="HBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control2" type="Control" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/PassPercentBox"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/PassPercentBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "POINTS_MULTIPLIER"
+label_settings = ExtResource("2_ixut7")
+
+[node name="Control" type="Control" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/PassPercentBox"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="PassMultiplierSpin" type="SpinBox" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/PassPercentBox/Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -2.0
+offset_right = 136.0
+offset_bottom = 40.0
+scale = Vector2(0.66, 0.66)
+mouse_default_cursor_shape = 2
+min_value = 0.10000000000582077
+max_value = 10.0
+step = 0.10000000000582077
+value = 0.5000000000291038
+update_on_text_changed = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TeamsVBox" type="VBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="CancelButton" type="Button" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "CANCEL"
+
+[node name="StartButton" type="Button" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "START"
+
+[connection signal="value_changed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/TeamsSpin/Control/TeamsSpin" to="." method="_on_teams_spin_value_changed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

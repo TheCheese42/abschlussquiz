@@ -1,0 +1,230 @@
+[gd_scene load_steps=11 format=3 uid="uid://dnqc0og11ybs7"]
+
+[ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="1_cdk58"]
+[ext_resource type="Script" uid="uid://djrnq72xu5xdd" path="res://scripts/answers_editor.gd" id="1_if4vu"]
+[ext_resource type="LabelSettings" uid="uid://7r267pcwb314" path="res://styles/labels/label_content_24.tres" id="2_le1t0"]
+[ext_resource type="Texture2D" uid="uid://sihoscf770oe" path="res://assets/textures/icons/trash-icon.png" id="3_865ig"]
+[ext_resource type="Texture2D" uid="uid://b5s8wxyflwsqj" path="res://assets/textures/icons/see-icon.png" id="3_q6b5p"]
+[ext_resource type="Texture2D" uid="uid://dwhnjmtwjacxy" path="res://assets/textures/icons/close-line-icon.png" id="4_865ig"]
+[ext_resource type="Texture2D" uid="uid://m1o3u8dgg2xh" path="res://assets/textures/icons/plus-line-icon-small.png" id="7_8fxqi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1831"]
+content_margin_left = 4.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_if4vu"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8fxqi"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="AnswersEditor" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_if4vu")
+
+[node name="AnswerBox" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = -1
+offset_left = 220.4375
+offset_top = 269.25
+offset_right = 600.4375
+offset_bottom = 393.25
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="TextHBox" type="HBoxContainer" parent="AnswerBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AnswerLabel" type="Label" parent="AnswerBox/TextHBox"]
+layout_mode = 2
+text = "ANSWER_X"
+label_settings = ExtResource("2_le1t0")
+
+[node name="AnswerText" type="LineEdit" parent="AnswerBox/TextHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+
+[node name="PanelContainer" type="PanelContainer" parent="AnswerBox/TextHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v1831")
+
+[node name="DeleteButton" type="TextureButton" parent="AnswerBox/TextHBox/PanelContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_865ig")
+
+[node name="PictureHBox" type="HBoxContainer" parent="AnswerBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="AnswerBox/PictureHBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AnswerBox/PictureHBox"]
+layout_mode = 2
+text = "PICTURE"
+label_settings = ExtResource("2_le1t0")
+
+[node name="PictureButton" type="Button" parent="AnswerBox/PictureHBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 20
+text = "CHOOSE"
+
+[node name="PicturePreviewContainer" type="PanelContainer" parent="AnswerBox/PictureHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_if4vu")
+
+[node name="PicturePreview" type="TextureButton" parent="AnswerBox/PictureHBox/PicturePreviewContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_q6b5p")
+
+[node name="ClearPictureContainer" type="PanelContainer" parent="AnswerBox/PictureHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8fxqi")
+
+[node name="ClearPicture" type="TextureButton" parent="AnswerBox/PictureHBox/ClearPictureContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_865ig")
+
+[node name="CorrectHBox" type="HBoxContainer" parent="AnswerBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="AnswerBox/CorrectHBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="CorrectAnswerCheck" type="CheckBox" parent="AnswerBox/CorrectHBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "CORRECT_ANSWER"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.5625
+offset_top = -238.75
+offset_right = 413.5625
+offset_bottom = 238.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Edit Answers"
+label_settings = ExtResource("1_cdk58")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AnswersGrid" type="GridContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+
+[node name="AddAnswerButton" type="Button" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ADD_ANSWER"
+icon = ExtResource("7_8fxqi")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="OKButton" type="Button" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ButtonsHBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "SAVE"
+
+[node name="CancelButton" type="Button" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ButtonsHBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "CANCEL"
+
+[connection signal="pressed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ButtonsHBox/AddAnswerButton" to="." method="_on_add_answer_button_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ButtonsHBox/HBoxContainer/OKButton" to="." method="_on_ok_button_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/ButtonsHBox/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
