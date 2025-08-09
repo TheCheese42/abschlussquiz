@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1v151mu5mecn"]
+
+[ext_resource type="Script" uid="uid://xr2q3fj8f33t" path="res://scripts/play_question.gd" id="1_iakm2"]
+[ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="2_o38n8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iakm2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o38n8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6uxe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l81w1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wksyo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uq1hu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iakm2"]
+bg_color = Color(0, 0, 0, 0.19607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6uxe"]
+bg_color = Color(1, 1, 1, 0.39215687)
+
+[node name="PlayQuestion" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_iakm2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -357.0
+offset_top = -84.375
+offset_right = 357.0
+offset_bottom = 84.375
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(357, 84.5)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Header" type="Label" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Elektrochemie
+40 Punkte"
+label_settings = ExtResource("2_o38n8")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -14.0
+offset_right = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="CancelButton" type="Button" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8646751, 0.86467516, 0.8646751, 1)
+theme_override_colors/font_focus_color = Color(0.8627451, 0.8627451, 0.8627451, 1)
+theme_override_colors/font_pressed_color = Color(0.5890956, 0.5890956, 0.5890956, 1)
+theme_override_colors/font_hover_color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0.5882353, 0.5882353, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iakm2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_o38n8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o6uxe")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l81w1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wksyo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uq1hu")
+text = "Cancel"
+
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_iakm2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o6uxe")
+show_percentage = false
+
+[connection signal="pressed" from="ColorRect/MarginContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

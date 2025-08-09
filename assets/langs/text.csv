@@ -78,7 +78,7 @@ ANSWER_X,Answer {0}:,Antwort {0}:
 CORRECT_ANSWER,Correct Answer,Richtige Antwort
 SAVE,Save,Speichern
 ADD_ANSWER,Add Answer,Neue Antwort
-### PLAY QUIZ ###,,
+### PLAY QUIZ MENU ###,,
 TEAM_NAMES,Holy Cungadero:The Fun Gang:Moss Finders:Trash Machine:Uncreative:Unmotivated:Not good but better,Heiliges Cungadero:Die Spaß Gang:Moos Finder:Müllmaschine:Unkreativ:Unmotiviert:Nicht gut sondern besser
 NO_TEAM_NAME_FOUND,But none was found.,Es wurde keiner gefunden.
 PLAY_QUIZ,Play Quiz,Quiz Spielen
@@ -100,3 +100,12 @@ EMPTY_TEAM_NAMES_TITLE,Missing Team Names,Fehlende Teamnamen
 EMPTY_TEAM_NAMES_CONTENT,"Not all teams have names, please add them.","Nicht alle Teams haben Namen,\nbitte fügen Sie diese hinzu."
 DUPLICATE_TEAM_NAMES_TITLE,Duplicate Team Names,Doppelte Teamnamen
 DUPLICATE_TEAM_NAMES_CONTENT,Some teams have the same name.\nPlease give every team a different name.,Manche Teams haben den gleichen Namen.\nBitte geben Sie jedem Team einen anderen Namen.
+### PLAY QUIZ ###,,
+STOP_GAME,Stop Game,Spiel Beenden
+EDIT_MANUALLY,Edit manually,Manuell bearbeiten
+HIDDEN_QUESTION,?,?
+EXHAUSTED_QUESTION,X,X
+QUESTION_INTRO,{category}\n{points} Points,{category}\n{points} Punkte
+CATEGORY_POINTS,{category} ({points}),{category} ({points})
+TOURNAMENT_QUESTION,Tournament Question!,Turnierfrage!
+YOU_HAVE_X_SECONDS,You have {0} seconds!,Ihr habt {0} Sekunden Zeit!

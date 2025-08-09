@@ -76,10 +76,13 @@ func rebuild_question_editor() -> void:
 		Question.QuestionType.Tournament:
 			mode_menu.selected = 1
 	time_spin.value = question.time
-	picture_preview_container.visible = question.image != null
-	clear_picture_container.visible = question.image != null
+	var image: ImageTexture = question.load_image()
+	picture_preview_container.visible = image != null
+	clear_picture_container.visible = image != null
 	question_text_edit.text = question.text
 	edit_answers.visible = question.type == Question.QuestionType.MultipleChoice
+	var time_box: HBoxContainer = time_spin.get_parent()
+	time_box.visible = question.type == Question.QuestionType.Tournament
 
 
 func rebuild_questions() -> void:
@@ -370,15 +373,16 @@ func _on_redo_button_pressed() -> void:
 
 func _on_picture_preview_pressed() -> void:
 	var question: Question = save.questions[selected_question_category][selected_question_stage]
-	if question.image:
+	var image: ImageTexture = question.load_image()
+	if image:
 		var preview: PicturePreview = picture_preview_scene.instantiate()
-		preview.texture = question.image
+		preview.texture = image
 		add_child(preview)
 
 
 func _on_clear_picture_pressed() -> void:
 	var question: Question = save.questions[selected_question_category][selected_question_stage]
-	question.image = null
+	question.delete_image()
 	rebuild_ui()
 
 
@@ -409,9 +413,8 @@ func open_image(path: String) -> void:
 		dialog.content_text = tr("LOAD_IMAGE_ERROR_CONTENT")
 		add_child(dialog)
 		dialog.show()
-	var texture: ImageTexture = ImageTexture.create_from_image(image)
 	var question: Question = save.questions[selected_question_category][selected_question_stage]
-	question.image = texture
+	question.save_image(image)
 	rebuild_ui()
 
 
@@ -420,6 +423,7 @@ func _on_mode_option_item_selected(index: int) -> void:
 	match index:
 		0:
 			question.type = Question.QuestionType.MultipleChoice
+			question.time = 0
 		1:
 			question.type = Question.QuestionType.Tournament
 			question.answers.clear()
@@ -438,13 +442,13 @@ func _on_time_spin_value_changed(value: float) -> void:
 func _on_question_text_edit_text_changed() -> void:
 	var question: Question = save.questions[selected_question_category][selected_question_stage]
 	question.text = question_text_edit.text
+	var panel: PanelContainer = question_panels[selected_question_category][selected_question_stage]
+	var label: Label = panel.get_child(0)
+	label.text = question.text
 	GlobalFunctions.save_quiz_saves()
 	undo_queue.append(last_state)
 	last_state = save.duplicate(true)
 	redo_queue.clear()
-	var panel: PanelContainer = question_panels[selected_question_category][selected_question_stage]
-	var label: Label = panel.get_child(0)
-	label.text = question.text
 
 
 func _on_edit_answers_pressed() -> void:
@@ -455,3 +459,7 @@ func _on_edit_answers_pressed() -> void:
 		func(answers: Array[Answer]) -> void: question.answers = answers; rebuild_ui()
 	)
 	add_child(answer_editor)
+
+
+func _on_tab_container_tab_changed(_tab: int) -> void:
+	rebuild_ui(false)

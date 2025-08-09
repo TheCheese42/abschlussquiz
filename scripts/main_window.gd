@@ -18,6 +18,20 @@ var options_panel_active_for: QuizSave = null
 func _ready() -> void:
 	backup_all()
 	rebuild_ui()
+	cleanup_images()
+
+
+func cleanup_images() -> void:
+	if DirAccess.dir_exists_absolute("user://saves/images"):
+		var images: PackedStringArray = DirAccess.get_files_at("user://saves/images")
+		for quiz: QuizSave in GlobalVars.quiz_saves.quiz_saves:
+			for category: String in quiz.categories:
+				for question: Question in quiz.questions[category]:
+					for image: String in images:
+						if image.begins_with(question.image_id):
+							images.erase(image)
+		for image: String in images:
+			DirAccess.remove_absolute("user://saves/images/" + image)
 
 
 func backup_all() -> void:
@@ -127,12 +141,15 @@ func start_quiz(
 	pass_points_multiplier: float,
 	quiz: QuizSave,
 ) -> void:
-	print(teams)
-	print(show_questions)
-	print(show_answers)
-	print(pass_questions)
-	print(pass_points_multiplier)
-	print(quiz)
+	GlobalVars.next_play_data = {
+		"teams": teams,
+		"show_questions": show_questions,
+		"show_answers": show_answers,
+		"pass_questions": pass_questions,
+		"pass_points_multiplier": pass_points_multiplier,
+		"quiz": quiz,
+	}
+	get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
 
 
 func _on_favorite_button_pressed() -> void:

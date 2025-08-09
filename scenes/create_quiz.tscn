@@ -487,6 +487,7 @@ shortcut = SubResource("Shortcut_wu2at")
 texture_normal = ExtResource("11_obxwr")
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="tab_changed" from="MarginContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="text_changed" from="MarginContainer/TabContainer/GENERAL/GENERAL/HBoxContainer/QuizName" to="." method="_on_quiz_name_text_changed"]
 [connection signal="pressed" from="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/CategoryContainer/AddCategory" to="." method="_on_add_category_pressed"]
 [connection signal="pressed" from="MarginContainer/TabContainer/CATEGORIES/CATEGORIES/HBoxContainer/PointsContainer/AddPointsStage" to="." method="_on_add_points_stage_pressed"]
