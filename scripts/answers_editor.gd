@@ -39,13 +39,14 @@ func rebuild_ui() -> void:
 		var picture_button: Button = new_answer_box.find_child("PictureButton", true, false)
 		picture_button.pressed.connect(func() -> void: select_picture(answer))
 		var picture_preview_button: TextureButton = new_answer_box.find_child("PicturePreview", true, false)
-		picture_preview_button.pressed.connect(func() -> void: show_preview(answer.image))
+		var image: ImageTexture = answer.load_image()
+		picture_preview_button.pressed.connect(func() -> void: show_preview(image))
 		var ppb_parent: PanelContainer = picture_preview_button.get_parent()
-		ppb_parent.visible = answer.image != null
+		ppb_parent.visible = image != null
 		var clear_picture_button: TextureButton = new_answer_box.find_child("ClearPicture", true, false)
-		clear_picture_button.pressed.connect(func() -> void: answer.image = null; rebuild_ui())
+		clear_picture_button.pressed.connect(func() -> void: answer.delete_image(); rebuild_ui())
 		var cpb_parent: PanelContainer = clear_picture_button.get_parent()
-		cpb_parent.visible = answer.image != null
+		cpb_parent.visible = image != null
 		var correct_answer_check: CheckBox = new_answer_box.find_child("CorrectAnswerCheck", true, false)
 		correct_answer_check.set_pressed_no_signal(answer.is_correct)
 		correct_answer_check.toggled.connect(func(on: bool) -> void: answer.is_correct = on)
@@ -80,8 +81,7 @@ func open_image(path: String, answer: Answer) -> void:
 		dialog.content_text = tr("LOAD_IMAGE_ERROR_CONTENT")
 		add_child(dialog)
 		dialog.show()
-	var texture: ImageTexture = ImageTexture.create_from_image(image)
-	answer.image = texture
+	answer.save_image(image)
 	rebuild_ui()
 
 

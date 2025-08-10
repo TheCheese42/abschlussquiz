@@ -109,3 +109,16 @@ QUESTION_INTRO,{category}\n{points} Points,{category}\n{points} Punkte
 CATEGORY_POINTS,{category} ({points}),{category} ({points})
 TOURNAMENT_QUESTION,Tournament Question!,Turnierfrage!
 YOU_HAVE_X_SECONDS,You have {0} seconds!,Ihr habt {0} Sekunden Zeit!
+CORRECT,Correct,Richtig
+WRONG,Wrong,
+NOBODY,Nobody,Niemand
+CORRECT_STATES,Well done!:Not bad!:You nailed it!:That's right!,Gut gemacht!:Nicht schlecht!:Saubere Leistung!:Richtige Antwort!
+CORRECT_SUB,You received {0} points!,Ihr erhaltet {0} Punkte!
+CORRECT_SUB_SECRET,{0}$ were added to your bank account.,{0}€ wurden auf euer Konto überwiesen.
+WRONG_STATES,That wasn't quite right.:Next time will be better!:A miss is a miss.:That's wrong!,Das war nicht ganz richtig.:Nächstes Mal wird besser!:Knapp daneben ist auch vorbei:Das ist leider falsch.
+WRONG_SUB,You get nothing.,Ihr bekommt genau gar nichts.
+WRONG_SUB_PASSING,Maybe {0} can do better?,Vielleicht kann es {0} besser?
+TEAM_WON,{0} won!,{0} hat gewonnen!
+TEAM_WON_SUB,{0} points were added to your score!,Eure Punktzahl wurde um {0} Punkte erhöht!
+NOBODY_WON,Nobody won!,Niemand hat gewonnen!
+NOBODY_WON_SUB,(However that is even possible...),(Wie auch immer das überhaupt möglich ist...)

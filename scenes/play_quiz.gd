@@ -162,6 +162,7 @@ func question_selected(event: InputEvent, category: String, stage_idx: int) -> v
 				_pass_questions,
 				pass_team,
 				_pass_points_multiplier,
+				_teams,
 			)
 			add_child(play_question)
 			play_question.canceled.connect(func() -> void: _team_turn_queue.append(next_team))

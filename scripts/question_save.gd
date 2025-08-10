@@ -12,11 +12,11 @@ class_name Question
 func save_image(image: Image) -> void:
 	DirAccess.make_dir_absolute("user://saves")
 	DirAccess.make_dir_absolute("user://saves/images")
-	image.save_jpg("user://saves/images/" + image_id + ".jpg")
+	image.save_png("user://saves/images/" + image_id + ".png")
 
 
 func load_image() -> ImageTexture:
-	var path: String = "user://saves/images/" + image_id + ".jpg"
+	var path: String = "user://saves/images/" + image_id + ".png"
 	if FileAccess.file_exists(path):
 		var image: Image = Image.load_from_file(path)
 		if image == null:
@@ -26,7 +26,7 @@ func load_image() -> ImageTexture:
 
 
 func delete_image() -> void:
-	DirAccess.remove_absolute("user://saves/images/" + image_id + ".jpg")
+	DirAccess.remove_absolute("user://saves/images/" + image_id + ".png")
 
 
 enum QuestionType {

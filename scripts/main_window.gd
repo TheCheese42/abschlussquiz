@@ -30,6 +30,10 @@ func cleanup_images() -> void:
 					for image: String in images:
 						if image.begins_with(question.image_id):
 							images.erase(image)
+					for answer: Answer in question.answers:
+						for image: String in  images:
+							if image.begins_with(answer.image_id):
+								images.erase(image)
 		for image: String in images:
 			DirAccess.remove_absolute("user://saves/images/" + image)
 

@@ -113,13 +113,17 @@ func emit_start() -> void:
 			add_child(dialog)
 			dialog.show()
 			return
+		if team_name == tr("NOBODY"):
+			# Prevent a team called tr("NOBODY") to get points
+			# when no team whon at a tournament question
+			team_name = tr("TEAM_X").format(team_name)
 		team_names.append(team_name)
 	emit_signal(
 		"start_pressed",
 		team_names,
 		show_questions_check.button_pressed,
 		show_answers_check.button_pressed,
-		pass_questions_check.button_pressed,
+		pass_questions_check.button_pressed if len(team_names) > 1 else false,
 		pass_multiplier_spin.value,
 	)
 	queue_free()

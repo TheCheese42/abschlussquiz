@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://bjuagqjdkauga"]
+
+[ext_resource type="Script" uid="uid://xb5udkff0hv7" path="res://scripts/confetti.gd" id="1_xejpt"]
+[ext_resource type="Texture2D" uid="uid://dxucb1t12qsau" path="res://assets/textures/sprites/confetti.png" id="1_xjk0n"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xejpt"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_2hbhx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7394958, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.8477635, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e8opl"]
+curve = SubResource("Curve_2hbhx")
+
+[sub_resource type="Gradient" id="Gradient_v30ou"]
+offsets = PackedFloat32Array(0.0044444446, 0.32444444, 0.32666665, 0.6711111, 0.67333335)
+colors = PackedColorArray(0.47907883, 0.4095536, 0.8012426, 1, 0.47843137, 0.40784314, 0.8, 1, 0.96184, 0.4639548, 0.44517386, 1, 0.64931774, 0.31320608, 0.30052745, 1, 0.90475637, 0.7270094, 0.44017234, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k3xkt"]
+gradient = SubResource("Gradient_v30ou")
+
+[sub_resource type="Curve" id="Curve_lnt6a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.21, 0.87), -0.8386466, -0.8386466, 0, 0, Vector2(1, 1), -1.6025566, 0.0, 0, 0]
+point_count = 4
+metadata/_snap_enabled = true
+metadata/_snap_count = 100
+
+[sub_resource type="CurveTexture" id="CurveTexture_3nbl6"]
+curve = SubResource("Curve_lnt6a")
+
+[sub_resource type="Curve" id="Curve_34nt1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72058827, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5331491), -2.8327084, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_equmu"]
+curve = SubResource("Curve_34nt1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k4xnr"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 356.46
+initial_velocity_max = 386.46
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+gravity = Vector3(0, 80, 0)
+linear_accel_min = 9.999997
+linear_accel_max = 29.999996
+damping_min = 74.0
+damping_max = 78.0
+damping_curve = SubResource("CurveTexture_3nbl6")
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_equmu")
+color_initial_ramp = SubResource("GradientTexture1D_k3xkt")
+alpha_curve = SubResource("CurveTexture_e8opl")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.019999977
+anim_speed_min = 2.0
+anim_speed_max = 5.0
+anim_offset_max = 1.0
+
+[node name="Confetti" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_xejpt")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_xejpt")
+amount = 200
+texture = ExtResource("1_xjk0n")
+lifetime = 15.0
+speed_scale = 2.0
+explosiveness = 0.97
+process_material = SubResource("ParticleProcessMaterial_k4xnr")
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
