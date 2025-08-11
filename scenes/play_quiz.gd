@@ -3,6 +3,7 @@ class_name PlayQuiz
 
 var play_question_scene: PackedScene = load("res://scenes/play_question.tscn")
 
+@onready var next_team_label: Label = $MarginContainer2/NextTeamLabel
 @onready var questions_grid: GridContainer = $MarginContainer/VBoxContainer/QuestionsGrid
 @onready var teams_v_box: VBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/TeamsVBox
 @onready var team_box: HBoxContainer = $TeamBox
@@ -14,7 +15,9 @@ var _pass_questions: bool
 var _pass_points_multiplier: float
 var _quiz: QuizSave
 
+var _teams_points: Dictionary[String, int]
 var _team_turn_queue: Array[String]
+var _teams_boxes: Dictionary[String, HBoxContainer]
 
 
 func _init() -> void:
@@ -30,6 +33,8 @@ func _init() -> void:
 	for _round: int in num_rounds:
 		_team_turn_queue.append_array(_teams.duplicate())
 	_team_turn_queue.reverse()
+	for team: String in _teams:
+		_teams_points[team] = 0
 
 
 func _ready() -> void:
@@ -37,6 +42,10 @@ func _ready() -> void:
 
 
 func rebuild_ui() -> void:
+	if _team_turn_queue:
+		next_team_label.text = tr("NEXT_UP").format([_team_turn_queue[-1]])
+	else:
+		next_team_label.visible = false
 	var grid: GridContainer = questions_grid
 	for child: Control in grid.get_children():
 		grid.remove_child(child)
@@ -44,6 +53,7 @@ func rebuild_ui() -> void:
 	for child: Control in teams_v_box.get_children():
 		teams_v_box.remove_child(child)
 		child.queue_free()
+	_teams_boxes.clear()
 
 	var stylebox_t: StyleBoxFlat = StyleBoxFlat.new()
 	stylebox_t.bg_color.a = 0.0
@@ -122,7 +132,7 @@ func rebuild_ui() -> void:
 			que_label.text = tr("HIDDEN_QUESTION")
 			var que_panel: PanelContainer = PanelContainer.new()
 			que_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			que_panel.gui_input.connect(question_selected.bind(category, stage_idx))
+			que_panel.gui_input.connect(question_selected.bind(category, stage_idx, que_panel))
 			que_panel.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 			if _quiz.categories.find(category) == len(_quiz.categories) - 1:
 				if stage_idx == len(_quiz.point_stages) - 1:
@@ -142,9 +152,10 @@ func rebuild_ui() -> void:
 		var name_label: Label = new_team_box.find_child("TeamName", true, false)
 		name_label.text = team
 		teams_v_box.add_child(new_team_box)
+		_teams_boxes[team] = new_team_box
 
 
-func question_selected(event: InputEvent, category: String, stage_idx: int) -> void:
+func question_selected(event: InputEvent, category: String, stage_idx: int, panel: PanelContainer) -> void:
 	if is_instance_of(event, InputEventMouseButton):
 		var mouse_event: InputEventMouseButton = event
 		if mouse_event.double_click:
@@ -166,3 +177,36 @@ func question_selected(event: InputEvent, category: String, stage_idx: int) -> v
 			)
 			add_child(play_question)
 			play_question.canceled.connect(func() -> void: _team_turn_queue.append(next_team))
+			play_question.completed.connect(question_completed.bind(panel))
+
+
+func question_completed(correct: bool, team: String, points: int, panel: PanelContainer) -> void:
+	panel.mouse_default_cursor_shape = Control.CURSOR_ARROW
+	for connection: Dictionary in panel.gui_input.get_connections():
+		var callable: Callable = connection["callable"]
+		panel.gui_input.disconnect(callable)
+	var label: Label = panel.get_child(0)
+	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	label.text = str(points) if correct else tr("X")
+	panel.remove_child(label)
+	if team:  # else is tournament when nobody won or multiple choice if passed and still wrong
+		var vbox: VBoxContainer = VBoxContainer.new()
+		vbox.add_child(label)
+		var sub_label: Label = Label.new()
+		sub_label.label_settings = load("res://styles/labels/label_content_24.tres")
+		sub_label.text = team
+		sub_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		sub_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		sub_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		vbox.add_child(sub_label)
+		panel.add_child(vbox)
+	else:
+		panel.add_child(label)
+	if correct:
+		_teams_points[team] += points
+		var score_label: Label = _teams_boxes[team].find_child("TeamScore", true, false)
+		score_label.text = str(_teams_points[team])
+	if _team_turn_queue:
+		next_team_label.text = tr("NEXT_UP").format([_team_turn_queue[-1]])
+	else:
+		next_team_label.visible = false

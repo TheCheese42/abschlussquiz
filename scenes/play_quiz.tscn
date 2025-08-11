@@ -53,157 +53,6 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 5
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Kategorie 1"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Kategorie 2"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Kategorie 3"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Kategorie 4"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label5" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "40"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 2
-
-[node name="Label6" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label7" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label8" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label9" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label10" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "60"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 2
-
-[node name="Label11" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label12" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label13" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label14" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label15" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "80"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 2
-
-[node name="Label16" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label17" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label18" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label19" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label20" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "100"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 2
-
-[node name="Label21" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label22" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label23" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
-[node name="Label24" type="Label" parent="MarginContainer/VBoxContainer/QuestionsGrid"]
-layout_mode = 2
-text = "?"
-label_settings = ExtResource("2_xrcdd")
-horizontal_alignment = 1
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -221,3 +70,25 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("3_eoxda")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_bottom = 185.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 30
+
+[node name="NextTeamLabel" type="Label" parent="MarginContainer2"]
+custom_minimum_size = Vector2(290, 71)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Next Up:
+Team1"
+label_settings = ExtResource("2_xrcdd")
+horizontal_alignment = 2
+autowrap_mode = 3
