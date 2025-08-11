@@ -13,8 +13,14 @@ KEEP_SCREEN_ON,Keep screen on,Bildschirm wach halten
 KEEP_SCREEN_ON_TOOLTIP,The app will prevent the screen from going to sleep.,"Die App wird verhindern, das der Bildschirm sich von selbst ausschaltet."
 BACKUP_COUNT,Backup Count,Backup Anzahl
 BACKUP_COUNT_TOOLTIP,"How many backups will be kept before the oldest one is deleted.\nEach time the main menu is loaded, a backup is created.\n0 means backups are disabled. -1 means unlimited backups are kept.","Wie viele Backups behalten werden, bevor die Ältesten gelöscht werden.\nJedes Mal wenn das Hauptmenu geladen wird, wird ein Backup erstellt.\n0 bedeutet, dass keine Backups erstellt werden.\n-1 bedeutet, dass unendlich viele Backups behalten werden."
-VERSION_X,Version: {0},Version: {0}
 CREDITS,Credits,Danksagungen
+VERSION_X,Version: {0},Version: {0}
+DEVELOPERS,Developers,Entwickler
+TESTERS,Testers,Tester
+ICONS,Icons,Icons
+FONTS,Fonts,Schriftarten
+FONT_TEMPLATE,{font} by {author},{font} von {author}
+LICENSES,Licenses,Lizenzen
 CLOSE,Close,Schließen
 FAVORITES,Favorites,Favoriten
 ALL,All,Alle
@@ -126,3 +132,9 @@ X,X,X
 NEXT_UP,Next up:\n{0},Als nächstes:\n{0}
 TIME_UP,Time's up!,Die Zeit ist um!
 TEAM_TURN,It's {0}'s turn!,{0} ist an der Reihe!
+### GAME OVER ###,,
+CONGRATS,Congratulations!,Glückwunsch!
+CONGRATS_SUB,You reached the end of the Quiz.,Ihr habt das Ende erreicht.
+WINNER_HEAD,And our glorious winner is...,Und unser glorreicher Sieger ist...
+TEAM_POINTS,{team} ({points}),{team} ({points})
+FINISH,Finish,Beenden

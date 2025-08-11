@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=36 format=3 uid="uid://cr3fth58p14i3"]
+[gd_resource type="Theme" load_steps=37 format=3 uid="uid://cr3fth58p14i3"]
 
 [ext_resource type="FontFile" uid="uid://bitequibce137" path="res://assets/fonts/Simply the Best/KGSimplytheBest.otf" id="1_q075r"]
 [ext_resource type="StyleBox" uid="uid://b3u38018sjwyy" path="res://styles/stylebox/bordered_thin.tres" id="2_q075r"]
@@ -165,6 +165,17 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kenu7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
@@ -235,3 +246,4 @@ TextEdit/font_sizes/font_size = 32
 TextEdit/fonts/font = ExtResource("1_q075r")
 TextEdit/styles/focus = SubResource("StyleBoxEmpty_8t75s")
 TextEdit/styles/normal = SubResource("StyleBoxFlat_yb557")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_kenu7")

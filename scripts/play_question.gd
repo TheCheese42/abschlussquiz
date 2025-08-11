@@ -4,7 +4,7 @@ class_name PlayQuestion
 signal completed(correct: bool, team: String, points: int)  # (false, "", 0) if not  answered correctly.
 signal canceled
 
-var confetti_scene: PackedScene = load("res://scenes/confetti.tscn")
+var confetti_scene: PackedScene = preload("res://scenes/confetti.tscn")
 
 @onready var progress_bar: ProgressBar = $ColorRect/ProgressBar
 @onready var panel_container: PanelContainer = $ColorRect/PanelContainer
@@ -58,61 +58,62 @@ func start_show() -> void:
 	panel_container.scale = Vector2.ZERO
 	progress_bar.value = 0.0
 	var header: Label = panel_container.find_child("Header", true, false)
-	header.text = tr("QUESTION_INTRO").format({"category": _category, "points": _points})
-	if _is_pass_run:
-		header.text += "\n" + tr("TEAM_TURN").format([_team])
 	var tournament_label: Label = null
 	var time_label: Label = null
 	var time_bar: ProgressBar = null
 	var time_bar_tween: Tween = null
-	if _question.type == Question.QuestionType.Tournament:
-		tournament_label = Label.new()
-		tournament_label.label_settings = load("res://styles/labels/label_title_56.tres")
-		tournament_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		tournament_label.text = tr("TOURNAMENT_QUESTION")
-		panel_vbox.add_child(tournament_label)
-		if _question.time > 0:
-			time_label = Label.new()
-			time_label.label_settings = load("res://styles/labels/label_content_40.tres")
-			time_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			time_label.text = tr("YOU_HAVE_X_SECONDS").format([_question.time])
-			panel_vbox.add_child(time_label)
-			time_bar = ProgressBar.new()
-			time_bar.custom_minimum_size.y = 10
-			time_bar.show_percentage = false
-			time_bar.max_value = _question.time
-			time_bar.value = _question.time 
-			var time_bar_stylebox: StyleBoxFlat = StyleBoxFlat.new()
-			time_bar_stylebox.set_corner_radius_all(2)
-			time_bar_stylebox.bg_color = Color(0x39c457ff)
-			time_bar.add_theme_stylebox_override("fill", time_bar_stylebox)
-			time_bar_tween = create_tween()
-			time_bar_tween.tween_property(time_bar, "value", 0.0, _question.time)
-			time_bar_tween.pause()
-			var time_bar_color_tween: Tween = create_tween()
-			time_bar_color_tween.set_trans(Tween.TRANS_EXPO)
-			time_bar_color_tween.set_ease(Tween.EASE_IN)
-			time_bar_color_tween.tween_property(
-				time_bar_stylebox, "bg_color", Color(0xc45039ff), _question.time
-			)
-			var time_up: Callable = func() -> void:
-				var time_bar_fade_tween: Tween = create_tween()
-				time_bar_fade_tween.set_ease(Tween.EASE_IN_OUT)
-				time_bar_fade_tween.tween_property(time_bar, "modulate", Color.TRANSPARENT, 0.5)
-				await time_bar_fade_tween.finished
-			time_bar_tween.finished.connect(time_up)
-	await get_tree().create_timer(0.0).timeout
-	panel_container.position = Vector2(DisplayServer.window_get_size()) / 2 - panel_container.size / 2
-	var prog_tween: Tween = create_tween()
-	prog_tween.set_ease(Tween.EASE_IN_OUT)
-	prog_tween.tween_property(progress_bar, "value", 100.0, 3.5 if not _is_pass_run else 3.0)
-	var panel_tween: Tween = create_tween()
-	panel_tween.set_ease(Tween.EASE_OUT)
-	panel_tween.tween_property(panel_container, "scale", Vector2.ONE, 0.8)
-	await prog_tween.finished
+	if not _is_pass_run:
+		header.text = tr("QUESTION_INTRO").format({"category": _category, "points": _points})
+		if _is_pass_run:
+			header.text += "\n" + tr("TEAM_TURN").format([_team])
+		if _question.type == Question.QuestionType.Tournament:
+			tournament_label = Label.new()
+			tournament_label.label_settings = load("res://styles/labels/label_title_56.tres")
+			tournament_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			tournament_label.text = tr("TOURNAMENT_QUESTION")
+			panel_vbox.add_child(tournament_label)
+			if _question.time > 0:
+				time_label = Label.new()
+				time_label.label_settings = load("res://styles/labels/label_content_40.tres")
+				time_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				time_label.text = tr("YOU_HAVE_X_SECONDS").format([_question.time])
+				panel_vbox.add_child(time_label)
+				time_bar = ProgressBar.new()
+				time_bar.custom_minimum_size.y = 10
+				time_bar.show_percentage = false
+				time_bar.max_value = _question.time
+				time_bar.value = _question.time 
+				var time_bar_stylebox: StyleBoxFlat = StyleBoxFlat.new()
+				time_bar_stylebox.set_corner_radius_all(10)
+				time_bar_stylebox.bg_color = Color(0x39c457ff)
+				time_bar.add_theme_stylebox_override("fill", time_bar_stylebox)
+				time_bar_tween = create_tween()
+				time_bar_tween.tween_property(time_bar, "value", 0.0, _question.time)
+				time_bar_tween.pause()
+				var time_bar_color_tween: Tween = create_tween()
+				time_bar_color_tween.set_trans(Tween.TRANS_EXPO)
+				time_bar_color_tween.set_ease(Tween.EASE_IN)
+				time_bar_color_tween.tween_property(
+					time_bar_stylebox, "bg_color", Color(0xc45039ff), _question.time
+				)
+				var time_up: Callable = func() -> void:
+					var time_bar_fade_tween: Tween = create_tween()
+					time_bar_fade_tween.set_ease(Tween.EASE_IN_OUT)
+					time_bar_fade_tween.tween_property(time_bar, "modulate", Color.TRANSPARENT, 0.5)
+					await time_bar_fade_tween.finished
+				time_bar_tween.finished.connect(time_up)
+		await get_tree().create_timer(0.0).timeout
+		panel_container.position = Vector2(DisplayServer.window_get_size()) / 2 - panel_container.size / 2
+		var prog_tween: Tween = create_tween()
+		prog_tween.set_ease(Tween.EASE_IN_OUT)
+		prog_tween.tween_property(progress_bar, "value", 100.0, 3.5 if not _is_pass_run else 3.0)
+		var panel_tween_: Tween = create_tween()
+		panel_tween_.set_ease(Tween.EASE_OUT)
+		panel_tween_.tween_property(panel_container, "scale", Vector2.ONE, 0.8)
+		await prog_tween.finished
 
 	# Show question
-	panel_tween = create_tween()
+	var panel_tween: Tween = create_tween()
 	panel_tween.set_ease(Tween.EASE_OUT)
 	panel_tween.tween_property(panel_container, "scale", Vector2.ZERO, 0.3)
 	await panel_tween.finished
@@ -269,6 +270,8 @@ func start_show() -> void:
 func answer_clicked(event: InputEvent, answer: Answer, answers_container: Container) -> void:
 	if not event.is_action_pressed("click"):
 		return
+	for child: Control in answers_container.get_children():
+		child.set_block_signals(true)
 	cancel_button.visible = false
 	cancel_button.disabled = true
 	panel_container.pivot_offset = panel_container.size / 2
@@ -307,7 +310,7 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			).format([_points])
 			var confetti: Confetti = confetti_scene.instantiate()
 			confetti.position = DisplayServer.window_get_size() / 2
-			add_child(confetti)
+			get_parent().add_child(confetti)
 		else:
 			var states: Array[String]
 			states.assign(tr("WRONG_STATES").split(":", false))

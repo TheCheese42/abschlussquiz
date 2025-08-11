@@ -1,11 +1,12 @@
 extends CanvasLayer
 class_name PlayQuiz
 
-var play_question_scene: PackedScene = load("res://scenes/play_question.tscn")
+var play_question_scene: PackedScene = preload("res://scenes/play_question.tscn")
+var game_over_scene: PackedScene = preload("res://scenes/game_over.tscn")
 
 @onready var next_team_label: Label = $MarginContainer2/NextTeamLabel
 @onready var questions_grid: GridContainer = $MarginContainer/VBoxContainer/QuestionsGrid
-@onready var teams_v_box: VBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/TeamsVBox
+@onready var teams_flow: VFlowContainer = $MarginContainer/VBoxContainer/HBoxContainer/TeamsVBox
 @onready var team_box: HBoxContainer = $TeamBox
 
 var _teams: PackedStringArray
@@ -50,10 +51,6 @@ func rebuild_ui() -> void:
 	for child: Control in grid.get_children():
 		grid.remove_child(child)
 		child.queue_free()
-	for child: Control in teams_v_box.get_children():
-		teams_v_box.remove_child(child)
-		child.queue_free()
-	_teams_boxes.clear()
 
 	var stylebox_t: StyleBoxFlat = StyleBoxFlat.new()
 	stylebox_t.bg_color.a = 0.0
@@ -145,14 +142,39 @@ func rebuild_ui() -> void:
 				que_panel.add_theme_stylebox_override("panel", stylebox_m)
 			que_panel.add_child(que_label)
 			grid.add_child(que_panel)
+	rebuild_teams_flow()
 
-	for team: String in _teams:
+
+func rebuild_teams_flow() -> void:
+	for child: Control in teams_flow.get_children():
+		teams_flow.remove_child(child)
+		child.queue_free()
+	_teams_boxes.clear()
+	var tp_keys: Array[String]
+	tp_keys.assign(_teams)
+	tp_keys.reverse()
+	var tp_values: Array[int] = []
+	for key: String in _teams:
+		tp_values.append(_teams_points[key])
+	while tp_keys:
+		var highest_point_team: String
+		var highest_point_points: int = 0
+		for idx: int in len(tp_keys):
+			var team: String = tp_keys[idx]
+			var points: int = tp_values[idx]
+			if points >= highest_point_points:
+				highest_point_team = team
+				highest_point_points = points
+		tp_keys.erase(highest_point_team)
+		tp_values.erase(highest_point_points)
 		var new_team_box: HBoxContainer = team_box.duplicate()
 		new_team_box.visible = true
 		var name_label: Label = new_team_box.find_child("TeamName", true, false)
-		name_label.text = team
-		teams_v_box.add_child(new_team_box)
-		_teams_boxes[team] = new_team_box
+		var score_label: Label = new_team_box.find_child("TeamScore", true, false)
+		score_label.text = str(_teams_points[highest_point_team])
+		name_label.text = highest_point_team
+		teams_flow.add_child(new_team_box)
+		_teams_boxes[highest_point_team] = new_team_box
 
 
 func question_selected(event: InputEvent, category: String, stage_idx: int, panel: PanelContainer) -> void:
@@ -189,6 +211,9 @@ func question_completed(correct: bool, team: String, points: int, panel: PanelCo
 	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	label.text = str(points) if correct else tr("X")
 	panel.remove_child(label)
+	var panel_stylebox: StyleBoxFlat = panel.get_theme_stylebox("panel").duplicate(true)
+	panel_stylebox.bg_color = Color(0.0, 0.0, 0.0, 0.1)
+	panel.add_theme_stylebox_override("panel", panel_stylebox)
 	if team:  # else is tournament when nobody won or multiple choice if passed and still wrong
 		var vbox: VBoxContainer = VBoxContainer.new()
 		vbox.add_child(label)
@@ -203,10 +228,26 @@ func question_completed(correct: bool, team: String, points: int, panel: PanelCo
 	else:
 		panel.add_child(label)
 	if correct:
+		var tween: Tween = create_tween()
+		tween.set_trans(Tween.TRANS_QUINT)
+		tween.set_ease(Tween.EASE_OUT)
+		var thbox: HBoxContainer = _teams_boxes[team]
+		var score_label: Label = thbox.find_child("TeamScore", true, false)
+		tween.tween_method(
+			func(score: int) -> void: score_label.text = str(score),
+			_teams_points[team], _teams_points[team] + points, 4.0
+		).set_delay(1.0)
 		_teams_points[team] += points
-		var score_label: Label = _teams_boxes[team].find_child("TeamScore", true, false)
-		score_label.text = str(_teams_points[team])
 	if _team_turn_queue:
 		next_team_label.text = tr("NEXT_UP").format([_team_turn_queue[-1]])
 	else:
+		# Quiz is done
 		next_team_label.visible = false
+		end_quiz()
+	await get_tree().create_timer(0.0).timeout
+
+
+func end_quiz() -> void:
+	var game_over: GameOver = game_over_scene.instantiate()
+	game_over.init(_teams_points)
+	add_child(game_over)

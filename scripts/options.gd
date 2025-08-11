@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var credits_scene: PackedScene = preload("res://scenes/credits.tscn")
+
 @onready var language_button: OptionButton = $ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LanguageButton
 @onready var keep_screen_on_check: CheckBox = $ColorRect/PanelContainer/MarginContainer/VBoxContainer/KeepScreenOnCheck
 @onready var backup_spin: SpinBox = $ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/BackupSpin
@@ -41,13 +43,5 @@ func _on_backup_spin_value_changed(value: float) -> void:
 
 
 func _on_credits_pressed() -> void:
-	var scene: PackedScene = load("res://scenes/better_accept_dialog.tscn")
-	var dialog: BetterAcceptDialog = scene.instantiate()
-	dialog.title_text = tr("CREDITS")
-	dialog.content_text = (
-		"If you can read this it either means that\nthis program isn't finished yet, or\n" +
-		"that I forgot to add the credits in which\ncase I'd be really sorry. Please remind\n" +
-		"me if I did. Thanks :)"
-	)
-	add_child(dialog)
-	dialog.show()
+	var credits: CanvasLayer = credits_scene.instantiate()
+	add_child(credits)

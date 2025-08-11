@@ -1,2 +1,3 @@
-More themes
+More themes (at least fonts)
 Option to export PDF for presentator
+Manual/Help page

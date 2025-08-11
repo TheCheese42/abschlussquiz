@@ -1,0 +1,112 @@
+[gd_scene load_steps=5 format=3 uid="uid://bb3co4xrjiste"]
+
+[ext_resource type="Script" uid="uid://cflww3m2wo03x" path="res://scripts/game_over.gd" id="1_racf3"]
+[ext_resource type="LabelSettings" uid="uid://csa3bq3yscrgk" path="res://styles/labels/label_title_56.tres" id="1_wqhvx"]
+[ext_resource type="LabelSettings" uid="uid://who7h76ycpko" path="res://styles/labels/label_content_40.tres" id="2_tbwuq"]
+[ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="3_racf3"]
+
+[node name="GameOver" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_racf3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="CongratsPanel" type="PanelContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -427.75
+offset_top = -211.0
+offset_right = 427.75
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CongratsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CongratsPanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="ColorRect/CongratsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "CONGRATS"
+label_settings = ExtResource("1_wqhvx")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect/CongratsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "CONGRATS_SUB"
+label_settings = ExtResource("2_tbwuq")
+horizontal_alignment = 1
+
+[node name="WinnerPanel" type="PanelContainer" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -451.5
+offset_top = -137.5
+offset_right = 451.5
+offset_bottom = 137.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/WinnerPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/WinnerPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="ColorRect/WinnerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "WINNER_HEAD"
+label_settings = ExtResource("3_racf3")
+horizontal_alignment = 1
+
+[node name="WinnerLabel" type="Label" parent="ColorRect/WinnerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+label_settings = ExtResource("1_wqhvx")
+horizontal_alignment = 1
+
+[node name="OthersVBox" type="VBoxContainer" parent="ColorRect/WinnerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="FinishButton" type="Button" parent="ColorRect/WinnerPanel/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+disabled = true
+text = "FINISH"
+
+[connection signal="pressed" from="ColorRect/WinnerPanel/MarginContainer/VBoxContainer/FinishButton" to="." method="_on_finish_button_pressed"]
