@@ -1,12 +1,13 @@
 extends CanvasLayer
 
 @onready var panel_container: PanelContainer = $PanelContainer
-@onready var version_label: Label = $PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/VersionLabel
-@onready var developer_label: Label = $PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/DeveloperLabel
-@onready var testers_label: Label = $PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/TestersLabel
-@onready var icons_label: Label = $PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/IconsLabel
-@onready var fonts_label: Label = $PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/FontsLabel
-@onready var licenses_label: Label = $PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/LicensesLabel
+@onready var version_label: Label = $PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/VersionLabel
+@onready var developer_label: Label = $PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/DeveloperLabel
+@onready var testers_label: Label = $PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/TestersLabel
+@onready var icons_label: Label = $PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/IconsLabel
+@onready var fonts_label: Label = $PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/FontsLabel
+@onready var licenses_label: Label = $PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/LicensesLabel
+@onready var all_vbox: VBoxContainer = $PanelContainer/ScrollContainer/MarginContainer/VBoxContainer
 
 
 func _ready() -> void:
@@ -32,7 +33,15 @@ func _ready() -> void:
 	file.close()
 	fonts_label.text = "\n".join(fonts)
 
-	# Quit button, licenses
+	file = FileAccess.open("res://assets/attributions/GODOT_COPYRIGHT.txt", FileAccess.READ)
+	var licenses: String = file.get_as_text()
+	file.close()
+	var lic_label: Label = Label.new()
+	lic_label.text = licenses
+	lic_label.label_settings = load("res://styles/labels/label_licenses_12.tres")
+	lic_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lic_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	all_vbox.add_child(lic_label)
 
 	on_resize(DisplayServer.window_get_size())
 
@@ -41,3 +50,12 @@ func on_resize(new_size: Vector2i) -> void:
 	panel_container.custom_minimum_size.y = new_size.y - 100
 	panel_container.size.y = new_size.y - 100
 	panel_container.position = Vector2(new_size) / 2 - panel_container.size / 2
+
+
+func _on_back_button_pressed() -> void:
+	queue_free()
+
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("escape"):
+		queue_free()
