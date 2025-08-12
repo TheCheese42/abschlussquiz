@@ -3,11 +3,17 @@ class_name PlayQuiz
 
 var play_question_scene: PackedScene = preload("res://scenes/play_question.tscn")
 var game_over_scene: PackedScene = preload("res://scenes/game_over.tscn")
+var confirmation_dialog_scene: PackedScene = preload("res://scenes/better_confirmation_dialog.tscn")
 
 @onready var next_team_label: Label = $MarginContainer2/NextTeamLabel
 @onready var questions_grid: GridContainer = $MarginContainer/VBoxContainer/QuestionsGrid
 @onready var teams_flow: VFlowContainer = $MarginContainer/VBoxContainer/HBoxContainer/TeamsVBox
 @onready var team_box: HBoxContainer = $TeamBox
+@onready var options_layer: CanvasLayer = $OptionsLayer
+@onready var options_panel: PanelContainer = $OptionsLayer/OptionsPanel
+@onready var points_v_box: VBoxContainer = $ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/PointsVBox
+@onready var manual_editor: CanvasLayer = $ManualEditor
+@onready var dots_button: TextureButton = $MarginContainer/VBoxContainer/HBoxContainer/DotsButton
 
 var _teams: PackedStringArray
 var _show_questions: bool
@@ -150,31 +156,40 @@ func rebuild_teams_flow() -> void:
 		teams_flow.remove_child(child)
 		child.queue_free()
 	_teams_boxes.clear()
-	var tp_keys: Array[String]
-	tp_keys.assign(_teams)
-	tp_keys.reverse()
-	var tp_values: Array[int] = []
-	for key: String in _teams:
-		tp_values.append(_teams_points[key])
-	while tp_keys:
-		var highest_point_team: String
-		var highest_point_points: int = 0
-		for idx: int in len(tp_keys):
-			var team: String = tp_keys[idx]
-			var points: int = tp_values[idx]
-			if points >= highest_point_points:
-				highest_point_team = team
-				highest_point_points = points
-		tp_keys.erase(highest_point_team)
-		tp_values.erase(highest_point_points)
+	for team: String in _teams:
+		var points: int = _teams_points[team]
 		var new_team_box: HBoxContainer = team_box.duplicate()
 		new_team_box.visible = true
 		var name_label: Label = new_team_box.find_child("TeamName", true, false)
 		var score_label: Label = new_team_box.find_child("TeamScore", true, false)
-		score_label.text = str(_teams_points[highest_point_team])
-		name_label.text = highest_point_team
+		score_label.text = str(points)
+		name_label.text = team
 		teams_flow.add_child(new_team_box)
-		_teams_boxes[highest_point_team] = new_team_box
+		_teams_boxes[team] = new_team_box
+
+
+func show_manual_editor() -> void:
+	for child: Control in points_v_box.get_children():
+		points_v_box.remove_child(child)
+		child.queue_free()
+	for team: String in _teams:
+		var hbox: HBoxContainer = HBoxContainer.new()
+		var label: Label = Label.new()
+		label.text = tr("X_COLON").format([team])
+		label.label_settings = load("res://styles/labels/label_content_32.tres")
+		hbox.add_child(label)
+		var spin: SpinBox = SpinBox.new()
+		spin.min_value = 0.0
+		spin.set_value_no_signal(_teams_points[team])
+		spin.allow_greater = true
+		spin.rounded = true
+		spin.update_on_text_changed = true
+		spin.value_changed.connect(
+			func(value: int) -> void: _teams_points[team] = value; rebuild_teams_flow()
+		)
+		hbox.add_child(spin)
+		points_v_box.add_child(hbox)
+	manual_editor.visible = true
 
 
 func question_selected(event: InputEvent, category: String, stage_idx: int, panel: PanelContainer) -> void:
@@ -251,3 +266,43 @@ func end_quiz() -> void:
 	var game_over: GameOver = game_over_scene.instantiate()
 	game_over.init(_teams_points)
 	add_child(game_over)
+
+
+func _on_dots_button_pressed() -> void:
+	if not options_layer.visible:
+		options_panel.position = (
+			dots_button.global_position - options_panel.size + Vector2(-4, dots_button.size.y)
+		)
+		options_layer.visible = true
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("escape"):
+		if options_layer.visible:
+			options_layer.visible = false
+	if is_instance_of(event, InputEventMouseButton):
+		var mouse_event: InputEventMouseButton = event
+		if mouse_event.is_action_pressed("click"):
+			if not options_panel.get_rect().has_point(mouse_event.global_position):
+				if options_layer.visible:
+					options_layer.visible = false
+
+
+func _on_stop_button_pressed() -> void:
+	if not Input.is_action_pressed("confirm"):
+		var dialog: BetterConfirmationDialog = confirmation_dialog_scene.instantiate()
+		dialog.title_text = tr("STOP_QUIZ_CONFIRM_TITLE")
+		dialog.content_text = tr("STOP_QUIZ_CONFIRM_CONTENT")
+		dialog.confirmed.connect(end_quiz)
+		add_child(dialog)
+		dialog.show()
+	else:
+		end_quiz()
+
+
+func _on_manual_edit_button_pressed() -> void:
+	show_manual_editor()
+
+
+func _on_close_button_pressed() -> void:
+	manual_editor.visible = false

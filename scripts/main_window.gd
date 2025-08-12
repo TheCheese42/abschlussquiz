@@ -11,6 +11,7 @@ var create_quiz_scene: PackedScene = preload("res://scenes/create_quiz.tscn")
 var confirmation_dialog_scene: PackedScene = preload("res://scenes/better_confirmation_dialog.tscn")
 var accept_dialog_scene: PackedScene = preload("res://scenes/better_accept_dialog.tscn")
 var play_menu_scene: PackedScene = preload("res://scenes/play_menu.tscn")
+var help_scene: PackedScene = preload("res://scenes/help.tscn")
 
 var options_panel_active_for: QuizSave = null
 
@@ -308,3 +309,8 @@ func _on_restore_button_pressed() -> void:
 	add_child(dialog)
 	dialog.popup_centered_ratio()
 	dialog.show()
+
+
+func _on_help_button_pressed() -> void:
+	var help: HelpDialog = help_scene.instantiate()
+	add_child(help)

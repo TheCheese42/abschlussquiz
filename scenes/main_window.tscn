@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ppxc5dtytj0o"]
+[gd_scene load_steps=20 format=3 uid="uid://ppxc5dtytj0o"]
 
 [ext_resource type="LabelSettings" uid="uid://bhh1m84qdtbee" path="res://styles/labels/label_title_64.tres" id="1_52e18"]
 [ext_resource type="Script" uid="uid://dq1kqb2k23xl5" path="res://scripts/main_window.gd" id="1_lp381"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dls4raqr5p8hm" path="res://assets/textures/icons/quit.png" id="7_71cax"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="7_j4oxs"]
 [ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="8_c4u0h"]
+[ext_resource type="Texture2D" uid="uid://dvl0nuk4gmh5w" path="res://assets/textures/icons/question-mark-circle-outline-icon.png" id="11_m7h58"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvr6y"]
 content_margin_left = 0.0
@@ -36,6 +37,15 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yy8od"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71cax"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_m7h58"]
+device = -1
+ctrl_pressed = true
+keycode = 81
+unicode = 113
+
+[sub_resource type="Shortcut" id="Shortcut_yy8od"]
+events = [SubResource("InputEventKey_m7h58")]
 
 [node name="MainWindow" type="CanvasLayer"]
 script = ExtResource("1_lp381")
@@ -337,6 +347,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_yy8od")
 texture_normal = ExtResource("7_71cax")
 
 [node name="Ttitle" type="Label" parent="MarginContainer/VBoxContainer/TitleContainer"]
@@ -430,8 +441,24 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
 theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="HelpButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("11_m7h58")
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="RestoreButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -463,6 +490,7 @@ text = "CREATE_QUIZ"
 [connection signal="pressed" from="MarginContainer/OptionsCanvas/ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/Close" to="MarginContainer/OptionsCanvas" method="_on_close_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TitleContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TitleContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HelpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RestoreButton" to="." method="_on_restore_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]

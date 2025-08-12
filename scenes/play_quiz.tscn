@@ -1,12 +1,138 @@
-[gd_scene load_steps=5 format=3 uid="uid://bua2fnn58w10t"]
+[gd_scene load_steps=12 format=3 uid="uid://bua2fnn58w10t"]
 
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="1_rj3ao"]
 [ext_resource type="Script" uid="uid://cs6djd1alitx2" path="res://scenes/play_quiz.gd" id="1_yyob3"]
+[ext_resource type="Texture2D" uid="uid://1aiahjte8cs" path="res://assets/textures/icons/round-line-left-arrow-icon.png" id="2_ftrs6"]
 [ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="2_xrcdd"]
 [ext_resource type="Texture2D" uid="uid://c3lo5yukfegs5" path="res://assets/textures/icons/more-options-ellipsis-icon.png" id="3_eoxda"]
+[ext_resource type="LabelSettings" uid="uid://who7h76ycpko" path="res://styles/labels/label_content_40.tres" id="3_xy054"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yyob3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_871a5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ftrs6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xy054"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6y83b"]
 
 [node name="PlayQuiz" type="CanvasLayer"]
 script = ExtResource("1_yyob3")
+
+[node name="OptionsLayer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="OptionsPanel" type="PanelContainer" parent="OptionsLayer"]
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 283.0
+offset_top = 275.0
+offset_right = 488.0
+offset_bottom = 371.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsLayer/OptionsPanel"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="StopButton" type="Button" parent="OptionsLayer/OptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyob3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_871a5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ftrs6")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xy054")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6y83b")
+text = "STOP_QUIZ"
+
+[node name="ManualEditButton" type="Button" parent="OptionsLayer/OptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyob3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_871a5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ftrs6")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xy054")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6y83b")
+text = "EDIT_MANUALLY"
+
+[node name="ManualEditor" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="ManualEditor"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="PanelContainer" type="PanelContainer" parent="ManualEditor"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -71.0
+offset_right = 175.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ManualEditor/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ManualEditor/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ManualEditor/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CloseButton" type="TextureButton" parent="ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource("2_ftrs6")
+
+[node name="Label" type="Label" parent="ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit Points"
+label_settings = ExtResource("3_xy054")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="PointsVBox" type="VBoxContainer" parent="ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="TeamBox" type="HBoxContainer" parent="."]
 visible = false
@@ -94,3 +220,8 @@ size_flags_vertical = 0
 label_settings = ExtResource("2_xrcdd")
 horizontal_alignment = 2
 autowrap_mode = 3
+
+[connection signal="pressed" from="OptionsLayer/OptionsPanel/VBoxContainer/StopButton" to="." method="_on_stop_button_pressed"]
+[connection signal="pressed" from="OptionsLayer/OptionsPanel/VBoxContainer/ManualEditButton" to="." method="_on_manual_edit_button_pressed"]
+[connection signal="pressed" from="ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/DotsButton" to="." method="_on_dots_button_pressed"]

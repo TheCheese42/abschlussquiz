@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://duur7thxqtxe5"]
+
+[ext_resource type="Texture2D" uid="uid://1aiahjte8cs" path="res://assets/textures/icons/round-line-left-arrow-icon.png" id="1_50phg"]
+[ext_resource type="Script" uid="uid://bqynnmn4ubiwv" path="res://scripts/help.gd" id="1_chmrd"]
+[ext_resource type="LabelSettings" uid="uid://7r267pcwb314" path="res://styles/labels/label_content_24.tres" id="1_ci552"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50phg"]
+content_margin_left = 10.0
+content_margin_top = 14.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_top = 3
+border_color = Color(0.08, 0.08, 0.08, 1)
+
+[node name="Help" type="CanvasLayer"]
+script = ExtResource("1_chmrd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -322.0
+offset_top = -249.5
+offset_right = 322.0
+offset_bottom = 249.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+
+[node name="BackButton" type="TextureButton" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_50phg")
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/side_margin = 55
+theme_override_styles/panel = SubResource("StyleBoxFlat_50phg")
+current_tab = 0
+
+[node name="HELP_CREATE_QUIZ" type="ScrollContainer" parent="PanelContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/HELP_CREATE_QUIZ"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "HELP_CREATE_QUIZ_CONTENT"
+label_settings = ExtResource("1_ci552")
+autowrap_mode = 3
+
+[node name="HELP_PLAY_QUIZ" type="ScrollContainer" parent="PanelContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/HELP_PLAY_QUIZ"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "HELP_PLAY_QUIZ_CONTENT"
+label_settings = ExtResource("1_ci552")
+autowrap_mode = 3
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
