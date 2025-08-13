@@ -5,6 +5,7 @@ YES,Yes,Ja
 NO,No,Nein
 CANCEL,Cancel,Abbrechen
 X_COLON,{0}:,{0}:
+BACK,Back,Zurück
 ### MAIN MENU ###,,
 HEADER,The Final Quiz,Das Große Abschlussquiz
 OPTIONS,Options,Optionen
@@ -113,6 +114,8 @@ EMPTY_TEAM_NAMES_CONTENT,"Not all teams have names, please add them.","Nicht all
 DUPLICATE_TEAM_NAMES_TITLE,Duplicate Team Names,Doppelte Teamnamen
 DUPLICATE_TEAM_NAMES_CONTENT,Some teams have the same name.\nPlease give every team a different name.,Manche Teams haben den gleichen Namen.\nBitte geben Sie jedem Team einen anderen Namen.
 ### PLAY QUIZ ###,,
+NICE_TRY,Nice try...,Netter Versuch...
+MORE_TEAMS_THAN_QUESTIONS,You have selected more teams than questions.\nDon't tell that was an accident!,"Sie haben mehr Teams als Fragen ausgewählt.\nErzählen Sie mir nicht, dass das ein Versehen\n gewesen sein soll!"
 STOP_QUIZ,End Quiz,Quiz Beenden
 EDIT_MANUALLY,Edit manually,Manuell bearbeiten
 HIDDEN_QUESTION,?,?

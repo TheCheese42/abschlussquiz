@@ -4,6 +4,7 @@ class_name PlayQuiz
 var play_question_scene: PackedScene = preload("res://scenes/play_question.tscn")
 var game_over_scene: PackedScene = preload("res://scenes/game_over.tscn")
 var confirmation_dialog_scene: PackedScene = preload("res://scenes/better_confirmation_dialog.tscn")
+var accept_dialog_scene: PackedScene = preload("res://scenes/better_accept_dialog.tscn")
 
 @onready var next_team_label: Label = $MarginContainer2/NextTeamLabel
 @onready var questions_grid: GridContainer = $MarginContainer/VBoxContainer/QuestionsGrid
@@ -45,6 +46,17 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	if len(_teams) > len(_quiz.categories) * len(_quiz.point_stages):
+		var dialog: BetterAcceptDialog = accept_dialog_scene.instantiate()
+		dialog.title_text = tr("NICE_TRY")
+		dialog.content_text = tr("MORE_TEAMS_THAN_QUESTIONS")
+		dialog.ok_button_text = tr("BACK")
+		add_child(dialog)
+		dialog.show()
+		dialog.confirmed.connect(
+			func() -> void: get_tree().change_scene_to_file("res://scenes/main_window.tscn")
+		)
+		return
 	rebuild_ui()
 
 
@@ -58,6 +70,7 @@ func rebuild_ui() -> void:
 		grid.remove_child(child)
 		child.queue_free()
 
+	grid.columns = len(_quiz.categories) + 1
 	var stylebox_t: StyleBoxFlat = StyleBoxFlat.new()
 	stylebox_t.bg_color.a = 0.0
 	stylebox_t.border_color = Color.BLACK
