@@ -1,3 +1,3 @@
-# Das große Abschlussquiz
+# The Final Quiz
 
-(So groß ist es auch wieder nicht.)
+Visit the store page at <https://thecheeseknife.itch.io/final-quiz>.
