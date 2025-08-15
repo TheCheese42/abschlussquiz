@@ -508,29 +508,25 @@ func _on_move_down_pressed() -> void:
 
 func _on_go_left_button_pressed() -> void:
 	var cat_index: int = save.categories.find(selected_question_category)
-	if Input.is_action_just_pressed("left"):
-		if cat_index > 0:
-			selected_question_category = save.categories[cat_index - 1]
-			rebuild_ui()
+	if cat_index > 0:
+		selected_question_category = save.categories[cat_index - 1]
+		rebuild_ui()
 
 
 func _on_go_right_button_pressed() -> void:
 	var cat_index: int = save.categories.find(selected_question_category)
-	if Input.is_action_just_pressed("right"):
-		if cat_index < len(save.categories) - 1:
-			selected_question_category = save.categories[cat_index + 1]
-			rebuild_ui()
+	if cat_index < len(save.categories) - 1:
+		selected_question_category = save.categories[cat_index + 1]
+		rebuild_ui()
 
 
 func _on_go_up_button_pressed() -> void:
-	if Input.is_action_just_pressed("up"):
-		if selected_question_stage > 0:
-			selected_question_stage -= 1
-			rebuild_ui()
+	if selected_question_stage > 0:
+		selected_question_stage -= 1
+		rebuild_ui()
 
 
 func _on_go_down_button_pressed() -> void:
-	if Input.is_action_just_pressed("down"):
-		if selected_question_stage < len(save.point_stages) - 1:
-			selected_question_stage += 1
-			rebuild_ui()
+	if selected_question_stage < len(save.point_stages) - 1:
+		selected_question_stage += 1
+		rebuild_ui()

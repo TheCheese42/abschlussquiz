@@ -597,6 +597,7 @@ texture_normal = ExtResource("11_obxwr")
 [node name="InvisibleButtons" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
+anchors_preset = 0
 
 [node name="GoLeftButton" type="Button" parent="InvisibleButtons"]
 layout_mode = 0

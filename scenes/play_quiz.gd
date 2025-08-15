@@ -21,6 +21,7 @@ var _show_questions: bool
 var _show_answers: bool
 var _pass_questions: bool
 var _pass_points_multiplier: float
+var _confirm_before_question: bool
 var _quiz: QuizSave
 
 var _teams_points: Dictionary[String, int]
@@ -34,6 +35,7 @@ func _init() -> void:
 	_show_answers = GlobalVars.next_play_data["show_answers"]
 	_pass_questions = GlobalVars.next_play_data["pass_questions"]
 	_pass_points_multiplier = GlobalVars.next_play_data["pass_points_multiplier"]
+	_confirm_before_question = GlobalVars.next_play_data["confirm_before_question"]
 	_quiz = GlobalVars.next_play_data["quiz"]
 	GlobalVars.next_play_data.clear()
 	var num_questions: int = len(_quiz.categories) * len(_quiz.point_stages)
@@ -223,6 +225,7 @@ func question_selected(event: InputEvent, category: String, stage_idx: int, pane
 				_pass_questions,
 				pass_team,
 				_pass_points_multiplier,
+				_confirm_before_question,
 				_teams,
 			)
 			add_child(play_question)

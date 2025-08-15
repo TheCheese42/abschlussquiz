@@ -20,7 +20,7 @@ MAXIMIZED,Maximized,Maximiert
 KEEP_SCREEN_ON,Keep screen on,Bildschirm wach halten
 KEEP_SCREEN_ON_TOOLTIP,The app will prevent the screen from going to sleep.,"Die App wird verhindern, das der Bildschirm sich von selbst ausschaltet."
 BACKUP_COUNT,Backup Count,Backup Anzahl
-BACKUP_COUNT_TOOLTIP,"How many backups will be kept before the oldest one is deleted.\nEach time the main menu is loaded, a backup is created.\n0 means backups are disabled. -1 means unlimited backups are kept.","Wie viele Backups behalten werden, bevor die Ältesten gelöscht werden.\nJedes Mal wenn das Hauptmenu geladen wird, wird ein Backup erstellt.\n0 bedeutet, dass keine Backups erstellt werden.\n-1 bedeutet, dass unendlich viele Backups behalten werden."
+BACKUP_COUNT_TOOLTIP,"How many backups will be kept before the oldest one is deleted.\nEach time the main menu is loaded, a backup is created.\n0 means backups are disabled. -1 means unlimited backups are kept.","Wie viele Backups behalten werden, bevor die Ältesten gelöscht werden.\nJedes Mal wenn das Hauptmenü geladen wird, wird ein Backup erstellt.\n0 bedeutet, dass keine Backups erstellt werden.\n-1 bedeutet, dass unendlich viele Backups behalten werden."
 CREDITS,Credits,Danksagungen
 VERSION_X,Version: {0},Version: {0}
 DEVELOPERS,Developers,Entwickler
@@ -98,6 +98,7 @@ SUPPORTED_IMAGE_FILES,Supported Image Files,Unterstützte Bilddateien
 SELECT_IMAGE,Select an Image,Wählen Sie ein Bild aus
 LOAD_IMAGE_ERROR_TITLE,Error loading Image,Fehler beim Laden des Bildes
 LOAD_IMAGE_ERROR_CONTENT,"The Image couldn't be loaded.\nEnsure that that it contains a supported Image format and the\nprogram has permissions to access it.\nIf that doesn't help, convert it to a different format.","Das Bild konnte nicht geladen werden.\nÜberprüfen Sie ob es sich um ein unterstütztes Format handelt\nund ob das Programm auf die Datei zugreifen darf.\nSollte das nicht helfen, konvertieren Sie es in ein anderes Format."
+EDIT_ANSWERS_HEADER,Edit Answers,Antworten Bearbeiten
 ANSWER_X,Answer {0}:,Antwort {0}:
 CORRECT_ANSWER,Correct Answer,Richtige Antwort
 SAVE,Save,Speichern
@@ -115,6 +116,8 @@ SHOW_ANSWERS_TOOLTIP,"Show the possible answers on the screen.\nOtherwise, they 
 PASS_QUESTIONS,Pass questions,Fragen weitergeben
 POINTS_MULTIPLIER,Points multiplier:,Punktemultiplikator:.
 PASS_QUESTIONS_TOOLTIP,"If a question was answered incorrectly, the next\nteam can try it for a portion of the points.","Wenn eine Frage falsch beantwortet wird, kann das nächste\nTeam sie für einen Teil der Punkte ebenfalls versuchen."
+CONFIRM_BEFORE_QUESTION,Confirm before question,Vor Frage bestätigen
+CONFIRM_BEFORE_QUESTION_TOOLTIP,"Before showing the actual question, the user has to press a button.",Bevor die Frage gezeigt wird muss der Nutzer einen Knopf drücken.
 TEAM_X_COLON,Team {0}:,Team {0}:
 TEAM_X,Team {0},Team {0}
 GENERATE,Generate,Generieren
@@ -135,6 +138,7 @@ QUESTION_INTRO,{category}\n{points} Points,{category}\n{points} Punkte
 CATEGORY_POINTS,{category} ({points}),{category} ({points})
 TOURNAMENT_QUESTION,Tournament Question!,Turnierfrage!
 YOU_HAVE_X_SECONDS,You have {0} seconds!,Ihr habt {0} Sekunden Zeit!
+PROCEED,Proceed,Weiter
 CORRECT,Correct,Richtig
 WRONG,Wrong,Falsch
 NOBODY,Nobody,Niemand

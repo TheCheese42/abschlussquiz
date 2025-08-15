@@ -9,6 +9,22 @@ class_name QuizSave
 @export var is_favorite: bool = false
 
 
+func clone() -> QuizSave:
+	var new: QuizSave = duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+	for category: String in new.categories:
+		for question: Question in new.questions[category]:
+			var image: ImageTexture = question.load_image()
+			question.image_id = str(ResourceUID.create_id())
+			if image:
+				question.save_image(image.get_image())
+			for answer: Answer in question.answers:
+				var answer_image: ImageTexture = answer.load_image()
+				answer.image_id = str(ResourceUID.create_id())
+				if answer_image:
+					answer.save_image(answer_image.get_image())
+	return new
+
+
 func rename_category(category: String, new: String) -> void:
 	"""Rename a category. Changes both the 'questions' key and the 'categories' value."""
 	var category_questions: Array = questions[category]

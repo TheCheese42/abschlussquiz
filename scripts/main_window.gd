@@ -17,6 +17,23 @@ var options_panel_active_for: QuizSave = null
 
 
 func _ready() -> void:
+	if GlobalVars.options_save.first_launch:
+		# Import demo quiz files. See res://assets/demo/info.txt
+		GlobalVars.options_save.first_launch = false
+		if not GlobalVars.quiz_saves.quiz_saves:
+			var demo: QuizSaves = load("res://assets/demo/demo.tres")
+			if demo:
+				GlobalVars.quiz_saves = demo
+				GlobalFunctions.save_quiz_saves()
+				DirAccess.make_dir_absolute("user://saves/images")
+				for file: String in DirAccess.get_files_at("res://assets/demo/images"):
+					if not file.ends_with(".import"):
+						continue
+					file = file.trim_suffix(".import")
+					var image_texture: Texture2D = load("res://assets/demo/images/" + file)
+					var image: Image = image_texture.get_image()
+					if image:
+						image.save_png("user://saves/images/" + file)
 	backup_all()
 	rebuild_ui()
 	cleanup_images()
@@ -40,34 +57,7 @@ func cleanup_images() -> void:
 
 
 func backup_all() -> void:
-	if GlobalVars.quiz_saves.quiz_saves and GlobalVars.options_save.backup_count != 0:
-		var datetime_string: String = Time.get_datetime_string_from_system(false, true)
-		DirAccess.make_dir_absolute("user://backup/")
-		DirAccess.make_dir_absolute("user://backup/" + datetime_string.validate_filename())
-		for quiz: QuizSave in GlobalVars.quiz_saves.quiz_saves:
-			ResourceSaver.save(
-				quiz,
-				"user://backup/" + datetime_string.validate_filename() + "/"
-				+ quiz.name + "_" + str(randi_range(100000, 999999)) + ".tres"
-			)
-	# Remove old backups
-	if GlobalVars.options_save.backup_count == -1:
-		return
-	var all_datetimes: PackedStringArray = DirAccess.get_directories_at("user://backup/")
-	all_datetimes.reverse()
-	var i: int = 0
-	for dt_dir: String in all_datetimes:
-		if i >= GlobalVars.options_save.backup_count:
-			remove_recursive("user://backup/" + dt_dir)
-		i += 1
-
-
-func remove_recursive(directory: String) -> void:
-	for dir_name: String in DirAccess.get_directories_at(directory):
-		remove_recursive(directory.path_join(dir_name))
-	for file_name: String in DirAccess.get_files_at(directory):
-		DirAccess.remove_absolute(directory.path_join(file_name))
-	DirAccess.remove_absolute(directory)
+	GlobalFunctions.make_backups()
 
 
 func rebuild_ui() -> void:
@@ -144,6 +134,7 @@ func start_quiz(
 	show_answers: bool,
 	pass_questions: bool,
 	pass_points_multiplier: float,
+	confirm_before_question: bool,
 	quiz: QuizSave,
 ) -> void:
 	GlobalVars.next_play_data = {
@@ -152,6 +143,7 @@ func start_quiz(
 		"show_answers": show_answers,
 		"pass_questions": pass_questions,
 		"pass_points_multiplier": pass_points_multiplier,
+		"confirm_before_question": confirm_before_question,
 		"quiz": quiz,
 	}
 	get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
@@ -200,8 +192,10 @@ func _on_export_button_pressed() -> void:
 
 
 func export_quiz(quiz: QuizSave, path: String) -> void:
+	var quiz_standalone: QuizSaveStandalone = QuizSaveStandalone.new()
+	quiz_standalone.from_quiz_save(quiz)
 	DirAccess.make_dir_absolute("user://export/")
-	var error: Error = ResourceSaver.save(quiz, "user://export/export.tres")
+	var error: Error = ResourceSaver.save(quiz_standalone, "user://export/export.tres")
 	if error == OK:
 		error = DirAccess.rename_absolute("user://export/export.tres", path)
 	if error != OK:
@@ -269,7 +263,8 @@ func _on_import_button_pressed() -> void:
 func import_quiz(path: String) -> void:
 	DirAccess.make_dir_absolute("user://import/")
 	var error: Error = DirAccess.copy_absolute(path, "user://import/import.tres")
-	var quiz: QuizSave = load("user://import/import.tres").duplicate(true)
+	var quiz_standalone: QuizSaveStandalone = load("user://import/import.tres")
+	var quiz: QuizSave = quiz_standalone.load_to_quiz_save()
 	var _err: Error = DirAccess.remove_absolute("user://import/import.tres")
 	if error != OK or not is_instance_of(quiz, QuizSave):
 		var dialog: BetterAcceptDialog = accept_dialog_scene.instantiate()
@@ -287,7 +282,8 @@ func import_quiz(path: String) -> void:
 func _on_duplicate_button_pressed() -> void:
 	if options_panel_active_for == null:
 		return
-	GlobalVars.quiz_saves.quiz_saves.append(options_panel_active_for.duplicate(true))
+	var clone: QuizSave = options_panel_active_for.clone()
+	GlobalVars.quiz_saves.quiz_saves.append(clone)
 	GlobalFunctions.save_quiz_saves()
 	options_panel_active_for = null
 	quiz_options_layer.visible = false

@@ -180,7 +180,7 @@ theme_override_constants/separation = 24
 
 [node name="Title" type="Label" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Edit Answers"
+text = "EDIT_ANSWERS_HEADER"
 label_settings = ExtResource("1_cdk58")
 horizontal_alignment = 1
 

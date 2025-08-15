@@ -182,6 +182,14 @@ step = 0.10000000000582077
 value = 0.5000000000291038
 update_on_text_changed = true
 
+[node name="ConfirmCheck" type="CheckBox" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox"]
+layout_mode = 2
+tooltip_text = "CONFIRM_BEFORE_QUESTION_TOOLTIP"
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+text = "CONFIRM_BEFORE_QUESTION"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox"]
 layout_mode = 2
 size_flags_horizontal = 3

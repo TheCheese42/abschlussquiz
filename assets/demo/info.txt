@@ -1,0 +1,3 @@
+A demo quiz for each language. Images are shipped separately to keep the filesize small; They were compressed lossy using pngquant. Godot would save them lossless.
+
+All images are in the public domain.

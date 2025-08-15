@@ -1,0 +1,754 @@
+[gd_resource type="Resource" script_class="QuizSaves" load_steps=139 format=3]
+
+[ext_resource type="Script" path="res://scripts/quiz_save.gd" id="1_28vwk"]
+[ext_resource type="Script" path="res://scripts/answer_save.gd" id="2_iyrtm"]
+[ext_resource type="Script" path="res://scripts/question_save.gd" id="3_juacn"]
+[ext_resource type="Script" path="res://scripts/quiz_saves.gd" id="4_fjoun"]
+
+[sub_resource type="Resource" id="Resource_g665e"]
+script = ExtResource("2_iyrtm")
+text = "Schwimmen"
+image_id = "4019521060555344912"
+
+[sub_resource type="Resource" id="Resource_phio3"]
+script = ExtResource("2_iyrtm")
+text = "Fahrradfahren"
+image_id = "4750330034659377284"
+
+[sub_resource type="Resource" id="Resource_q4ctp"]
+script = ExtResource("2_iyrtm")
+text = "Laufen"
+image_id = "7613935777558991835"
+
+[sub_resource type="Resource" id="Resource_70i0w"]
+script = ExtResource("2_iyrtm")
+text = "Schießen"
+image_id = "7567892441606942696"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_j07b2"]
+script = ExtResource("3_juacn")
+text = "Welche ist keine Triathlon Sportart?"
+image_id = "789590260225727336"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_g665e"), SubResource("Resource_phio3"), SubResource("Resource_q4ctp"), SubResource("Resource_70i0w")])
+
+[sub_resource type="Resource" id="Resource_xqc1w"]
+script = ExtResource("2_iyrtm")
+text = "Alle"
+image_id = "280942993021365349"
+
+[sub_resource type="Resource" id="Resource_iopud"]
+script = ExtResource("2_iyrtm")
+text = "Mindestens die Hälfte"
+image_id = "8883096066267420330"
+
+[sub_resource type="Resource" id="Resource_2g46i"]
+script = ExtResource("2_iyrtm")
+text = "Mehr als alle Anderen"
+image_id = "8419649432356656305"
+
+[sub_resource type="Resource" id="Resource_5kras"]
+script = ExtResource("2_iyrtm")
+text = "Mehr als die Hälfte"
+image_id = "2386606708429204938"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_5uta6"]
+script = ExtResource("3_juacn")
+text = "Wie viele Stimmen benötigt man, um eine absolute Mehrheit zu erhalten?"
+image_id = "8445204471431064988"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_xqc1w"), SubResource("Resource_iopud"), SubResource("Resource_2g46i"), SubResource("Resource_5kras")])
+
+[sub_resource type="Resource" id="Resource_i3leo"]
+script = ExtResource("2_iyrtm")
+text = "Rot, Grün, Blau"
+image_id = "7819596721389467686"
+
+[sub_resource type="Resource" id="Resource_phm4h"]
+script = ExtResource("2_iyrtm")
+text = "Rot, Gelb, Blau"
+image_id = "6599469704734574743"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_oe32t"]
+script = ExtResource("2_iyrtm")
+text = "Grün, Orange, Violett"
+image_id = "6720595046715625406"
+
+[sub_resource type="Resource" id="Resource_5gqix"]
+script = ExtResource("2_iyrtm")
+text = "Grün, Orange, Blau"
+image_id = "291690804115862068"
+
+[sub_resource type="Resource" id="Resource_lqchf"]
+script = ExtResource("3_juacn")
+text = "Was sind die drei Primärfarben?"
+image_id = "1377593567508555983"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_i3leo"), SubResource("Resource_phm4h"), SubResource("Resource_oe32t"), SubResource("Resource_5gqix")])
+
+[sub_resource type="Resource" id="Resource_28gq0"]
+script = ExtResource("2_iyrtm")
+text = "Ein Kreis"
+image_id = "6712151134207276649"
+
+[sub_resource type="Resource" id="Resource_3asix"]
+script = ExtResource("2_iyrtm")
+text = "Eine Kugel"
+image_id = "868161453288209766"
+
+[sub_resource type="Resource" id="Resource_a6j7x"]
+script = ExtResource("2_iyrtm")
+text = "Ein Ellipsoid"
+image_id = "8314066288024589032"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_qeqt6"]
+script = ExtResource("2_iyrtm")
+text = "Eine Pyramide"
+image_id = "1908414943870001804"
+
+[sub_resource type="Resource" id="Resource_anfdt"]
+script = ExtResource("3_juacn")
+text = "Welche Form hat die Erde???"
+image_id = "1866558175922705486"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_28gq0"), SubResource("Resource_3asix"), SubResource("Resource_a6j7x"), SubResource("Resource_qeqt6")])
+
+[sub_resource type="Resource" id="Resource_pmnqh"]
+script = ExtResource("2_iyrtm")
+text = "Argon"
+image_id = "818476393136189299"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_rr78g"]
+script = ExtResource("2_iyrtm")
+text = "Xenon"
+image_id = "2246349036755897428"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_d311h"]
+script = ExtResource("2_iyrtm")
+text = "Radon"
+image_id = "9145343039647387477"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_5sl65"]
+script = ExtResource("2_iyrtm")
+text = "Wasserstoff"
+image_id = "5314730388199735777"
+
+[sub_resource type="Resource" id="Resource_m8sb3"]
+script = ExtResource("3_juacn")
+text = "Welches ist ein Edelgas?"
+image_id = "5439163051202301185"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_pmnqh"), SubResource("Resource_rr78g"), SubResource("Resource_d311h"), SubResource("Resource_5sl65")])
+
+[sub_resource type="Resource" id="Resource_lch8g"]
+script = ExtResource("2_iyrtm")
+text = "Ein Experiment"
+image_id = "5716866405852403491"
+
+[sub_resource type="Resource" id="Resource_yis8f"]
+script = ExtResource("2_iyrtm")
+text = "Eine seltene Todesursache"
+image_id = "8660279298565825492"
+
+[sub_resource type="Resource" id="Resource_hiyyy"]
+script = ExtResource("2_iyrtm")
+text = "Gute Frage, nächste Frage"
+image_id = "7359396033253753789"
+
+[sub_resource type="Resource" id="Resource_030ta"]
+script = ExtResource("2_iyrtm")
+text = "Chemische Teilgebiete"
+image_id = "7471854712895886822"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_s5ire"]
+script = ExtResource("3_juacn")
+text = "Was ist Elektrochemie?"
+image_id = "4229775508707804022"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_lch8g"), SubResource("Resource_yis8f"), SubResource("Resource_hiyyy"), SubResource("Resource_030ta")])
+
+[sub_resource type="Resource" id="Resource_vfyio"]
+script = ExtResource("2_iyrtm")
+text = "Den Boden heizen"
+image_id = "9079816097831321218"
+
+[sub_resource type="Resource" id="Resource_wsutm"]
+script = ExtResource("2_iyrtm")
+text = "Oxidieren"
+image_id = "767499146122184781"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_syahs"]
+script = ExtResource("2_iyrtm")
+text = "Strom leiten"
+image_id = "5135876430020192419"
+
+[sub_resource type="Resource" id="Resource_c5e2c"]
+script = ExtResource("2_iyrtm")
+text = "Dient nur als Dekoration"
+image_id = "7606961933294850697"
+
+[sub_resource type="Resource" id="Resource_famcx"]
+script = ExtResource("3_juacn")
+text = "Was macht eine Opferanode?
+(Bildlizenz: CC0; gemeinfrei)"
+image_id = "6806183125843847023"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_vfyio"), SubResource("Resource_wsutm"), SubResource("Resource_syahs"), SubResource("Resource_c5e2c")])
+
+[sub_resource type="Resource" id="Resource_31k6j"]
+script = ExtResource("3_juacn")
+text = "Zählt alle Elemente der zweiten Periode auf!"
+image_id = "5084052930013678610"
+
+[sub_resource type="Resource" id="Resource_n3k7n"]
+script = ExtResource("2_iyrtm")
+text = "Gibt es nicht"
+image_id = "1813754611608360655"
+
+[sub_resource type="Resource" id="Resource_20aqe"]
+script = ExtResource("2_iyrtm")
+text = "Syntaktische Regeln"
+image_id = "1231005520540714080"
+
+[sub_resource type="Resource" id="Resource_uxuyy"]
+script = ExtResource("2_iyrtm")
+text = "Datenstrukturen"
+image_id = "458814021651228283"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_655u5"]
+script = ExtResource("2_iyrtm")
+text = "Das hier:"
+image_id = "181168890345486341"
+
+[sub_resource type="Resource" id="Resource_holny"]
+script = ExtResource("3_juacn")
+text = "Was sind Arrays?"
+image_id = "3494975227531676402"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_n3k7n"), SubResource("Resource_20aqe"), SubResource("Resource_uxuyy"), SubResource("Resource_655u5")])
+
+[sub_resource type="Resource" id="Resource_3w8gi"]
+script = ExtResource("2_iyrtm")
+text = "Nichts"
+image_id = "621914649134634874"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_3fj66"]
+script = ExtResource("2_iyrtm")
+text = "Die Welt geht unter"
+image_id = "2980858663306169265"
+
+[sub_resource type="Resource" id="Resource_de3b6"]
+script = ExtResource("2_iyrtm")
+text = "Die wird Zahl verdoppelt"
+image_id = "7347682859382104681"
+
+[sub_resource type="Resource" id="Resource_uc78b"]
+script = ExtResource("2_iyrtm")
+text = "Die Zahl wird halbiert"
+image_id = "4491164332435382790"
+
+[sub_resource type="Resource" id="Resource_oh7a4"]
+script = ExtResource("3_juacn")
+text = "Was passiert, wenn ich bei einer Binärzahl eine Null vor das signifikanteste Bit schreibe?"
+image_id = "1747133764075373056"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_3w8gi"), SubResource("Resource_3fj66"), SubResource("Resource_de3b6"), SubResource("Resource_uc78b")])
+
+[sub_resource type="Resource" id="Resource_lu3vp"]
+script = ExtResource("3_juacn")
+type = 1
+text = "Schreibt möglichst viele Operatoren auf."
+image_id = "2956607132479167704"
+time = 60
+
+[sub_resource type="Resource" id="Resource_1rj3a"]
+script = ExtResource("3_juacn")
+type = 1
+text = "Findet den Fehler im folgenden Programm (rechts).
+(Kontext für Interessierte: https://github.com/torvalds/linux/pull/833)"
+image_id = "6525405312230079560"
+
+[sub_resource type="Resource" id="Resource_8hutt"]
+script = ExtResource("2_iyrtm")
+text = "a² + b² = c²"
+image_id = "2145370605829278539"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_p5lh7"]
+script = ExtResource("2_iyrtm")
+text = "a * b = ab"
+image_id = "3674708812244606870"
+
+[sub_resource type="Resource" id="Resource_xqel5"]
+script = ExtResource("2_iyrtm")
+text = "“Alle Dreiecke sind gleich lang”"
+image_id = "776575463839332189"
+
+[sub_resource type="Resource" id="Resource_7rqqh"]
+script = ExtResource("2_iyrtm")
+text = "a² * b² = a²b²"
+image_id = "5773219168420928841"
+
+[sub_resource type="Resource" id="Resource_chcuo"]
+script = ExtResource("2_iyrtm")
+text = "a² * b² = c²"
+image_id = "3092534621167663473"
+
+[sub_resource type="Resource" id="Resource_nurx6"]
+script = ExtResource("2_iyrtm")
+text = "a + b = ab"
+image_id = "8181830160316380812"
+
+[sub_resource type="Resource" id="Resource_elym0"]
+script = ExtResource("3_juacn")
+text = "Wie lautet der Satz des Pythagoras?"
+image_id = "5313863341266046958"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_8hutt"), SubResource("Resource_p5lh7"), SubResource("Resource_xqel5"), SubResource("Resource_7rqqh"), SubResource("Resource_chcuo"), SubResource("Resource_nurx6")])
+
+[sub_resource type="Resource" id="Resource_2w2ky"]
+script = ExtResource("2_iyrtm")
+image_id = "1568695835470452867"
+
+[sub_resource type="Resource" id="Resource_ds4oq"]
+script = ExtResource("2_iyrtm")
+image_id = "6577364539342444625"
+
+[sub_resource type="Resource" id="Resource_30mn6"]
+script = ExtResource("2_iyrtm")
+image_id = "4205463911416911440"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_qsju1"]
+script = ExtResource("2_iyrtm")
+image_id = "8885950043749874152"
+
+[sub_resource type="Resource" id="Resource_nwfol"]
+script = ExtResource("3_juacn")
+text = "Wer davon ist Euklid?
+(Alle Bilder sind gemeinfrei.)"
+image_id = "24122685961373475"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_2w2ky"), SubResource("Resource_ds4oq"), SubResource("Resource_30mn6"), SubResource("Resource_qsju1")])
+
+[sub_resource type="Resource" id="Resource_lh38k"]
+script = ExtResource("3_juacn")
+type = 1
+text = "Wer am schnellsten folgende Aufgabe löst, gewinnt!"
+image_id = "1394983392024520650"
+
+[sub_resource type="Resource" id="Resource_6hegy"]
+script = ExtResource("2_iyrtm")
+text = "10"
+image_id = "1554428058489592190"
+
+[sub_resource type="Resource" id="Resource_wh8po"]
+script = ExtResource("2_iyrtm")
+text = "1"
+image_id = "6846242405035319882"
+
+[sub_resource type="Resource" id="Resource_ff5fi"]
+script = ExtResource("2_iyrtm")
+text = "x"
+image_id = "1922018169329196987"
+
+[sub_resource type="Resource" id="Resource_u5gm5"]
+script = ExtResource("2_iyrtm")
+text = "e"
+image_id = "5222436435646312415"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_m7yvh"]
+script = ExtResource("3_juacn")
+text = "Welche Basis hat der natürliche Logarithmus?"
+image_id = "2093730039960115905"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_6hegy"), SubResource("Resource_wh8po"), SubResource("Resource_ff5fi"), SubResource("Resource_u5gm5")])
+
+[sub_resource type="Resource" id="Resource_vswpr"]
+script = ExtResource("1_28vwk")
+name = "Demo Quiz (deutsch)"
+categories = Array[String](["Chemie", "Mathematik", "Informatik", "Andere"])
+point_stages = PackedInt64Array(40, 60, 80, 100)
+questions = Dictionary[String, Array]({
+"Andere": [SubResource("Resource_j07b2"), SubResource("Resource_5uta6"), SubResource("Resource_lqchf"), SubResource("Resource_anfdt")],
+"Chemie": [SubResource("Resource_m8sb3"), SubResource("Resource_s5ire"), SubResource("Resource_famcx"), SubResource("Resource_31k6j")],
+"Informatik": [SubResource("Resource_holny"), SubResource("Resource_oh7a4"), SubResource("Resource_lu3vp"), SubResource("Resource_1rj3a")],
+"Mathematik": [SubResource("Resource_elym0"), SubResource("Resource_nwfol"), SubResource("Resource_lh38k"), SubResource("Resource_m7yvh")]
+})
+is_favorite = true
+
+[sub_resource type="Resource" id="Resource_78tm0"]
+script = ExtResource("2_iyrtm")
+text = "Argon"
+image_id = "8264501022006741820"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_wmjv3"]
+script = ExtResource("2_iyrtm")
+text = "Xenon"
+image_id = "7270815999585475095"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_8i245"]
+script = ExtResource("2_iyrtm")
+text = "Radon"
+image_id = "8344533049328373299"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_f4uiq"]
+script = ExtResource("2_iyrtm")
+text = "Hydrogen"
+image_id = "5280086881308895729"
+
+[sub_resource type="Resource" id="Resource_al0tv"]
+script = ExtResource("3_juacn")
+text = "Which is a noble gas?"
+image_id = "6331073597157208107"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_78tm0"), SubResource("Resource_wmjv3"), SubResource("Resource_8i245"), SubResource("Resource_f4uiq")])
+
+[sub_resource type="Resource" id="Resource_m65go"]
+script = ExtResource("2_iyrtm")
+text = "An experiment"
+image_id = "7148212403683006319"
+
+[sub_resource type="Resource" id="Resource_yve3x"]
+script = ExtResource("2_iyrtm")
+text = "A rare cause of death"
+image_id = "6136066730505587652"
+
+[sub_resource type="Resource" id="Resource_tunvu"]
+script = ExtResource("2_iyrtm")
+text = "Good question, next question"
+image_id = "3521004087345657027"
+
+[sub_resource type="Resource" id="Resource_og15q"]
+script = ExtResource("2_iyrtm")
+text = "Chemical sub-areas"
+image_id = "7739912943339122515"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_3vudp"]
+script = ExtResource("3_juacn")
+text = "What is electrochemistry?"
+image_id = "8424346628962587750"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_m65go"), SubResource("Resource_yve3x"), SubResource("Resource_tunvu"), SubResource("Resource_og15q")])
+
+[sub_resource type="Resource" id="Resource_hdrke"]
+script = ExtResource("2_iyrtm")
+text = "Heat the floor"
+image_id = "163374934909244530"
+
+[sub_resource type="Resource" id="Resource_swgs1"]
+script = ExtResource("2_iyrtm")
+text = "Oxidize"
+image_id = "6725046421371859110"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_8elgl"]
+script = ExtResource("2_iyrtm")
+text = "Conducting electricity"
+image_id = "8667690386342485687"
+
+[sub_resource type="Resource" id="Resource_g2uq7"]
+script = ExtResource("2_iyrtm")
+text = "Serves only as decoration"
+image_id = "3752273948755165298"
+
+[sub_resource type="Resource" id="Resource_pugmm"]
+script = ExtResource("3_juacn")
+text = "What does a sacrificial anode do?
+(Image license: CC0; public domain)"
+image_id = "917498202343846353"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_hdrke"), SubResource("Resource_swgs1"), SubResource("Resource_8elgl"), SubResource("Resource_g2uq7")])
+
+[sub_resource type="Resource" id="Resource_kmtvv"]
+script = ExtResource("3_juacn")
+text = "List all the elements of the second period!"
+image_id = "348872640501794376"
+
+[sub_resource type="Resource" id="Resource_4re3e"]
+script = ExtResource("2_iyrtm")
+text = "Don't exist"
+image_id = "4124209330814878491"
+
+[sub_resource type="Resource" id="Resource_wydsf"]
+script = ExtResource("2_iyrtm")
+text = "Syntactical rules"
+image_id = "390774041490311210"
+
+[sub_resource type="Resource" id="Resource_j4pd6"]
+script = ExtResource("2_iyrtm")
+text = "Data structures"
+image_id = "5781019919073910379"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_4sssi"]
+script = ExtResource("2_iyrtm")
+text = "This:"
+image_id = "2558072260313612521"
+
+[sub_resource type="Resource" id="Resource_2p4m1"]
+script = ExtResource("3_juacn")
+text = "What are arrays?"
+image_id = "6625049542861441176"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_4re3e"), SubResource("Resource_wydsf"), SubResource("Resource_j4pd6"), SubResource("Resource_4sssi")])
+
+[sub_resource type="Resource" id="Resource_kd8ho"]
+script = ExtResource("2_iyrtm")
+text = "Nothing"
+image_id = "8964967821271460396"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_xbcx1"]
+script = ExtResource("2_iyrtm")
+text = "The world is coming to an end"
+image_id = "4440884413458831743"
+
+[sub_resource type="Resource" id="Resource_brwqv"]
+script = ExtResource("2_iyrtm")
+text = "The number is doubled"
+image_id = "7553044005701261309"
+
+[sub_resource type="Resource" id="Resource_neopy"]
+script = ExtResource("2_iyrtm")
+text = "The number is halved"
+image_id = "6628222909017492616"
+
+[sub_resource type="Resource" id="Resource_4rp6n"]
+script = ExtResource("3_juacn")
+text = "What happens if I write a zero in front of the most significant bit of a binary number?"
+image_id = "8011709145409945822"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_kd8ho"), SubResource("Resource_xbcx1"), SubResource("Resource_brwqv"), SubResource("Resource_neopy")])
+
+[sub_resource type="Resource" id="Resource_5jvui"]
+script = ExtResource("3_juacn")
+type = 1
+text = "Write down as many operators as possible."
+image_id = "8535026351264482182"
+time = 60
+
+[sub_resource type="Resource" id="Resource_37b32"]
+script = ExtResource("3_juacn")
+type = 1
+text = "Find the error in the following program (right).
+(Context for those interested: https://github.com/torvalds/linux/pull/833)"
+image_id = "8127655742746120056"
+
+[sub_resource type="Resource" id="Resource_obe1g"]
+script = ExtResource("2_iyrtm")
+text = "a² + b² = c²"
+image_id = "2839499935387245194"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_j5kho"]
+script = ExtResource("2_iyrtm")
+text = "a * b = ab"
+image_id = "2839022986724682471"
+
+[sub_resource type="Resource" id="Resource_g0ohw"]
+script = ExtResource("2_iyrtm")
+text = "“Alle Dreiecke sind gleich lang”"
+image_id = "8387562827813216662"
+
+[sub_resource type="Resource" id="Resource_lscdw"]
+script = ExtResource("2_iyrtm")
+text = "a² * b² = a²b²"
+image_id = "5062051492608469253"
+
+[sub_resource type="Resource" id="Resource_o1mrq"]
+script = ExtResource("2_iyrtm")
+text = "a² * b² = c²"
+image_id = "2274282992232780814"
+
+[sub_resource type="Resource" id="Resource_f7dlb"]
+script = ExtResource("2_iyrtm")
+text = "a + b = ab"
+image_id = "8625649859419418926"
+
+[sub_resource type="Resource" id="Resource_t786y"]
+script = ExtResource("3_juacn")
+text = "What is the Pythagorean theorem?"
+image_id = "6644376736813152364"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_obe1g"), SubResource("Resource_j5kho"), SubResource("Resource_g0ohw"), SubResource("Resource_lscdw"), SubResource("Resource_o1mrq"), SubResource("Resource_f7dlb")])
+
+[sub_resource type="Resource" id="Resource_8om61"]
+script = ExtResource("2_iyrtm")
+image_id = "3017363510340001014"
+
+[sub_resource type="Resource" id="Resource_1chqw"]
+script = ExtResource("2_iyrtm")
+image_id = "2048705601460564980"
+
+[sub_resource type="Resource" id="Resource_u83d7"]
+script = ExtResource("2_iyrtm")
+image_id = "3912841737592247419"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_e0knr"]
+script = ExtResource("2_iyrtm")
+image_id = "1408805189127782914"
+
+[sub_resource type="Resource" id="Resource_dlv1o"]
+script = ExtResource("3_juacn")
+text = "Who of them is Euclid?
+(All images are in the public domain.)"
+image_id = "3579002587759211992"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_8om61"), SubResource("Resource_1chqw"), SubResource("Resource_u83d7"), SubResource("Resource_e0knr")])
+
+[sub_resource type="Resource" id="Resource_4bc7w"]
+script = ExtResource("3_juacn")
+type = 1
+text = "Whoever solves the following task the fastest wins!"
+image_id = "8907048546633315906"
+
+[sub_resource type="Resource" id="Resource_6d3v5"]
+script = ExtResource("2_iyrtm")
+text = "10"
+image_id = "6648823811700002696"
+
+[sub_resource type="Resource" id="Resource_14alu"]
+script = ExtResource("2_iyrtm")
+text = "1"
+image_id = "8982653731957354232"
+
+[sub_resource type="Resource" id="Resource_fb1qk"]
+script = ExtResource("2_iyrtm")
+text = "x"
+image_id = "5635635325916772064"
+
+[sub_resource type="Resource" id="Resource_tyn5u"]
+script = ExtResource("2_iyrtm")
+text = "e"
+image_id = "8812740243823880739"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_kgbs1"]
+script = ExtResource("3_juacn")
+text = "What is the base of the natural logarithm?"
+image_id = "187277566494184744"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_6d3v5"), SubResource("Resource_14alu"), SubResource("Resource_fb1qk"), SubResource("Resource_tyn5u")])
+
+[sub_resource type="Resource" id="Resource_qborf"]
+script = ExtResource("2_iyrtm")
+text = "Swimming"
+image_id = "8765409810827024850"
+
+[sub_resource type="Resource" id="Resource_3lpuk"]
+script = ExtResource("2_iyrtm")
+text = "Cycling"
+image_id = "6640798799015598035"
+
+[sub_resource type="Resource" id="Resource_tolrd"]
+script = ExtResource("2_iyrtm")
+text = "Distance running"
+image_id = "4003101655400453834"
+
+[sub_resource type="Resource" id="Resource_63k0u"]
+script = ExtResource("2_iyrtm")
+text = "Shooting"
+image_id = "578103016290817757"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_8mxf0"]
+script = ExtResource("3_juacn")
+text = "Which is not a triathlon sport?"
+image_id = "882548046338064283"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_qborf"), SubResource("Resource_3lpuk"), SubResource("Resource_tolrd"), SubResource("Resource_63k0u")])
+
+[sub_resource type="Resource" id="Resource_smw4w"]
+script = ExtResource("2_iyrtm")
+text = "All"
+image_id = "3810554124454358128"
+
+[sub_resource type="Resource" id="Resource_8lt0v"]
+script = ExtResource("2_iyrtm")
+text = "At least half"
+image_id = "1959935912916812869"
+
+[sub_resource type="Resource" id="Resource_ylpml"]
+script = ExtResource("2_iyrtm")
+text = "More than anyone else"
+image_id = "6177377946597092396"
+
+[sub_resource type="Resource" id="Resource_ut0lb"]
+script = ExtResource("2_iyrtm")
+text = "More than half"
+image_id = "7564455452195586040"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_5q83f"]
+script = ExtResource("3_juacn")
+text = "How many votes do you need to achieve an absolute majority?"
+image_id = "4573199119565603777"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_smw4w"), SubResource("Resource_8lt0v"), SubResource("Resource_ylpml"), SubResource("Resource_ut0lb")])
+
+[sub_resource type="Resource" id="Resource_mhb0p"]
+script = ExtResource("2_iyrtm")
+text = "Red, Green, Blue"
+image_id = "1796939489623737190"
+
+[sub_resource type="Resource" id="Resource_7mlpa"]
+script = ExtResource("2_iyrtm")
+text = "Red, Yellow, Blue"
+image_id = "8070089987143256151"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_o8spe"]
+script = ExtResource("2_iyrtm")
+text = "Green, Orange, Purple"
+image_id = "1074943934320386052"
+
+[sub_resource type="Resource" id="Resource_renhv"]
+script = ExtResource("2_iyrtm")
+text = "Green, Orange, Blue"
+image_id = "2156502034123063430"
+
+[sub_resource type="Resource" id="Resource_lw4h4"]
+script = ExtResource("3_juacn")
+text = "What are the three primary colors?"
+image_id = "2329185548047383578"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_mhb0p"), SubResource("Resource_7mlpa"), SubResource("Resource_o8spe"), SubResource("Resource_renhv")])
+
+[sub_resource type="Resource" id="Resource_akrjl"]
+script = ExtResource("2_iyrtm")
+text = "A circle"
+image_id = "6157923781162182632"
+
+[sub_resource type="Resource" id="Resource_e3uhk"]
+script = ExtResource("2_iyrtm")
+text = "A sphere"
+image_id = "549788201721953573"
+
+[sub_resource type="Resource" id="Resource_y5bma"]
+script = ExtResource("2_iyrtm")
+text = "An ellipsoid"
+image_id = "4408976124044629223"
+is_correct = true
+
+[sub_resource type="Resource" id="Resource_c0l16"]
+script = ExtResource("2_iyrtm")
+text = "A pyramid"
+image_id = "8428060692408182458"
+
+[sub_resource type="Resource" id="Resource_nqww2"]
+script = ExtResource("3_juacn")
+text = "What shape is the earth???"
+image_id = "3119885547953911548"
+answers = Array[ExtResource("2_iyrtm")]([SubResource("Resource_akrjl"), SubResource("Resource_e3uhk"), SubResource("Resource_y5bma"), SubResource("Resource_c0l16")])
+
+[sub_resource type="Resource" id="Resource_jlcny"]
+script = ExtResource("1_28vwk")
+name = "Demo Quiz (english)"
+categories = Array[String](["Chemistry", "Maths", "Computer Science", "Other"])
+point_stages = PackedInt64Array(40, 60, 80, 100)
+questions = Dictionary[String, Array]({
+"Chemistry": [SubResource("Resource_al0tv"), SubResource("Resource_3vudp"), SubResource("Resource_pugmm"), SubResource("Resource_kmtvv")],
+"Computer Science": [SubResource("Resource_2p4m1"), SubResource("Resource_4rp6n"), SubResource("Resource_5jvui"), SubResource("Resource_37b32")],
+"Maths": [SubResource("Resource_t786y"), SubResource("Resource_dlv1o"), SubResource("Resource_4bc7w"), SubResource("Resource_kgbs1")],
+"Other": [SubResource("Resource_8mxf0"), SubResource("Resource_5q83f"), SubResource("Resource_lw4h4"), SubResource("Resource_nqww2")]
+})
+is_favorite = true
+
+[resource]
+script = ExtResource("4_fjoun")
+quiz_saves = Array[ExtResource("1_28vwk")]([SubResource("Resource_vswpr"), SubResource("Resource_jlcny")])

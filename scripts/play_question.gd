@@ -22,6 +22,7 @@ var _show_answers: bool
 var _pass_questions: bool
 var _pass_team: String
 var _pass_multiplier: float
+var _confirm_before_question: bool
 var _all_teams: Array[String]
 var _is_pass_run: bool = false
 
@@ -36,6 +37,7 @@ func init(
 	pass_questions: bool,
 	pass_team: String,
 	pass_multiplier: float,
+	confirm_before_question: bool,
 	all_teams: Array[String],
 ) -> void:
 	_question = question
@@ -47,6 +49,7 @@ func init(
 	_pass_questions = pass_questions
 	_pass_team = pass_team
 	_pass_multiplier = pass_multiplier
+	_confirm_before_question = confirm_before_question
 	_all_teams = all_teams
 
 
@@ -62,6 +65,7 @@ func start_show() -> void:
 	var time_label: Label = null
 	var time_bar: ProgressBar = null
 	var time_bar_tween: Tween = null
+	var proceed_button: Button = null
 	if not _is_pass_run:
 		header.text = tr("QUESTION_INTRO").format({"category": _category, "points": _points})
 		if _is_pass_run:
@@ -102,15 +106,32 @@ func start_show() -> void:
 					time_bar_fade_tween.tween_property(time_bar, "modulate", Color.TRANSPARENT, 0.5)
 					await time_bar_fade_tween.finished
 				time_bar_tween.finished.connect(time_up)
+		if _confirm_before_question:
+			proceed_button = Button.new()
+			proceed_button.text = tr("PROCEED")
+			proceed_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			var key_enter: InputEventKey = InputEventKey.new()
+			key_enter.keycode = KEY_ENTER
+			var key_space: InputEventKey = InputEventKey.new()
+			key_space.keycode = KEY_SPACE
+			var shortcut: Shortcut = Shortcut.new()
+			shortcut.events = [key_enter, key_space]
+			proceed_button.set_shortcut(shortcut)
+			proceed_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			panel_vbox.add_child(proceed_button)
 		await get_tree().create_timer(0.0).timeout
 		panel_container.position = Vector2(DisplayServer.window_get_size()) / 2 - panel_container.size / 2
-		var prog_tween: Tween = create_tween()
-		prog_tween.set_ease(Tween.EASE_IN_OUT)
-		prog_tween.tween_property(progress_bar, "value", 100.0, 3.5 if not _is_pass_run else 3.0)
 		var panel_tween_: Tween = create_tween()
 		panel_tween_.set_ease(Tween.EASE_OUT)
 		panel_tween_.tween_property(panel_container, "scale", Vector2.ONE, 0.8)
-		await prog_tween.finished
+		if not proceed_button:
+			# No need for a progress bar if the user has to click anyway
+			var prog_tween: Tween = create_tween()
+			prog_tween.set_ease(Tween.EASE_IN_OUT)
+			prog_tween.tween_property(progress_bar, "value", 100.0, 3.5 if not _is_pass_run else 3.0)
+			await prog_tween.finished
+		else:
+			await proceed_button.pressed
 
 	# Show question
 	var panel_tween: Tween = create_tween()
@@ -122,6 +143,8 @@ func start_show() -> void:
 		tournament_label.queue_free()
 	if time_label:
 		time_label.queue_free()
+	if proceed_button:
+		proceed_button.queue_free()
 	var image_texture: ImageTexture = _question.load_image()
 	if _show_questions:
 		if _question.text:
@@ -297,6 +320,7 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 	sub_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var was_correct: bool = false
 	var active_team: String = ""  # "" means no team won in a tournament or multiple choice if passed and still wrong
+	var proceed_button: Button = null
 	if _question.type == Question.QuestionType.MultipleChoice:
 		active_team = _team
 		if answer.is_correct:
@@ -306,6 +330,7 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			states.shuffle()
 			state_label.text = states[0]
 			sub_label.text = (
+				# 5% chance for secret message
 				tr("CORRECT_SUB") if randi_range(1, 100) > 5 else tr("CORRECT_SUB_SECRET")
 			).format([_points])
 			var confetti: Confetti = confetti_scene.instantiate()
@@ -318,6 +343,18 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			state_label.text = states[0]
 			if _pass_questions:
 				sub_label.text = tr("WRONG_SUB_PASSING").format([_pass_team])
+				if _confirm_before_question:
+					proceed_button = Button.new()
+					proceed_button.text = tr("PROCEED")
+					proceed_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+					var key_enter: InputEventKey = InputEventKey.new()
+					key_enter.keycode = KEY_ENTER
+					var key_space: InputEventKey = InputEventKey.new()
+					key_space.keycode = KEY_SPACE
+					var shortcut: Shortcut = Shortcut.new()
+					shortcut.events = [key_enter, key_space]
+					proceed_button.set_shortcut(shortcut)
+					proceed_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 			else:
 				sub_label.text = tr("WRONG_SUB")
 	elif _question.type == Question.QuestionType.Tournament:
@@ -333,6 +370,8 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			confetti.position = DisplayServer.window_get_size() / 2
 			add_child(confetti)
 	panel_vbox.add_child(sub_label)
+	if proceed_button:
+		panel_vbox.add_child(proceed_button)
 	panel_container.size = Vector2.ZERO
 	state_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	await get_tree().create_timer(0.0).timeout
@@ -342,10 +381,13 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 	panel_tween = create_tween()
 	panel_tween.tween_property(panel_container, "scale", Vector2.ONE, 0.4)
 	progress_bar.value = 0.0
-	var prog_tween: Tween = create_tween()
-	prog_tween.set_ease(Tween.EASE_IN_OUT)
-	prog_tween.tween_property(progress_bar, "value", 100.0, 3)
-	await prog_tween.finished
+	if not proceed_button:
+		var prog_tween: Tween = create_tween()
+		prog_tween.set_ease(Tween.EASE_IN_OUT)
+		prog_tween.tween_property(progress_bar, "value", 100.0, 3)
+		await prog_tween.finished
+	else:
+		await proceed_button.pressed
 	panel_tween = create_tween()
 	panel_tween.tween_property(panel_container, "scale", Vector2.ZERO, 0.4)
 	await panel_tween.finished
