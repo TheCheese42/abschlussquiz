@@ -11,6 +11,12 @@ HEADER,The Final Quiz,Das Große Abschlussquiz
 OPTIONS,Options,Optionen
 OPTIONS_TIP,Tip: Hover over a label to find out more.,"Tipp: Fahren Sie mit der Maus über einen Eintrag, um mehr herauszufinden."
 LANGUAGE,Language,Sprache
+WINDOW_MODE,Window mode:,Fenstermodus:
+WINDOW_MODE_TOOLTIP,Tip: Press F11 to toggle fullscreen.,Tipp: Benutzen Sie F11 um den Vollbildmodus umzuschalten.
+FULLSCREEN,Fullscreen,Vollbild
+WINDOWED_FULLSCREEN,Windowed fullscreen,Fenster-Vollbild
+WINDOWED,Windowed,Fenstermodus
+MAXIMIZED,Maximized,Maximiert
 KEEP_SCREEN_ON,Keep screen on,Bildschirm wach halten
 KEEP_SCREEN_ON_TOOLTIP,The app will prevent the screen from going to sleep.,"Die App wird verhindern, das der Bildschirm sich von selbst ausschaltet."
 BACKUP_COUNT,Backup Count,Backup Anzahl
@@ -74,7 +80,7 @@ DELETE_POINT_STAGE_CONFIRM_TITLE,Delete Point Stage?,Punktestufe löschen?
 DELETE_POINT_STAGE_CONFIRM_CONTENT,Are you sure you want to delete this point stage?\nAll questions associated with it will be removed.\n\nTip: Press 'shift' to skip this message.,Möchten Sie diese Punktestufe wirklich löschen?\nAlle zugehörigen Fragen werden ebenfalls entfernt.\n\nTipp: Drücken Sie 'Shift' um diese Nachricht zu überspringen.
 MODE,Mode:,Modus:
 MULTIPLE_CHOICE,Multiple Choice,Mehrfachauswahl
-TOURNAMENT,Tournament,Turnier
+TOURNAMENT,Tournament,Wettbewerb
 TIME,Time:,Zeit:
 TIME_TOOLTIP,Set to something other than 0 to add a time limit for the question.,Setzen Sie es auf etwas anderes als 0 um eine Zeitbegrenzung für die Frage festzulegen.
 QUESTION_TEXT,Question text:,Fragentext:
@@ -83,6 +89,11 @@ CHOOSE,Choose,Auswählen
 ANSWERS,Answers:,Antworten:
 ANSWER_PLACEHOLDER,Answer text...,Antworttext...
 EDIT_ANSWERS,Edit answers...,Antworten bearbeiten...
+MOVE,Move:,Bewegen:
+MOVE_UP,Move up,Nach oben bewegen
+MOVE_DOWN,Move down,Nach unten bewegen
+MOVE_LEFT,Move left,Nach links bewegen
+MOVE_RIGHT,Move right,Nach rechts bewegen
 SUPPORTED_IMAGE_FILES,Supported Image Files,Unterstützte Bilddateien
 SELECT_IMAGE,Select an Image,Wählen Sie ein Bild aus
 LOAD_IMAGE_ERROR_TITLE,Error loading Image,Fehler beim Laden des Bildes

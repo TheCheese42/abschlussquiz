@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://4hljjmc6pt2g"]
+[gd_scene load_steps=43 format=3 uid="uid://4hljjmc6pt2g"]
 
 [ext_resource type="Script" uid="uid://b48ff1ce8ovme" path="res://scripts/create_quiz.gd" id="1_mj7ud"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="2_3epqd"]
@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://b5s8wxyflwsqj" path="res://assets/textures/icons/see-icon.png" id="10_obxwr"]
 [ext_resource type="Texture2D" uid="uid://dwhnjmtwjacxy" path="res://assets/textures/icons/close-line-icon.png" id="11_o7jte"]
 [ext_resource type="Texture2D" uid="uid://d32xko5olfjbh" path="res://assets/textures/icons/redo-circle-outline-icon.png" id="11_obxwr"]
+[ext_resource type="LabelSettings" uid="uid://7r267pcwb314" path="res://styles/labels/label_content_24.tres" id="12_kfhrm"]
+[ext_resource type="Texture2D" uid="uid://dumfg1qrq3ne8" path="res://assets/textures/icons/select-box-arrow-left-icon.png" id="12_wu2at"]
+[ext_resource type="Texture2D" uid="uid://dp1ntiu61vy1y" path="res://assets/textures/icons/select-box-arrow-right-icon.png" id="13_kfhrm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hd6rt"]
 content_margin_left = 10.0
@@ -72,6 +75,38 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="InputEventKey" id="InputEventKey_kfhrm"]
+device = -1
+ctrl_pressed = true
+keycode = 4194319
+
+[sub_resource type="Shortcut" id="Shortcut_pee2g"]
+events = [SubResource("InputEventKey_kfhrm")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_pee2g"]
+device = -1
+ctrl_pressed = true
+keycode = 4194321
+
+[sub_resource type="Shortcut" id="Shortcut_3kmnd"]
+events = [SubResource("InputEventKey_pee2g")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_3kmnd"]
+device = -1
+ctrl_pressed = true
+keycode = 4194320
+
+[sub_resource type="Shortcut" id="Shortcut_cplfn"]
+events = [SubResource("InputEventKey_3kmnd")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ad6fb"]
+device = -1
+ctrl_pressed = true
+keycode = 4194322
+
+[sub_resource type="Shortcut" id="Shortcut_4lmdp"]
+events = [SubResource("InputEventKey_ad6fb")]
+
 [sub_resource type="InputEventKey" id="InputEventKey_hd6rt"]
 device = -1
 ctrl_pressed = true
@@ -96,6 +131,34 @@ unicode = 121
 
 [sub_resource type="Shortcut" id="Shortcut_wu2at"]
 events = [SubResource("InputEventKey_o7jte"), SubResource("InputEventKey_8lc2j")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_cplfn"]
+device = -1
+keycode = 4194319
+
+[sub_resource type="Shortcut" id="Shortcut_m33k8"]
+events = [SubResource("InputEventKey_cplfn")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4lmdp"]
+device = -1
+keycode = 4194321
+
+[sub_resource type="Shortcut" id="Shortcut_nejkp"]
+events = [SubResource("InputEventKey_4lmdp")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4e0ob"]
+device = -1
+keycode = 4194320
+
+[sub_resource type="Shortcut" id="Shortcut_3bih3"]
+events = [SubResource("InputEventKey_4e0ob")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_jm4gc"]
+device = -1
+keycode = 4194322
+
+[sub_resource type="Shortcut" id="Shortcut_8cca2"]
+events = [SubResource("InputEventKey_jm4gc")]
 
 [node name="CreateQuiz" type="CanvasLayer" groups=["events"]]
 script = ExtResource("1_mj7ud")
@@ -448,10 +511,55 @@ wrap_mode = 1
 scroll_smooth = true
 caret_blink = true
 
-[node name="EditAnswers" type="Button" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox"]
+[node name="MoveEditAnswersBox" type="VBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer"]
+layout_mode = 2
+text = "MOVE"
+label_settings = ExtResource("12_kfhrm")
+
+[node name="Control" type="Control" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer"]
+layout_mode = 2
+
+[node name="MoveLeft" type="TextureButton" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "MOVE_LEFT"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_pee2g")
+texture_normal = ExtResource("12_wu2at")
+
+[node name="MoveRight" type="TextureButton" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "MOVE_RIGHT"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_3kmnd")
+texture_normal = ExtResource("13_kfhrm")
+
+[node name="MoveUp" type="TextureButton" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "MOVE_UP
+"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_cplfn")
+texture_normal = ExtResource("7_5bj04")
+
+[node name="MoveDown" type="TextureButton" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "MOVE_DOWN"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_4lmdp")
+texture_normal = ExtResource("8_0vcbe")
+
+[node name="EditAnswers" type="Button" parent="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 6
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 24
 text = "EDIT_ANSWERS"
@@ -486,6 +594,37 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_wu2at")
 texture_normal = ExtResource("11_obxwr")
 
+[node name="InvisibleButtons" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+
+[node name="GoLeftButton" type="Button" parent="InvisibleButtons"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 14.0
+shortcut = SubResource("Shortcut_m33k8")
+
+[node name="GoRightButton" type="Button" parent="InvisibleButtons"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 20.0
+offset_bottom = 14.0
+shortcut = SubResource("Shortcut_nejkp")
+
+[node name="GoUpButton" type="Button" parent="InvisibleButtons"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 20.0
+offset_bottom = 14.0
+shortcut = SubResource("Shortcut_3bih3")
+
+[node name="GoDownButton" type="Button" parent="InvisibleButtons"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 20.0
+offset_bottom = 14.0
+shortcut = SubResource("Shortcut_8cca2")
+
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="tab_changed" from="MarginContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="text_changed" from="MarginContainer/TabContainer/GENERAL/GENERAL/HBoxContainer/QuizName" to="." method="_on_quiz_name_text_changed"]
@@ -497,6 +636,14 @@ texture_normal = ExtResource("11_obxwr")
 [connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/PicturePreviewContainer/PicturePreview" to="." method="_on_picture_preview_pressed"]
 [connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/ClearPictureContainer/ClearPicture" to="." method="_on_clear_picture_pressed"]
 [connection signal="text_changed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/TextBox/QuestionTextEdit" to="." method="_on_question_text_edit_text_changed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/EditAnswers" to="." method="_on_edit_answers_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer/MoveLeft" to="." method="_on_move_left_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer/MoveRight" to="." method="_on_move_right_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer/MoveUp" to="." method="_on_move_up_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/HBoxContainer/MoveDown" to="." method="_on_move_down_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/EditAnswers" to="." method="_on_edit_answers_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer2/UndoButton" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer2/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="InvisibleButtons/GoLeftButton" to="." method="_on_go_left_button_pressed"]
+[connection signal="pressed" from="InvisibleButtons/GoRightButton" to="." method="_on_go_right_button_pressed"]
+[connection signal="pressed" from="InvisibleButtons/GoUpButton" to="." method="_on_go_up_button_pressed"]
+[connection signal="pressed" from="InvisibleButtons/GoDownButton" to="." method="_on_go_down_button_pressed"]

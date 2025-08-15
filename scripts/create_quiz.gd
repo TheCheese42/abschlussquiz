@@ -24,8 +24,7 @@ var answer_editor_scene: PackedScene = preload("res://scenes/answers_editor.tscn
 @onready var question_text_edit: TextEdit = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/TextBox/QuestionTextEdit
 @onready var picture_preview_container: PanelContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/PicturePreviewContainer
 @onready var clear_picture_container: PanelContainer = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/GeneralBox/PictureBox/ClearPictureContainer
-@onready var edit_answers: Button = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/EditAnswers
-
+@onready var edit_answers: Button = $MarginContainer/TabContainer/QUESTIONS/QUESTIONS/VBoxContainer/ScrollContainer/QuestionsEditorBox/MoveEditAnswersBox/EditAnswers
 var edit: bool = false
 var save: QuizSave = null
 var undo_queue: Array[QuizSave] = []
@@ -463,3 +462,75 @@ func _on_edit_answers_pressed() -> void:
 
 func _on_tab_container_tab_changed(_tab: int) -> void:
 	rebuild_ui(false)
+
+
+func _on_move_left_pressed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	var cat_index: int = save.categories.find(selected_question_category)
+	if cat_index > 0:
+		var other_question: Question = save.questions[save.categories[cat_index - 1]][selected_question_stage]
+		save.questions[save.categories[cat_index - 1]][selected_question_stage] = question
+		save.questions[selected_question_category][selected_question_stage] = other_question
+		selected_question_category = save.categories[cat_index - 1]
+		rebuild_questions()
+
+
+func _on_move_right_pressed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	var cat_index: int = save.categories.find(selected_question_category)
+	if cat_index < len(save.categories) - 1:
+		var other_question: Question = save.questions[save.categories[cat_index + 1]][selected_question_stage]
+		save.questions[save.categories[cat_index + 1]][selected_question_stage] = question
+		save.questions[selected_question_category][selected_question_stage] = other_question
+		selected_question_category = save.categories[cat_index + 1]
+		rebuild_ui()
+
+
+func _on_move_up_pressed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	if selected_question_stage > 0:
+		var other_question: Question = save.questions[selected_question_category][selected_question_stage - 1]
+		save.questions[selected_question_category][selected_question_stage - 1] = question
+		save.questions[selected_question_category][selected_question_stage] = other_question
+		selected_question_stage -= 1
+		rebuild_questions()
+
+
+func _on_move_down_pressed() -> void:
+	var question: Question = save.questions[selected_question_category][selected_question_stage]
+	if selected_question_stage < len(save.point_stages) - 1:
+		var other_question: Question = save.questions[selected_question_category][selected_question_stage + 1]
+		save.questions[selected_question_category][selected_question_stage + 1] = question
+		save.questions[selected_question_category][selected_question_stage] = other_question
+		selected_question_stage += 1
+		rebuild_questions()
+
+
+func _on_go_left_button_pressed() -> void:
+	var cat_index: int = save.categories.find(selected_question_category)
+	if Input.is_action_just_pressed("left"):
+		if cat_index > 0:
+			selected_question_category = save.categories[cat_index - 1]
+			rebuild_ui()
+
+
+func _on_go_right_button_pressed() -> void:
+	var cat_index: int = save.categories.find(selected_question_category)
+	if Input.is_action_just_pressed("right"):
+		if cat_index < len(save.categories) - 1:
+			selected_question_category = save.categories[cat_index + 1]
+			rebuild_ui()
+
+
+func _on_go_up_button_pressed() -> void:
+	if Input.is_action_just_pressed("up"):
+		if selected_question_stage > 0:
+			selected_question_stage -= 1
+			rebuild_ui()
+
+
+func _on_go_down_button_pressed() -> void:
+	if Input.is_action_just_pressed("down"):
+		if selected_question_stage < len(save.point_stages) - 1:
+			selected_question_stage += 1
+			rebuild_ui()
