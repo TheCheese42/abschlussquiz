@@ -11,11 +11,9 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	var file: FileAccess
-	file = FileAccess.open("res://version.txt", FileAccess.READ)
-	var version: String = file.get_line()
-	file.close()
+	var version: String = GlobalVars.options_save.version
 	version_label.text = tr("VERSION_X").format([version])
+	var file: FileAccess
 	file = FileAccess.open("res://assets/attributions/developers.txt", FileAccess.READ)
 	var developers: PackedStringArray = file.get_as_text().split("\n", false)
 	file.close()

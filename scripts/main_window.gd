@@ -20,6 +20,7 @@ func _ready() -> void:
 	if GlobalVars.options_save.first_launch:
 		# Import demo quiz files. See res://assets/demo/info.txt
 		GlobalVars.options_save.first_launch = false
+		GlobalFunctions.save_options()
 		if not GlobalVars.quiz_saves.quiz_saves:
 			var demo: QuizSaves = load("res://assets/demo/demo.tres")
 			if demo:

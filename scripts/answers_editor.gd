@@ -82,7 +82,7 @@ func open_image(path: String, answer: Answer) -> void:
 		add_child(dialog)
 		dialog.show()
 	answer.save_image(image)
-	rebuild_ui()
+	rebuild_ui() 
 
 
 func show_preview(image: ImageTexture) -> void:

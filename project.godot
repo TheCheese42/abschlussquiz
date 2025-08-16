@@ -11,13 +11,21 @@ config_version=5
 [application]
 
 config/name="Abschlussquiz"
+config/name_localized={
+"de": "Abschlussquiz",
+"en": "Final Quiz"
+}
+config/version="1.0.0"
 run/main_scene="uid://ppxc5dtytj0o"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=30
 run/low_processor_mode=true
-config/icon="uid://cf2m5lmnv2m4q"
-config/macos_native_icon="uid://cf2m5lmnv2m4q"
-config/windows_native_icon="uid://cf2m5lmnv2m4q"
+boot_splash/bg_color=Color(0.95, 0.95, 0.95, 1)
+boot_splash/show_image=false
+config/icon="uid://djo3rqbunsk0q"
+config/macos_native_icon="uid://djo3rqbunsk0q"
+config/windows_native_icon="uid://djo3rqbunsk0q"
 
 [autoload]
 
@@ -85,6 +93,7 @@ pointing/android/enable_long_press_as_right_click=true
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/langs/text.en.translation", "res://assets/langs/text.de.translation")
+locale/locale_filter_mode=0
 
 [rendering]
 
