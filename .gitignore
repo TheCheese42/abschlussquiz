@@ -3,3 +3,7 @@
 /android/
 export/
 addons/
+
+# WiX Toolset
+obj/
+bin/
