@@ -20,12 +20,6 @@ def main() -> None:
     )
 
     parser.add_argument(
-        "package",
-        action="store",
-        help="Path to the python package whose version should be bumped.",
-    )
-
-    parser.add_argument(
         "-v",
         "--version",
         action="version",

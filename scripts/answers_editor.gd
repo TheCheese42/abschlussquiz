@@ -68,9 +68,7 @@ func select_picture(answer: Answer) -> void:
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(func(path: String) -> void: open_image(path, answer))
 	dialog.visible = true
-	add_child(dialog)
 	dialog.popup_centered_ratio()
-	dialog.show()
 
 
 func open_image(path: String, answer: Answer) -> void:

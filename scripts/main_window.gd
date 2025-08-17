@@ -187,9 +187,7 @@ func _on_export_button_pressed() -> void:
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(func(path: String) -> void: export_quiz(quiz, path))
 	dialog.visible = true
-	add_child(dialog)
 	dialog.popup_centered_ratio()
-	dialog.show()
 
 
 func export_quiz(quiz: QuizSave, path: String) -> void:
@@ -256,18 +254,15 @@ func _on_import_button_pressed() -> void:
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(import_quiz)
 	dialog.visible = true
-	add_child(dialog)
 	dialog.popup_centered_ratio()
-	dialog.show()
 
 
 func import_quiz(path: String) -> void:
 	DirAccess.make_dir_absolute("user://import/")
 	var error: Error = DirAccess.copy_absolute(path, "user://import/import.tres")
 	var quiz_standalone: QuizSaveStandalone = load("user://import/import.tres")
-	var quiz: QuizSave = quiz_standalone.load_to_quiz_save()
 	var _err: Error = DirAccess.remove_absolute("user://import/import.tres")
-	if error != OK or not is_instance_of(quiz, QuizSave):
+	if error != OK or not is_instance_of(quiz_standalone, QuizSaveStandalone):
 		var dialog: BetterAcceptDialog = accept_dialog_scene.instantiate()
 		dialog.title_text = tr("IMPORT_QUIZ_ERROR_TITLE")
 		dialog.content_text = tr("IMPORT_QUIZ_ERROR_CONTENT")
@@ -275,6 +270,7 @@ func import_quiz(path: String) -> void:
 		add_child(dialog)
 		dialog.show()
 		return
+	var quiz: QuizSave = quiz_standalone.load_to_quiz_save()
 	GlobalVars.quiz_saves.quiz_saves.append(quiz)
 	GlobalFunctions.save_quiz_saves()
 	rebuild_ui()
@@ -303,9 +299,7 @@ func _on_restore_button_pressed() -> void:
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(import_quiz)
 	dialog.visible = true
-	add_child(dialog)
 	dialog.popup_centered_ratio()
-	dialog.show()
 
 
 func _on_help_button_pressed() -> void:

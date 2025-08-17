@@ -21,6 +21,9 @@ func _ready() -> void:
 	_backup_semaphore = Semaphore.new()
 	_backup_thread.start(_backup_saver, Thread.PRIORITY_LOW)
 
+	if OS.get_name() == "Android":
+		OS.request_permissions()
+
 
 func _quiz_saver() -> void:
 	while true:

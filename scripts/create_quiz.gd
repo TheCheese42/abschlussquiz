@@ -399,9 +399,7 @@ func _on_picture_button_pressed() -> void:
 	dialog.use_native_dialog = true
 	dialog.file_selected.connect(open_image)
 	dialog.visible = true
-	add_child(dialog)
 	dialog.popup_centered_ratio()
-	dialog.show()
 
 
 func open_image(path: String) -> void:
