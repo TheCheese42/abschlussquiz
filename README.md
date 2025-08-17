@@ -1,4 +1,4 @@
-# Abschlussquiz/The Final Quiz
+# Abschlussquiz
 
 Visit the store page, including downloads, at <https://thecheeseknife.itch.io/abschlussquiz>.
 
@@ -10,14 +10,6 @@ Create quizzes made up of multiple-choice and tournament questions. Questions ar
 
 ## Screenshots
 
-### Main Menu
-
-![Main Menu](./marketing/screenshots/main_menu.png)
-
-### Quiz Editor
-
-![Quiz Editor](./marketing/screenshots/edit_quiz.png)
-
-### Play Quiz
-
-![Play Quiz](./marketing/screenshots/play_quiz.png)
+Main Menu | Quiz Editor | Play Quiz
+-|-|-
+![Main Menu](./marketing/screenshots/main_menu.png) | ![Quiz Editor](./marketing/screenshots/edit_quiz.png) | ![Play Quiz](./marketing/screenshots/play_quiz.png)
