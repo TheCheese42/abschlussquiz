@@ -2,7 +2,7 @@
 
 Visit the store page, including downloads, at <https://thecheeseknife.itch.io/abschlussquiz>.
 
-In this turn-based quiz applications, teams have to battle for the highest amount of points.
+In this turn-based quiz application, teams have to battle for the highest amount of points.
 
 Create quizzes made up of multiple-choice and tournament questions. Questions are separated into categories and point stages. The more points, the harder the questions! A manual can be found within the main menu at the bottom left corner.
 
