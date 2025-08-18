@@ -502,7 +502,7 @@ size_flags_vertical = 10
 mouse_default_cursor_shape = 2
 text = "CREATE_QUIZ"
 
-[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/PlayButton" to="." method="play_quiz"]
 [connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/FavoriteButton" to="." method="_on_favorite_button_pressed"]
 [connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]
 [connection signal="pressed" from="QuizOptionsLayer/QuizOptionsPanel/VBoxContainer/DuplicateButton" to="." method="_on_duplicate_button_pressed"]

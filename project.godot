@@ -15,7 +15,7 @@ config/name_localized={
 "de": "Abschlussquiz",
 "en": "Final Quiz"
 }
-config/version="1.0.1"
+config/version="1.1.0"
 run/main_scene="uid://ppxc5dtytj0o"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "Forward Plus")
@@ -23,9 +23,9 @@ run/max_fps=30
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.95, 0.95, 0.95, 1)
 boot_splash/show_image=false
-config/icon="uid://djo3rqbunsk0q"
-config/macos_native_icon="uid://djo3rqbunsk0q"
-config/windows_native_icon="uid://djo3rqbunsk0q"
+config/icon="uid://b27dlve6a8mws"
+config/macos_native_icon="uid://b27dlve6a8mws"
+config/windows_native_icon="uid://b27dlve6a8mws"
 
 [autoload]
 

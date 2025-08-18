@@ -5,6 +5,7 @@ signal completed(correct: bool, team: String, points: int)  # (false, "", 0) if 
 signal canceled
 
 var confetti_scene: PackedScene = preload("res://scenes/confetti.tscn")
+var picture_preview_scene: PackedScene = preload("res://scenes/picture_preview.tscn")
 
 @onready var progress_bar: ProgressBar = $ColorRect/ProgressBar
 @onready var panel_container: PanelContainer = $ColorRect/PanelContainer
@@ -156,6 +157,7 @@ func start_show() -> void:
 			panel_vbox.add_child(question_text)
 		if image_texture:
 			var image: TextureRect = TextureRect.new()
+			image.gui_input.connect(show_preview.bind(image_texture))
 			image.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
 			image.texture = image_texture
 			image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
@@ -411,6 +413,16 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			active_team = ""
 		emit_signal("completed", was_correct, active_team, _points)
 		queue_free()
+
+
+func show_preview(event: InputEvent, texture: ImageTexture) -> void:
+	if event.is_action_released("click"):
+		if texture:
+			var preview: PicturePreview = picture_preview_scene.instantiate()
+			preview.texture = texture
+			preview.margin_sides = 100
+			preview.margin_top_bottom = 80
+			add_child(preview)
 
 
 func _input(_event: InputEvent) -> void:

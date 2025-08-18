@@ -71,6 +71,7 @@ func rebuild_ui() -> void:
 
 	for quiz_save: QuizSave in GlobalVars.quiz_saves.quiz_saves:
 		var save_panel: PanelContainer = quiz_panel.duplicate()
+		save_panel.gui_input.connect(quiz_panel_input.bind(quiz_save))
 		save_panel.visible = true
 		var title: Label = save_panel.find_child("Title", true, false)
 		title.text = quiz_save.name
@@ -84,6 +85,13 @@ func rebuild_ui() -> void:
 			favorites_h_box.add_child(save_panel)
 		else:
 			all_h_box.add_child(save_panel)
+
+
+func quiz_panel_input(event: InputEvent, quiz: QuizSave) -> void:
+	if is_instance_of(event, InputEventMouseButton):
+		var mouse_event: InputEventMouseButton = event
+		if mouse_event.is_action("click") and mouse_event.double_click:
+			play_quiz(quiz)
 
 
 func open_actions_panel(quiz_save: QuizSave, save_panel: PanelContainer) -> void:
@@ -117,10 +125,11 @@ func _on_quit_pressed() -> void:
 	get_tree().quit(0)
 
 
-func _on_play_button_pressed() -> void:
-	if options_panel_active_for == null:
-		return
-	var quiz: QuizSave = options_panel_active_for
+func play_quiz(quiz: QuizSave = null) -> void:
+	if not quiz:
+		if options_panel_active_for == null:
+			return
+		quiz = options_panel_active_for
 	options_panel_active_for = null
 	quiz_options_layer.visible = false
 	var play_menu: PlayMenu = play_menu_scene.instantiate()
