@@ -18,6 +18,7 @@ var is_done: bool = false  # Prevent double emitting
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	_title.text = title_text
 	_content.text = content_text
 	_ok_button.text = ok_button_text

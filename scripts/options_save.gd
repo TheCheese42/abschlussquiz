@@ -4,6 +4,8 @@ class_name OptionsSave
 
 @export var first_launch: bool = true
 @export var language: String = OS.get_locale_language()
+@export var theme: Theme = load("res://styles/themes/light.tres")
+@export var default_font: Font = load("res://assets/fonts/Simply the Best/KGSimplytheBest.otf")
 @export var keep_screen_on: bool = true
 @export var window_mode: DisplayServer.WindowMode = DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED
 @export var window_size: Vector2i = Vector2i(800, 840)

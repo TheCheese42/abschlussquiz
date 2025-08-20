@@ -11,6 +11,12 @@ HEADER,The Final Quiz,Das Große Abschlussquiz
 OPTIONS,Options,Optionen
 OPTIONS_TIP,Tip: Hover over a label to find out more.,"Tipp: Fahren Sie mit der Maus über einen Eintrag, um mehr herauszufinden."
 LANGUAGE,Language,Sprache
+FONT,Font,Schriftart
+SYSTEM_SANS_SERIF,System: Sans-Serif,System: Serifenfrei
+SYSTEM_SERIF,System: Serif,System: Serifen
+SYSTEM_MONOSPACE,System: Monospace,System: Monospace
+SYSTEM_CURSIVE,System: Cursive,System: Kursiv
+SYSTEM_FANTASY,System: Fantasy,System: Fantasie
 WINDOW_MODE,Window mode:,Fenstermodus:
 WINDOW_MODE_TOOLTIP,Tip: Press F11 to toggle fullscreen.,Tipp: Benutzen Sie F11 um den Vollbildmodus umzuschalten.
 FULLSCREEN,Fullscreen,Vollbild
@@ -114,7 +120,7 @@ SHOW_QUESTIONS_TOOLTIP,"Show the question texts on the screen.\nOtherwise, they 
 SHOW_ANSWERS,Show answers,Antworten anzeigen
 SHOW_ANSWERS_TOOLTIP,"Show the possible answers on the screen.\nOtherwise, they need to be read aloud by a presenter.\nAfter that, you can select whether it was answered correctly.","Zeige die Antwortmöglichkeiten auf dem Bildschirm an.\nAnsonsten müssen sie von einem Moderator vorgelesen werden.\nDanach können Sie auswählen, ob richtig geantwortet wurde."
 PASS_QUESTIONS,Pass questions,Fragen weitergeben
-POINTS_MULTIPLIER,Points multiplier:,Punktemultiplikator:.
+POINTS_MULTIPLIER,Points multiplier:,Punktemultiplikator:
 PASS_QUESTIONS_TOOLTIP,"If a question was answered incorrectly, the next\nteam can try it for a portion of the points.","Wenn eine Frage falsch beantwortet wird, kann das nächste\nTeam sie für einen Teil der Punkte ebenfalls versuchen."
 CONFIRM_BEFORE_QUESTION,Confirm before question,Vor Frage bestätigen
 CONFIRM_BEFORE_QUESTION_TOOLTIP,"Before showing the actual question, the user has to press a button.",Bevor die Frage gezeigt wird muss der Nutzer einen Knopf drücken.

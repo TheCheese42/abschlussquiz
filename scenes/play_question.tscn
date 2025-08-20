@@ -112,4 +112,10 @@ theme_override_styles/background = SubResource("StyleBoxFlat_iakm2")
 theme_override_styles/fill = SubResource("StyleBoxFlat_o6uxe")
 show_percentage = false
 
+[node name="Answers" type="Control" parent="."]
+editor_description = "Used to avoid adding FlowContainers directly to the scene root, which causes the theme to not be applied to them."
+layout_mode = 3
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="ColorRect/MarginContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

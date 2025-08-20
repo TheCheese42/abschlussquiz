@@ -48,6 +48,9 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
+	GlobalFunctions.apply_theme_for_children(manual_editor)
+	GlobalFunctions.apply_theme_for_children(options_layer)
 	if len(_teams) > len(_quiz.categories) * len(_quiz.point_stages):
 		var dialog: BetterAcceptDialog = accept_dialog_scene.instantiate()
 		dialog.title_text = tr("NICE_TRY")

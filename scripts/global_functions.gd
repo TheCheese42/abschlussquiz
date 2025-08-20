@@ -126,3 +126,12 @@ func apply_options() -> void:
 	DisplayServer.window_set_mode(GlobalVars.options_save.window_mode)
 	TranslationServer.set_locale(GlobalVars.options_save.language)
 	ProjectSettings.set_setting("display/window/energy_saving/keep_screen_on", GlobalVars.options_save.keep_screen_on)
+	GlobalVars.options_save.theme.set_font("font", "Control", GlobalVars.options_save.default_font)
+	GlobalVars.options_save.theme.set_font("font", "PopupMenu", GlobalVars.options_save.default_font)
+
+
+func apply_theme_for_children(parent: Node) -> void:
+	for child: Node in parent.get_children():
+		if is_instance_of(child, Control):
+			var control: Control = child
+			control.theme = GlobalVars.options_save.theme

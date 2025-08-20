@@ -1,8 +1,5 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://who7h76ycpko"]
-
-[ext_resource type="FontFile" uid="uid://bitequibce137" path="res://assets/fonts/Simply the Best/KGSimplytheBest.otf" id="1_lykcm"]
+[gd_resource type="LabelSettings" format=3 uid="uid://who7h76ycpko"]
 
 [resource]
-font = ExtResource("1_lykcm")
 font_size = 40
 font_color = Color(0, 0, 0, 1)

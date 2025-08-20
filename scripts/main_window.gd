@@ -17,6 +17,8 @@ var options_panel_active_for: QuizSave = null
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
+	GlobalFunctions.apply_theme_for_children(quiz_options_layer)
 	if GlobalVars.options_save.first_launch:
 		# Import demo quiz files. See res://assets/demo/info.txt
 		GlobalVars.options_save.first_launch = false

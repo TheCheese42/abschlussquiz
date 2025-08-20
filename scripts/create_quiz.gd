@@ -39,6 +39,7 @@ var question_panels: Dictionary[String, Array] = {}
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	if GlobalVars.next_save_to_be_edited:
 		save = GlobalVars.next_save_to_be_edited
 		GlobalVars.next_save_to_be_edited = null

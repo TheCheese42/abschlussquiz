@@ -1,5 +1,9 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://cv4lfcsjs8r7k"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cv4lfcsjs8r7k"]
+
+[sub_resource type="SystemFont" id="SystemFont_snxc8"]
+font_names = PackedStringArray("Sans-Serif")
 
 [resource]
+font = SubResource("SystemFont_snxc8")
 font_size = 12
 font_color = Color(0, 0, 0, 1)

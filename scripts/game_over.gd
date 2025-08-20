@@ -17,6 +17,7 @@ func init(teams_points: Dictionary[String, int]) -> void:
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	start_show()
 
 

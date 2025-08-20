@@ -2,6 +2,10 @@ extends CanvasLayer
 class_name HelpDialog
 
 
+func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
+
+
 func _on_back_button_pressed() -> void:
 	queue_free()
 

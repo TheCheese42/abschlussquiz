@@ -18,6 +18,7 @@ func init(answers: Array[Answer]) -> void:
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	rebuild_ui()
 
 

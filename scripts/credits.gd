@@ -11,6 +11,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	var version: String = GlobalVars.options_save.version
 	version_label.text = tr("VERSION_X").format([version])
 	var file: FileAccess

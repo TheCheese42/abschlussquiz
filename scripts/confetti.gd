@@ -7,6 +7,7 @@ class_name Confetti
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	gpu_particles_2d.position = position
 	gpu_particles_2d.one_shot = true
 

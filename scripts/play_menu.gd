@@ -27,6 +27,7 @@ var _num_questions: int
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	update_teams(roundi(teams_spin.value))
 
 

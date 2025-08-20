@@ -13,6 +13,7 @@ var picture_preview_scene: PackedScene = preload("res://scenes/picture_preview.t
 @onready var panel_vbox: VBoxContainer = $ColorRect/PanelContainer/MarginContainer/VBoxContainer
 @onready var cancel_button: Button = $ColorRect/MarginContainer/CancelButton
 @onready var color_rect: ColorRect = $ColorRect
+@onready var answers_node: Control = $Answers
 
 var _question: Question
 var _category: String
@@ -26,6 +27,8 @@ var _pass_multiplier: float
 var _confirm_before_question: bool
 var _all_teams: Array[String]
 var _is_pass_run: bool = false
+var _answers_animation_finished: bool = false
+var _grey_answers: Array[Answer] = []
 
 
 func init(
@@ -55,6 +58,7 @@ func init(
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	start_show()
 
 
@@ -203,9 +207,19 @@ func start_show() -> void:
 					var team_answer: Answer = Answer.new()
 					team_answer.text = team
 					answer_list.append(team_answer)
+		_answers_animation_finished = false
 		for answer: Answer in answer_list:
 			var answer_panel: PanelContainer = PanelContainer.new()
-			answer_panel.gui_input.connect(answer_clicked.bind(answer, flow))
+			if answer in _grey_answers:
+				var answer_stylebox: StyleBoxFlat = GlobalVars.options_save.theme.get_stylebox(
+					"panel", "PanelContainer").duplicate(true)
+				answer_stylebox.bg_color = Color(0.5, 0.5, 0.5, 1.0)
+				answer_panel.add_theme_stylebox_override("panel", answer_stylebox)
+			else:
+				answer_panel.gui_input.connect(
+					func(event: InputEvent) -> void: if _answers_animation_finished:
+						answer_clicked(event, answer, flow)
+				)
 			var answer_label: Label = null
 			if answer.text:
 				answer_label = Label.new()
@@ -233,7 +247,7 @@ func start_show() -> void:
 				answer_vbox.add_child(answer_label)
 			answer_panel.add_child(answer_vbox)
 			flow.add_child(answer_panel)
-		add_child(flow)
+		answers_node.add_child(flow)
 		flow.modulate.a = 0.0
 		if not image_texture:
 			flow.size.x = panel_container.size.x
@@ -287,6 +301,7 @@ func start_show() -> void:
 		answers_tween.set_ease(Tween.EASE_IN_OUT)
 		answers_tween.tween_property(flow, "modulate", Color.WHITE, 0.4)
 		await answers_tween.finished
+		_answers_animation_finished = true
 		if time_bar_tween:
 			await get_tree().create_timer(0.5).timeout
 			time_bar_tween.play()
@@ -343,6 +358,8 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			states.assign(tr("WRONG_STATES").split(":", false))
 			states.shuffle()
 			state_label.text = states[0]
+			if _question.answers and _show_answers:
+				_grey_answers.append(answer)
 			if _pass_questions:
 				sub_label.text = tr("WRONG_SUB_PASSING").format([_pass_team])
 				if _confirm_before_question:

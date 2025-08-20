@@ -11,6 +11,7 @@ var texture: Texture = null
 
 
 func _ready() -> void:
+	GlobalFunctions.apply_theme_for_children(self)
 	set_picture(texture)
 	margin_container.add_theme_constant_override("margin_bottom", margin_top_bottom)
 	margin_container.add_theme_constant_override("margin_top", margin_top_bottom)
