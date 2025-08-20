@@ -190,6 +190,40 @@ theme_override_font_sizes/font_size = 24
 button_pressed = true
 text = "CONFIRM_BEFORE_QUESTION"
 
+[node name="5050JokersBox" type="HBoxContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control2" type="Control" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/5050JokersBox"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/5050JokersBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "50_50_JOKERS_TOOLTIP"
+mouse_filter = 0
+text = "50_50_JOKERS"
+label_settings = ExtResource("2_ixut7")
+
+[node name="Control" type="Control" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/5050JokersBox"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="5050JokersSpin" type="SpinBox" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/5050JokersBox/Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -2.0
+offset_right = 136.0
+offset_bottom = 40.0
+scale = Vector2(0.66, 0.66)
+mouse_default_cursor_shape = 2
+value = 1.0
+rounded = true
+allow_greater = true
+update_on_text_changed = true
+
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -218,5 +252,6 @@ theme_override_font_sizes/font_size = 24
 text = "START"
 
 [connection signal="value_changed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/TeamsSpin/Control/TeamsSpin" to="." method="_on_teams_spin_value_changed"]
+[connection signal="value_changed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/5050JokersBox/Control/5050JokersSpin" to="." method="_on_jokers_spin_value_changed"]
 [connection signal="pressed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ColorRect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

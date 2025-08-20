@@ -124,6 +124,8 @@ POINTS_MULTIPLIER,Points multiplier:,Punktemultiplikator:
 PASS_QUESTIONS_TOOLTIP,"If a question was answered incorrectly, the next\nteam can try it for a portion of the points.","Wenn eine Frage falsch beantwortet wird, kann das nächste\nTeam sie für einen Teil der Punkte ebenfalls versuchen."
 CONFIRM_BEFORE_QUESTION,Confirm before question,Vor Frage bestätigen
 CONFIRM_BEFORE_QUESTION_TOOLTIP,"Before showing the actual question, the user has to press a button.",Bevor die Frage gezeigt wird muss der Nutzer einen Knopf drücken.
+50_50_JOKERS,50-50 jokers per team:,50-50 Joker pro Team:
+50_50_JOKERS_TOOLTIP,Each team gets this amount of 50-50 jokers. Using those will eliminate all answers but two.\nOnly available for multiple choice questions with answers if “Show answers” is enabled.,"Jedes Team bekommt diese Anzahl an 50-50 Jokern. Werden diese benutzt, werden alle Antwortmöglichkeiten bis auf 2 eliminiert.\nNur verfügbar für Mehrfachauswahl Fragen mit Antworten, wenn „Antworten anzeigen” eingeschaltet ist."
 TEAM_X_COLON,Team {0}:,Team {0}:
 TEAM_X,Team {0},Team {0}
 GENERATE,Generate,Generieren
@@ -134,6 +136,7 @@ EMPTY_TEAM_NAMES_CONTENT,"Not all teams have names, please add them.","Nicht all
 DUPLICATE_TEAM_NAMES_TITLE,Duplicate Team Names,Doppelte Teamnamen
 DUPLICATE_TEAM_NAMES_CONTENT,Some teams have the same name.\nPlease give every team a different name.,Manche Teams haben den gleichen Namen.\nBitte geben Sie jedem Team einen anderen Namen.
 ### PLAY QUIZ ###,,
+50_50_JOKER_X,50-50 Joker ({0}),50-50 Joker ({0})
 NICE_TRY,Nice try...,Netter Versuch...
 MORE_TEAMS_THAN_QUESTIONS,You have selected more teams than questions.\nDon't tell that was an accident!,"Sie haben mehr Teams als Fragen ausgewählt.\nErzählen Sie mir nicht, dass das ein Versehen\n gewesen sein soll!"
 STOP_QUIZ,End Quiz,Quiz Beenden

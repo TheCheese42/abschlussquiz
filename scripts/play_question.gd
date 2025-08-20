@@ -14,6 +14,7 @@ var picture_preview_scene: PackedScene = preload("res://scenes/picture_preview.t
 @onready var cancel_button: Button = $ColorRect/MarginContainer/CancelButton
 @onready var color_rect: ColorRect = $ColorRect
 @onready var answers_node: Control = $Answers
+@onready var _5050_joker_button: Button = $"ColorRect/MarginContainer2/5050JokerButton"
 
 var _question: Question
 var _category: String
@@ -25,9 +26,11 @@ var _pass_questions: bool
 var _pass_team: String
 var _pass_multiplier: float
 var _confirm_before_question: bool
+var _5050_jokers_per_team: Dictionary[String, int] = {}
 var _all_teams: Array[String]
 var _is_pass_run: bool = false
 var _answers_animation_finished: bool = false
+var _answers_panels: Dictionary[Answer, PanelContainer] = {}
 var _grey_answers: Array[Answer] = []
 
 
@@ -42,6 +45,7 @@ func init(
 	pass_team: String,
 	pass_multiplier: float,
 	confirm_before_question: bool,
+	__5050_jokers_per_team: Dictionary[String, int],
 	all_teams: Array[String],
 ) -> void:
 	_question = question
@@ -54,8 +58,8 @@ func init(
 	_pass_team = pass_team
 	_pass_multiplier = pass_multiplier
 	_confirm_before_question = confirm_before_question
+	_5050_jokers_per_team = __5050_jokers_per_team
 	_all_teams = all_teams
-
 
 func _ready() -> void:
 	GlobalFunctions.apply_theme_for_children(self)
@@ -63,6 +67,19 @@ func _ready() -> void:
 
 
 func start_show() -> void:
+	var _5050_jokers_for_team: int = _5050_jokers_per_team[_team]
+	if (
+		_show_answers
+		and _question.type == Question.QuestionType.MultipleChoice
+		and _question.answers
+		and _5050_jokers_for_team > 0
+	):
+		_5050_joker_button.text = tr("50_50_JOKER_X").format([_5050_jokers_for_team])
+		_5050_joker_button.visible = true
+		_5050_joker_button.disabled = false
+	else:
+		_5050_joker_button.visible = false
+		_5050_joker_button.disabled = true
 	panel_container.scale = Vector2.ZERO
 	progress_bar.value = 0.0
 	var header: Label = panel_container.find_child("Header", true, false)
@@ -247,6 +264,7 @@ func start_show() -> void:
 				answer_vbox.add_child(answer_label)
 			answer_panel.add_child(answer_vbox)
 			flow.add_child(answer_panel)
+			_answers_panels[answer] = answer_panel
 		answers_node.add_child(flow)
 		flow.modulate.a = 0.0
 		if not image_texture:
@@ -310,6 +328,7 @@ func start_show() -> void:
 func answer_clicked(event: InputEvent, answer: Answer, answers_container: Container) -> void:
 	if not event.is_action_pressed("click"):
 		return
+	_answers_animation_finished = false
 	for child: Control in answers_container.get_children():
 		child.set_block_signals(true)
 	cancel_button.visible = false
@@ -456,3 +475,26 @@ func quit() -> void:
 	emit_signal("canceled")
 	get_parent().remove_child(self)  # Quit as soon as possible to avoid spoiler
 	queue_free()
+
+
+func _on_joker_button_pressed() -> void:
+	if _answers_animation_finished:
+		_5050_joker_button.disabled = true
+		_5050_joker_button.visible = false
+		_5050_jokers_per_team[_team] -= 1
+		var leftover_answers: Array[Answer] = _answers_panels.keys().duplicate()
+		for answer: Answer in _answers_panels:
+			if answer.is_correct:
+				leftover_answers.erase(answer)
+		while len(leftover_answers) > 1:
+			var answer: Answer = leftover_answers.pick_random()
+			leftover_answers.erase(answer)
+			var panel: PanelContainer = _answers_panels[answer]
+			_grey_answers.append(answer)
+			var answer_stylebox: StyleBoxFlat = GlobalVars.options_save.theme.get_stylebox(
+				"panel", "PanelContainer").duplicate(true)
+			answer_stylebox.bg_color = Color(0.5, 0.5, 0.5, 1.0)
+			panel.add_theme_stylebox_override("panel", answer_stylebox)
+			for conn: Dictionary in panel.gui_input.get_connections():
+				var callable: Callable = conn["callable"]
+				panel.gui_input.disconnect(callable)

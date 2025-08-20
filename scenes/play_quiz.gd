@@ -22,11 +22,13 @@ var _show_answers: bool
 var _pass_questions: bool
 var _pass_points_multiplier: float
 var _confirm_before_question: bool
+var _5050_jokers: int
 var _quiz: QuizSave
 
 var _teams_points: Dictionary[String, int]
 var _team_turn_queue: Array[String]
 var _teams_boxes: Dictionary[String, HBoxContainer]
+var _5050_jokers_per_team: Dictionary[String, int] = {}
 
 
 func _init() -> void:
@@ -36,6 +38,7 @@ func _init() -> void:
 	_pass_questions = GlobalVars.next_play_data["pass_questions"]
 	_pass_points_multiplier = GlobalVars.next_play_data["pass_points_multiplier"]
 	_confirm_before_question = GlobalVars.next_play_data["confirm_before_question"]
+	_5050_jokers = GlobalVars.next_play_data["5050_jokers"]
 	_quiz = GlobalVars.next_play_data["quiz"]
 	GlobalVars.next_play_data.clear()
 	var num_questions: int = len(_quiz.categories) * len(_quiz.point_stages)
@@ -45,6 +48,7 @@ func _init() -> void:
 	_team_turn_queue.reverse()
 	for team: String in _teams:
 		_teams_points[team] = 0
+		_5050_jokers_per_team[team] = _5050_jokers
 
 
 func _ready() -> void:
@@ -224,11 +228,12 @@ func question_selected(event: InputEvent, category: String, stage_idx: int, pane
 				_quiz.point_stages[stage_idx],
 				next_team,
 				_show_questions,
-				_show_questions,
+				_show_answers,
 				_pass_questions,
 				pass_team,
 				_pass_points_multiplier,
 				_confirm_before_question,
+				_5050_jokers_per_team,
 				_teams,
 			)
 			add_child(play_question)

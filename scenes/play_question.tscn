@@ -99,6 +99,35 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_wksyo")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_uq1hu")
 text = "CANCEL"
 
+[node name="MarginContainer2" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="5050JokerButton" type="Button" parent="ColorRect/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8646751, 0.86467516, 0.8646751, 1)
+theme_override_colors/font_focus_color = Color(0.8627451, 0.8627451, 0.8627451, 1)
+theme_override_colors/font_pressed_color = Color(0.5890956, 0.5890956, 0.5890956, 1)
+theme_override_colors/font_hover_color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0.5882353, 0.5882353, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iakm2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_o38n8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o6uxe")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l81w1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wksyo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uq1hu")
+text = "50_50_JOKER_X"
+
 [node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
@@ -119,3 +148,4 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="pressed" from="ColorRect/MarginContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer2/5050JokerButton" to="." method="_on_joker_button_pressed"]

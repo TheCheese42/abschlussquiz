@@ -8,6 +8,7 @@ signal start_pressed(
 	pass_questions: bool,
 	pass_points_multiplier: float,
 	confirm_before_question: bool,
+	_5050_jokers: int,
 )
 signal canceled
 
@@ -22,6 +23,7 @@ var accept_dialog_scene: PackedScene = preload("res://scenes/better_accept_dialo
 @onready var pass_questions_check: CheckBox = $ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/PassQuestionsCheck
 @onready var pass_multiplier_spin: SpinBox = $ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/PassPercentBox/Control/PassMultiplierSpin
 @onready var confirm_check: CheckBox = $ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/ConfirmCheck
+@onready var _5050_jokers_spin: SpinBox = $"ColorRect/PanelContainer/MarginContainer/VBoxContainer/SetupHBox/OptionsBox/5050JokersBox/Control/5050JokersSpin"
 
 var _num_questions: int
 
@@ -129,5 +131,6 @@ func emit_start() -> void:
 		pass_questions_check.button_pressed if len(team_names) > 1 else false,
 		pass_multiplier_spin.value,
 		confirm_check.button_pressed,
+		_5050_jokers_spin.value,
 	)
 	queue_free()

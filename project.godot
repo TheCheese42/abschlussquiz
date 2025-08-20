@@ -58,6 +58,11 @@ enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 events=""
 
+[gui]
+
+theme/custom="uid://cr3fth58p14i3"
+theme/custom_font="uid://bitequibce137"
+
 [input]
 
 fullscreen={

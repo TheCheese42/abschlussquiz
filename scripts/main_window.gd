@@ -147,6 +147,7 @@ func start_quiz(
 	pass_questions: bool,
 	pass_points_multiplier: float,
 	confirm_before_question: bool,
+	_5050_jokers: int,
 	quiz: QuizSave,
 ) -> void:
 	GlobalVars.next_play_data = {
@@ -156,6 +157,7 @@ func start_quiz(
 		"pass_questions": pass_questions,
 		"pass_points_multiplier": pass_points_multiplier,
 		"confirm_before_question": confirm_before_question,
+		"5050_jokers": _5050_jokers,
 		"quiz": quiz,
 	}
 	get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
