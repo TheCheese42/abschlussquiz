@@ -51,6 +51,7 @@ func _ready() -> void:
 	save.update_questions()
 	rebuild_ui()
 	await get_tree().create_timer(0.0).timeout
+	tab_container.add_theme_constant_override("side_margin", roundi(title.size.x) + 160)
 	rebuild_ui()
 
 

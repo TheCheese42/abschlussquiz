@@ -1,8 +1,7 @@
-[gd_scene load_steps=43 format=3 uid="uid://4hljjmc6pt2g"]
+[gd_scene load_steps=42 format=3 uid="uid://4hljjmc6pt2g"]
 
 [ext_resource type="Script" uid="uid://b48ff1ce8ovme" path="res://scripts/create_quiz.gd" id="1_mj7ud"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="2_3epqd"]
-[ext_resource type="FontFile" uid="uid://bitequibce137" path="res://assets/fonts/Simply the Best/KGSimplytheBest.otf" id="3_3b5p7"]
 [ext_resource type="LabelSettings" uid="uid://dt6e1w8og3low" path="res://styles/labels/label_content_32.tres" id="4_3epqd"]
 [ext_resource type="Texture2D" uid="uid://b4cq06hcb7fat" path="res://assets/textures/icons/plus-line-icon.png" id="5_3b5p7"]
 [ext_resource type="Texture2D" uid="uid://jc0oxlhfgu61" path="res://assets/textures/icons/close-square-line-icon.png" id="5_6ct6t"]
@@ -316,7 +315,6 @@ label_settings = ExtResource("4_3epqd")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_3b5p7")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_3epqd")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3b5p7")
