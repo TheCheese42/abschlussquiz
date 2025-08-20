@@ -4,7 +4,7 @@ godotengine --headless --export-release "Linux arm64" "export/abschlussquiz-linu
 godotengine --headless --export-release "Windows Desktop x86_64" "export/abschlussquiz-windows-x86_64-portable.exe"
 godotengine --headless --export-release "Windows Desktop x86_32" "export/abschlussquiz-windows-x86_32-portable.exe"
 godotengine --headless --export-release "Windows Desktop arm64" "export/abschlussquiz-windows-arm64-portable.exe"
-godotengine --headless --export-release "Android armeabi-v7a" "export/abschlussquiz-android.apk"
+godotengine --headless --export-release "Android armeabi-v7a-arm64-v8a" "export/abschlussquiz-android.apk"
 
 cd wix/x86_64
 ./build-installer.sh

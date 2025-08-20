@@ -330,3 +330,19 @@ func _on_manual_edit_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	manual_editor.visible = false
+
+
+func _on_cancel_quiz_button_pressed() -> void:
+	if not Input.is_action_pressed("confirm"):
+		var dialog: BetterConfirmationDialog = confirmation_dialog_scene.instantiate()
+		dialog.title_text = tr("CANCEL_QUIZ_CONFIRM_TITLE")
+		dialog.content_text = tr("CANCEL_QUIZ_CONFIRM_CONTENT")
+		dialog.confirmed.connect(cancel_quiz)
+		add_child(dialog)
+		dialog.show()
+	else:
+		cancel_quiz()
+
+
+func cancel_quiz() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_window.tscn")

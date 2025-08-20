@@ -140,6 +140,9 @@ DUPLICATE_TEAM_NAMES_CONTENT,Some teams have the same name.\nPlease give every t
 NICE_TRY,Nice try...,Netter Versuch...
 MORE_TEAMS_THAN_QUESTIONS,You have selected more teams than questions.\nDon't tell that was an accident!,"Sie haben mehr Teams als Fragen ausgewählt.\nErzählen Sie mir nicht, dass das ein Versehen\n gewesen sein soll!"
 STOP_QUIZ,End Quiz,Quiz Beenden
+STOP_QUIZ_TOOLTIP,The quiz ends early and the winner(s) are announced.,Das Quiz wird vorzeitig beendet und der oder die Sieger werden verkündet.
+CANCEL_QUIZ,Cancel Quiz,Quiz Abbrechen
+CANCEL_QUIZ_TOOLTIP,The quiz is canceled without a result.,"Das Quiz wird ohne Ergebnis abgebrochen."
 EDIT_MANUALLY,Edit manually,Manuell bearbeiten
 HIDDEN_QUESTION,?,?
 EXHAUSTED_QUESTION,X,X
@@ -167,6 +170,8 @@ TIME_UP,Time's up!,Die Zeit ist um!
 TEAM_TURN,It's {0}'s turn!,{0} ist an der Reihe!
 STOP_QUIZ_CONFIRM_TITLE,Stop the Quiz?,Quiz beenden?
 STOP_QUIZ_CONFIRM_CONTENT,Are you sure you want to stop the quiz?\nThe score will still be evaluated.,Möchten Sie das Quiz wirklich beenden?\nDer Spielstand wird dennoch ausgewertet.
+CANCEL_QUIZ_CONFIRM_TITLE,Cancel the Quiz?,Quiz Abbrechen?
+CANCEL_QUIZ_CONFIRM_CONTENT,Are you sure you want to cancel the quiz?\nYou will directly be taken to the menu.,Möchten Sie das Quiz wirklich abbrechen?\nSie werden direkt zum Menü zurückgebracht.
 ### GAME OVER ###,,
 CONGRATS,Congratulations!,Glückwunsch!
 CONGRATS_SUB,You reached the end of the Quiz.,Ihr habt das Ende erreicht.

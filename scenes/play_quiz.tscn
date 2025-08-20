@@ -48,6 +48,7 @@ size_flags_vertical = 4
 z_index = 2
 layout_mode = 2
 size_flags_horizontal = 0
+tooltip_text = "STOP_QUIZ_TOOLTIP"
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxEmpty_yyob3")
@@ -56,6 +57,20 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_ftrs6")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_xy054")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6y83b")
 text = "STOP_QUIZ"
+
+[node name="CancelQuizButton" type="Button" parent="OptionsLayer/OptionsPanel/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "CANCEL_QUIZ_TOOLTIP"
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyob3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_871a5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ftrs6")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xy054")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6y83b")
+text = "CANCEL_QUIZ"
 
 [node name="ManualEditButton" type="Button" parent="OptionsLayer/OptionsPanel/VBoxContainer"]
 z_index = 2
@@ -221,6 +236,7 @@ horizontal_alignment = 2
 autowrap_mode = 3
 
 [connection signal="pressed" from="OptionsLayer/OptionsPanel/VBoxContainer/StopButton" to="." method="_on_stop_button_pressed"]
+[connection signal="pressed" from="OptionsLayer/OptionsPanel/VBoxContainer/CancelQuizButton" to="." method="_on_cancel_quiz_button_pressed"]
 [connection signal="pressed" from="OptionsLayer/OptionsPanel/VBoxContainer/ManualEditButton" to="." method="_on_manual_edit_button_pressed"]
 [connection signal="pressed" from="ManualEditor/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/DotsButton" to="." method="_on_dots_button_pressed"]
