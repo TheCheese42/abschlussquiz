@@ -396,19 +396,15 @@ libraries = {
 
 [node name="TeamName" type="Label" parent="ColorRect/RustyAxeAnimation"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -106.5
-offset_top = -25.5
-offset_right = 106.5
-offset_bottom = 25.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
 label_settings = ExtResource("3_o6uxe")
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("3_uq1hu")
 
 [node name="RustyAxe" type="TextureRect" parent="ColorRect/RustyAxeAnimation"]
