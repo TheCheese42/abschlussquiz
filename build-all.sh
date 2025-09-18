@@ -12,3 +12,4 @@ cp bin/Release/abschlussquiz-windows-x86_64-setup.msi ../../export/
 cd ../x86_32
 ./build-installer.sh
 cp bin/Release/abschlussquiz-windows-x86_32-setup.msi ../../export/
+cd ../..

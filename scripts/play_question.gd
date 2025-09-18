@@ -15,6 +15,10 @@ var picture_preview_scene: PackedScene = preload("res://scenes/picture_preview.t
 @onready var color_rect: ColorRect = $ColorRect
 @onready var answers_node: Control = $Answers
 @onready var _5050_joker_button: Button = $"ColorRect/MarginContainer2/5050JokerButton"
+@onready var rusty_axe_animation: AnimationPlayer = $ColorRect/RustyAxeAnimation
+@onready var rusty_axe: TextureRect = $ColorRect/RustyAxeAnimation/RustyAxe
+@onready var team_name: Label = $ColorRect/RustyAxeAnimation/TeamName
+@onready var gpu_particles_2d: GPUParticles2D = $ColorRect/RustyAxeAnimation/GPUParticles2D
 
 var _question: Question
 var _category: String
@@ -373,6 +377,19 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			confetti.position = DisplayServer.window_get_size() / 2
 			get_parent().add_child(confetti)
 		else:
+			if randf() < 0.2:
+				team_name.text = _team
+				team_name.global_position = DisplayServer.window_get_size() / 2.0
+				await get_tree().create_timer(0.0).timeout
+				team_name.pivot_offset = team_name.size / 2.0
+				rusty_axe.global_position.x = DisplayServer.window_get_size().x / 2.0 - 50
+				rusty_axe_animation.play("rusty_axe")
+				gpu_particles_2d.global_position = DisplayServer.window_get_size() / 2.0
+				await get_tree().create_timer(2.2).timeout
+				team_name.modulate = Color.TRANSPARENT
+				gpu_particles_2d.restart()
+				await rusty_axe_animation.animation_finished
+				await get_tree().create_timer(1.5).timeout
 			var states: Array[String]
 			states.assign(tr("WRONG_STATES").split(":", false))
 			states.shuffle()

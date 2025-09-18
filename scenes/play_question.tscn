@@ -1,7 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1v151mu5mecn"]
+[gd_scene load_steps=20 format=3 uid="uid://c1v151mu5mecn"]
 
 [ext_resource type="Script" uid="uid://xr2q3fj8f33t" path="res://scripts/play_question.gd" id="1_iakm2"]
 [ext_resource type="LabelSettings" uid="uid://mb0o2fex4fry" path="res://styles/labels/label_title_48.tres" id="2_o38n8"]
+[ext_resource type="LabelSettings" uid="uid://dsi2it6uej3sj" path="res://styles/labels/label_title_48_white.tres" id="3_o6uxe"]
+[ext_resource type="Texture2D" uid="uid://b8w06e1syyllj" path="res://assets/textures/sprites/rusty_axe.png" id="3_o38n8"]
+[ext_resource type="Script" uid="uid://dvj2p7rn6f4kd" path="res://scripts/jitter.gd" id="3_uq1hu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iakm2"]
 
@@ -20,6 +23,251 @@ bg_color = Color(0, 0, 0, 0.19607843)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6uxe"]
 bg_color = Color(1, 1, 1, 0.39215687)
+
+[sub_resource type="Animation" id="Animation_iakm2"]
+resource_name = "rusty_axe"
+length = 2.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RustyAxeAnimation/RustyAxe:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0, 2),
+"points": PackedFloat32Array(740, 0, 0, 0.307055, -346.5, -175, -1.4, 1, 0, 0, -175, -1.4, 1, 0, 0, 5000, -0.06666665, -862.50006, 0, 0),
+"times": PackedFloat32Array(0, 2, 2.2, 2.6)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RustyAxeAnimation/RustyAxe:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RustyAxeAnimation/RustyAxe:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RustyAxeAnimation/RustyAxe:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(18, 0, 0, 0.36666667, -18, -2.0943952, -0.33333334, 2.7908883, 0.066666685, -0.55817777),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RustyAxeAnimation/RustyAxe:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.33333334, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RustyAxeAnimation/RustyAxe:pivot_offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(200, 300)]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RustyAxeAnimation/TeamName:modulate:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.33333334, -0.16666667, 0, 0, 1, -0.33333334, -0.16666667, 0, 0, 0, -0.033333343, 0.16666669, 0, 0),
+"times": PackedFloat32Array(0, 2, 2.1666667, 2.2)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RustyAxeAnimation/TeamName:scale:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.33333334, -0.166665, 0, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RustyAxeAnimation/TeamName:scale:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.33333334, -0.166665, 0, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="Animation" id="Animation_o38n8"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RustyAxeAnimation/RustyAxe:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RustyAxeAnimation/RustyAxe:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RustyAxeAnimation/RustyAxe:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RustyAxeAnimation/RustyAxe:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RustyAxeAnimation/RustyAxe:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(502, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RustyAxeAnimation/RustyAxe:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(980, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RustyAxeAnimation/RustyAxe:pivot_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(200, 300)]
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RustyAxeAnimation/TeamName:modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RustyAxeAnimation/TeamName:scale:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RustyAxeAnimation/TeamName:scale:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o38n8"]
+_data = {
+&"RESET": SubResource("Animation_o38n8"),
+&"rusty_axe": SubResource("Animation_iakm2")
+}
+
+[sub_resource type="Curve" id="Curve_o6uxe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.471916, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l81w1"]
+curve = SubResource("Curve_o6uxe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o6uxe"]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 110.0
+gravity = Vector3(0, 20, 0)
+linear_accel_min = -60.0
+linear_accel_max = -50.0
+scale_min = 5.0
+scale_max = 5.0
+alpha_curve = SubResource("CurveTexture_l81w1")
 
 [node name="PlayQuestion" type="CanvasLayer"]
 layer = 2
@@ -141,9 +389,51 @@ theme_override_styles/background = SubResource("StyleBoxFlat_iakm2")
 theme_override_styles/fill = SubResource("StyleBoxFlat_o6uxe")
 show_percentage = false
 
+[node name="RustyAxeAnimation" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_o38n8")
+}
+
+[node name="TeamName" type="Label" parent="ColorRect/RustyAxeAnimation"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -25.5
+offset_right = 106.5
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+label_settings = ExtResource("3_o6uxe")
+script = ExtResource("3_uq1hu")
+
+[node name="RustyAxe" type="TextureRect" parent="ColorRect/RustyAxeAnimation"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 502.0
+offset_top = 980.0
+offset_right = 910.00555
+offset_bottom = 1592.0059
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(200, 300)
+texture = ExtResource("3_o38n8")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ColorRect/RustyAxeAnimation"]
+emitting = false
+amount = 12
+lifetime = 2.0
+one_shot = true
+speed_scale = 0.8
+explosiveness = 0.98
+process_material = SubResource("ParticleProcessMaterial_o6uxe")
+
 [node name="Answers" type="Control" parent="."]
 editor_description = "Used to avoid adding FlowContainers directly to the scene root, which causes the theme to not be applied to them."
 layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
