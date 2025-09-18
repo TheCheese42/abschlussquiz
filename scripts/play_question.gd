@@ -377,7 +377,7 @@ func answer_clicked(event: InputEvent, answer: Answer, answers_container: Contai
 			confetti.position = DisplayServer.window_get_size() / 2
 			get_parent().add_child(confetti)
 		else:
-			if randf() < 1.2:
+			if randf() < 0.2:
 				team_name.text = _team
 				team_name.global_position = DisplayServer.window_get_size() / 2.0
 				await get_tree().create_timer(0.0).timeout
